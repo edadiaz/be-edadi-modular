@@ -33,6 +33,10 @@
         <groupId>com.az.edadi</groupId>
         <artifactId>user</artifactId>
       </dependency>
+       <dependency>
+         <groupId>com.az.edadi</groupId>
+         <artifactId>dal</artifactId>
+       </dependency>
 
     </dependencies>
 </dependencyManagement>

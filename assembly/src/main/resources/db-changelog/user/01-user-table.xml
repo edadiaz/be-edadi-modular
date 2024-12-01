@@ -13,10 +13,16 @@
             <column name="username" type="varchar(50)">
                 <constraints nullable="false"/>
             </column>
+            <column name="name" type="varchar(50)">
+                <constraints nullable="false"/>
+            </column>
             <column name="email" type="varchar(100)">
                 <constraints nullable="false"/>
             </column>
             <column name="password" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="create_time" type="timestamp" defaultValueDate="CURRENT_TIMESTAMP">
                 <constraints nullable="false"/>
             </column>
 
