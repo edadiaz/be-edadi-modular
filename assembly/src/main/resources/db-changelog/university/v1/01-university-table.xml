@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+        http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+
+    <changeSet author="ulvu" id="01-create-university-table">
+        <createTable tableName="university">
+            <column name="id" type="uuid">
+                <constraints primaryKey="true" nullable="false"/>
+            </column>
+                <column name="name_az" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="name_en" type="varchar(256)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="abbr_az" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="abbr_en" type="varchar(20)">
+                <constraints nullable="false"/>
+            </column>
+            <column name="photo_url" type="varchar(100)">
+                <constraints nullable="false"/>
+            </column>
+
+        </createTable>
+    </changeSet>
+
+    <changeSet id="02-add-universities-of-azerbaijan" author="ulvu">
+     <sql>
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('088671b3-8b93-49cc-aeb9-1ea83f07f3f8', 'Bakı Dövlət Universiteti', 'Baku State University', 'bdu', 'bsu', 'bsu.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('cda9ee2d-8582-4566-9464-e2178e3f23ba', 'Azərbaycan Dövlət Neft və Sənaye Universiteti', 'Azerbaijan State Oil and Industry University', 'adnsu', 'asoiu', 'asoiu.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('f66f6bf9-3de0-473b-b946-d2821610d072', 'Azərbaycan Texniki Universiteti', 'Azerbaijan Technical University', 'aztu', 'aztu', 'aztu.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('1ff4cc01-52b2-4c00-9521-37eadad4e0f1', 'Azərbaycan Memarlıq və İnşaat Universiteti', 'Azerbaijan Architecture and Construction University', 'azmiu', 'aacu', 'aacu.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('f6836c53-d2c3-4bf6-9392-ca82e889ac8d', 'Azerbaycan Dovlet Pedaqoji Universiteti', 'Azerbaijan State Pedagogical University', 'adpu', 'aspu', 'aspu.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('8f26f6b8-f56b-488e-929b-98db8b623a11', 'Azərbaycan Dövlət İqtisad Universiteti\r\n', 'Azerbaijan State University of Economics', 'adiu', 'unec', 'unec.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('050875ef-ead1-45ed-8b40-bd523d63167c', 'Bakı Mühəndislik Universiteti', 'Baku Engineering University\r\n', 'bmu', 'beu', 'beu.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('7c9753b5-1cd4-4648-8bf7-a4cefed9bfdc', 'Azərbaycan Respublikası Prezidenti yanında Dövlət İdarəçilik Akademiyası\r\n', 'The Academy Of Public Administration Under The President Of The Republic Of Azerbaijan', 'dia', 'dia', 'dia.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('8f46428f-9f1c-4e44-82a7-d17aafd9b486', '\"ADA\" Universiteti', 'ADA University', 'ada', 'ada', 'ada.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('5fd18f1f-6c90-45de-bf7b-abba7b739800', 'Azərbaycan Dövlət Rəssamlıq Akademiyası', 'Azerbaijan State Academy of Art', 'adra', 'adra', 'adra.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('cd2dc4e1-79df-4897-b4b7-0e9195a1aa88', 'Azərbaycan Turizm və Menecment Universiteti', 'Azerbaijan Tourism and Management University', 'atmu', 'atmu', 'atmu.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('8ade3841-b568-498c-a0c9-87625c4e70ff', 'Milli Aviasiya Akademiyası', 'National Aviation Academy', 'maa', 'naa', 'naa.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('c53e0798-a25e-4a19-b07e-70367ec89092', 'Bakı Ali Neft Məktəbi\r\n', 'Baku Higher Oil School', 'banm', 'bhos', 'bhos.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('a007ec40-b4f6-4b43-86d8-863bc727deb2', 'Azərbaycan Dövlət Dəniz Akademiyası', 'Azerbaijan State Marine Academy', 'adda', 'adda', 'adda.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('d83010d7-3041-47de-9c8a-b131fa16de0e', 'Naxçıvan Dövlət Universiteti\r\n', 'Nakhchivan State University', 'ndu', 'ndu', 'ndu.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('0764927a-63ea-4dbc-9c12-38df098fec42', 'Naxçıvan Müəllimlər İnstitutu\r\n', 'nakhchivan teachers institute', 'nmi', 'nmi', 'nmi.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('c846f068-385e-4404-a734-d9e7fcbf5eca', 'Azərbaycan Dövlət Aqrar Universiteti', 'Azerbaijan State Agricultural University', 'adau', 'adau', 'adau.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('b520be5b-06f5-4194-8c11-29824c584fe1', 'Gəncə Dövlət Universiteti\r\n', 'Ganja State University', 'gdu', 'gdu', 'gdu.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('76a7420e-a4c7-411e-9d86-731743af6341', 'Azərbaycan Texnologiya Universiteti\r\n', 'Azerbaijan Technology University', 'uteca', 'uteca', 'uteca.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('175feb92-3ecc-46e2-ac33-b146c8a308ef', 'Sumqayıt Dövlət Universiteti', 'Sumgait State University\r\n', 'sdu', 'sdu', 'sdu.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('4f0992c2-01fd-4a43-a000-7c781e02f54e', 'Mingəçevir Dövlət Universiteti', 'Mingachevir State University', 'mdu', 'mdu', 'mdu.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('12a54537-1413-4ef3-89f2-3399f62493be', 'Lənkəran Dövlət Universiteti\r\n', 'Lankaran State University', 'ldu', 'lsu', 'lsu.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('0b5f166d-0ca9-4b02-b612-8c012c9c997b', 'Azərbaycan Kooperasiya Universiteti\r\n', 'Azerbaijan University of Cooperation', 'aku', 'aku', 'aku.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('2b224b34-2889-404e-a4c7-d6a107e6d883', 'Qerbi Kaspi Universiteti', 'Western Caspian University', 'qku', 'wcu', 'wcu.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('645de959-e69e-43ec-9b49-db6d7b935957', 'Azərbaycan Universiteti\r\n', 'Azerbaijan University', 'au', 'au', 'au.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('d02fb005-3ad9-4435-b364-bc0b5db0b380', 'Xəzər Universiteti', 'Khazar University', 'xu', 'khu', 'khu.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('9bafa317-35c2-4e78-a145-1651e0419624', 'Bakı Qızlar Universiteti', 'Baku Girls University', 'bqu', 'bgu', 'bgu.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('004b0a2c-8573-427d-9dce-ccb5f5b2aa6a', 'Odlar Yurdu Universiteti\r\n', 'Odlar Yurdu Universiteti\r\n', 'oyu', 'oyu', 'oyu.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('61df4fa1-412c-41dd-b06b-2a1170962177', 'Naxçıvan Universiteti', 'Nakhchivan University\r\n', 'nu', 'nu', 'nu.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('286a2a7d-f3dd-4753-b98a-e846158ed41a', 'Azərbaycan Dillər Universiteti', 'Azerbaijan University of Languages', 'adu', 'adu', 'adu.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('9de0c31f-b676-4a4f-a999-d2da5b6016a6', 'Bakı Slavyan Universiteti', 'Baku Slavic University', 'bsu-uni', 'bsu-uni', 'bsu-uni.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('af03fc79-ef5a-486c-8ea0-ef3485f725db', 'Bakı Xoreoqrafiya Akademiyası', 'Baku Choreography Academy', 'bxa', 'bxa', 'bxa.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('a15f892b-ef6a-4677-bde9-7b83f8c64aff', 'Azərbaycan Dövlət Mədəniyyət və İncəsənət\r\nUniversiteti', 'Azerbaijan State University of Culture and Arts', 'admiu', 'admiu', 'admiu.png');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('1e72618d-3a2f-4562-a3c0-a566ab967011', 'Azərbaycan Dövlət Bədən Tərbiyəsi və İdman Akademiyası', 'Azerbaijan State Academy of Physical Education and Sport', 'adbtia', 'adbtia', 'adbtia.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('294c8e63-093a-4dc1-8ac4-b70567eb987e', 'Dövlət Gömrük Komitəsinin Akademiyası', 'Academy of the State Customs Committee', 'dgka', 'ascca', 'ascca.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('f759cff2-e827-4d7f-8775-bfe72c356b84', 'Azərbaycan Əmək və Sosial Münasibətlər Akademiyası', 'Azerbaijan Academy of Labour and Social Affairs', 'aəsma', 'aesma', 'aesma.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('dbf02d41-d5d4-4f76-80a9-8868f9cfa39e', 'Bakı Avrasiya Universiteti', 'Baku Eurasian University', 'bau', 'baau', 'baau.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('3597984f-7969-4fc7-9325-501e20f0ffc4', 'Bakı Biznes Universiteti', 'Baku Business University', 'bbu', 'bbu', 'bbu.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('bad85fbe-47e4-4fc3-96be-f4add074e5d6', 'Bakı İslam Universiteti', 'Baku Islamic University', 'biu', 'biu', 'biu.jpg');
+         INSERT INTO UNIVERSITY(id, name_az, name_en, abbr_az, abbr_en, photo_url) VALUES ('b6a95687-2d46-446f-83ad-4818b7812d4a', 'Azərbaycan Tibb Universiteti', 'Azerbaijan Medical University', 'atu', 'amu', 'amu.jpg');
+     </sql>
+    </changeSet>
+</databaseChangeLog>

@@ -22,6 +22,7 @@
     <module>app</module>
     <module>assembly</module>
     <module>dal</module>
+      <module>university</module>
   </modules>
 <dependencyManagement>
      <dependencies>
