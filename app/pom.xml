@@ -8,6 +8,7 @@
         <artifactId>edadi-modular</artifactId>
         <version>1.0-SNAPSHOT</version>
     </parent>
+    <packaging>jar</packaging>
 
     <artifactId>app</artifactId>
 
