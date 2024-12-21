@@ -1,12 +1,11 @@
-package com.az.edadi.user;
+package com.az.edadi.auth.config;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
 
 @Configuration
 @ComponentScan(basePackages = {
-        "com.az.edadi.user"
+        "com.az.edadi.auth"
 })
-
-public class UserConfig {
+public class AuthConfig {
 }

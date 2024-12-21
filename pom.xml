@@ -1,104 +1,120 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-  <modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-  <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>3.3.0</version>
-    <relativePath/> <!-- lookup parent from repository -->
-  </parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.1</version>
+        <relativePath/>
+    </parent>
 
-  <groupId>com.az.edadi</groupId>
-  <artifactId>edadi-modular</artifactId>
-  <version>1.0-SNAPSHOT</version>
-  <packaging>pom</packaging>
+    <groupId>com.az.edadi</groupId>
+    <artifactId>edadi-modular</artifactId>
+    <version>1.0-SNAPSHOT</version>
+    <packaging>pom</packaging>
 
-  <name>edadi-multi-module</name>
+    <name>edadi-modular</name>
 
-  <modules>
-    <module>post</module>
-    <module>user</module>
-    <module>app</module>
-    <module>assembly</module>
-    <module>dal</module>
-      <module>university</module>
-    <module>auth</module>
-  </modules>
-<dependencyManagement>
-     <dependencies>
+    <modules>
+        <module>post</module>
+        <module>user</module>
+        <module>app</module>
+        <module>assembly</module>
+        <module>dal</module>
+        <module>university</module>
+        <module>auth</module>
+    </modules>
 
-      <dependency>
-        <groupId>com.az.edadi</groupId>
-        <artifactId>post</artifactId>
-        <version>1.0-SNAPSHOT</version>
 
-      </dependency>
-      <dependency>
-        <groupId>com.az.edadi</groupId>
-        <artifactId>user</artifactId>
-        <version>1.0-SNAPSHOT</version>
-      </dependency>
+    <properties>
 
-       <dependency>
-         <groupId>com.az.edadi</groupId>
-         <artifactId>dal</artifactId>
-         <version>1.0-SNAPSHOT</version>
-       </dependency>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-       <dependency>
-         <groupId>com.az.edadi</groupId>
-         <artifactId>assembly</artifactId>
-         <version>1.0-SNAPSHOT</version>
-       </dependency>
+        <eda-post-version>1.0-SNAPSHOT</eda-post-version>
+        <eda-user-version>1.0-SNAPSHOT</eda-user-version>
+        <eda-dal-version>1.0-SNAPSHOT</eda-dal-version>
+        <eda-assembly-version>1.0-SNAPSHOT</eda-assembly-version>
+        <eda-university-version>1.0-SNAPSHOT</eda-university-version>
+        <eda-auth-version>1.0-SNAPSHOT</eda-auth-version>
 
-       <dependency>
-         <groupId>com.az.edadi</groupId>
-         <artifactId>university</artifactId>
-         <version>1.0-SNAPSHOT</version>
-       </dependency>
+    </properties>
+
+    <dependencyManagement>
+        <dependencies>
+
+            <dependency>
+                <groupId>com.az.edadi</groupId>
+                <artifactId>post</artifactId>
+                <version>${eda-post-version}</version>
+
+            </dependency>
+            <dependency>
+                <groupId>com.az.edadi</groupId>
+                <artifactId>user</artifactId>
+                <version>${eda-user-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.az.edadi</groupId>
+                <artifactId>dal</artifactId>
+                <version>${eda-dal-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.az.edadi</groupId>
+                <artifactId>assembly</artifactId>
+                <version>${eda-assembly-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.az.edadi</groupId>
+                <artifactId>university</artifactId>
+                <version>${eda-university-version}</version>
+            </dependency>
+            <dependency>
+
+                <groupId>com.az.edadi</groupId>
+                <artifactId>auth</artifactId>
+                <version>${eda-auth-version}</version>
+            </dependency>
+
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.postgresql</groupId>
+            <artifactId>postgresql</artifactId>
+            <version>42.7.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-jpa</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.liquibase</groupId>
+            <artifactId>liquibase-core</artifactId>
+            <version>4.20.0</version>
+        </dependency>
 
     </dependencies>
-</dependencyManagement>
 
-  <dependencies>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-web</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.postgresql</groupId>
-      <artifactId>postgresql</artifactId>
-      <version>42.6.0</version> <!-- Or the latest version -->
-    </dependency>
-
-    <dependency>
-      <groupId>org.springframework.boot</groupId>
-      <artifactId>spring-boot-starter-data-jpa</artifactId>
-    </dependency>
-
-    <dependency>
-      <groupId>org.liquibase</groupId>
-      <artifactId>liquibase-core</artifactId>
-      <version>4.20.0</version> <!-- Use the latest version available -->
-    </dependency>
-
-  </dependencies>
-
-
-  <properties>
-    <maven.compiler.source>17</maven.compiler.source>
-    <maven.compiler.target>17</maven.compiler.target>
-    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-  </properties>
-
-  <repositories>
-    <repository>
-      <id>maven-central</id>
-      <url>https://repo.maven.apache.org/maven2</url>
-    </repository>
-  </repositories>
+    <repositories>
+        <repository>
+            <id>maven-central</id>
+            <url>https://repo.maven.apache.org/maven2</url>
+        </repository>
+    </repositories>
 
 </project>

@@ -8,8 +8,6 @@ import org.springframework.context.annotation.Import;
 @Import(AppConfig.class)
 @SpringBootApplication
 public class AppStarter {
-
-
     public static void main(String[] args) {
         SpringApplication.run(AppStarter.class, args);
     }
