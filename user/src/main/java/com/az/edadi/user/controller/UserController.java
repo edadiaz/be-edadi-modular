@@ -1,6 +1,7 @@
 package com.az.edadi.user.controller;
 
 import com.az.edadi.user.model.RegisterUserRequest;
+import com.az.edadi.user.service.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -11,8 +12,15 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("api/v1/user")
 public class UserController {
-    @PostMapping
+    private final UserService userService;
+
+    public UserController(UserService userService) {
+        this.userService = userService;
+    }
+
+    @PostMapping("sign-up")
     ResponseEntity<HttpStatus> registerUser(@RequestBody RegisterUserRequest request) {
-        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+        userService.registerUser(request);
+        return ResponseEntity.ok(HttpStatus.CREATED);
     }
 }
