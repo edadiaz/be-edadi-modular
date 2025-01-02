@@ -16,7 +16,7 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfigurer {
 
     private final String[] POST_WHITE_LIST = {
-            "/api/v1/auth/**"
+            "/api/v1/user/sign-up"
     };
     private final String[] GET_WHITE_LIST = {
             "/api/v1/**",

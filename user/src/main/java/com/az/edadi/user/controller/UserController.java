@@ -5,6 +5,7 @@ import com.az.edadi.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,7 +19,7 @@ public class UserController {
     private final UserService userService;
 
     @PostMapping("sign-up")
-    ResponseEntity<HttpStatus> registerUser(@RequestBody RegisterUserRequest request) {
+    ResponseEntity<HttpStatus> registerUser(@RequestBody @Validated RegisterUserRequest request) {
         userService.registerUser(request);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
