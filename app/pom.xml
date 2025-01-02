@@ -37,7 +37,18 @@
             <groupId>com.az.edadi</groupId>
             <artifactId>auth</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>common-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>common-model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>file-storage</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

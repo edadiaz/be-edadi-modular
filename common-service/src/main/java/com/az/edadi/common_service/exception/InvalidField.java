@@ -1,4 +1,4 @@
-package com.az.edadi.user.exception;
+package com.az.edadi.common_service.exception;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;

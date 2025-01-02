@@ -1,6 +1,6 @@
-package com.az.edadi.user.exception;
+package com.az.edadi.common_service.exception;
 
-import com.az.edadi.user.service.Translator;
+import com.az.edadi.common_service.service.Translator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;

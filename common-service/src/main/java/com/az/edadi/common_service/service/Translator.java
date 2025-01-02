@@ -1,4 +1,4 @@
-package com.az.edadi.user.service;
+package com.az.edadi.common_service.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
