@@ -17,3 +17,10 @@ spring:
   liquibase:
     change-log: classpath:/db-changelog/changelog-master.xml
     enabled: true
+aws:
+  s3:
+    access: ${S3_ACCESS}
+    secret: ${S3_SECRET}
+    region: ${S3_REGION}
+    bucket: ${S3_BUCKET}
+    url: ${S3_URL}
