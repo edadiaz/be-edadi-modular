@@ -46,4 +46,9 @@ jobs:
               -e TEST_POSTGRES_URL=${{ secrets.TEST_POSTGRES_URL }} \
               -e TEST_POSTGRES_USERNAME=${{ secrets.TEST_POSTGRES_USERNAME }} \
               -e TEST_POSTGRES_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} \
+              -e S3_ACCESS=${{ secrets.S3_ACCESS }} \
+              -e S3_SECRET=${{ secrets.S3_SECRET }} \
+              -e S3_BUCKET=${{ secrets.S3_BUCKET }} \
+              -e S3_URL=${{ secrets.S3_URL }} \
+              -e S3_REGION=${{ secrets.S3_REGION }} \
               ulvusuleymanov1/edadi-modular:latest
