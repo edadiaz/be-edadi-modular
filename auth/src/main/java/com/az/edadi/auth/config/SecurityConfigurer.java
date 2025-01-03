@@ -23,6 +23,7 @@ public class SecurityConfigurer {
             "/api/v1/**",
             "/swagger-ui/**",
             "/v3/api-docs/**"
+
     };
 
     private final String[] ALL_ALLOWED = {

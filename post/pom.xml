@@ -10,5 +10,11 @@
     </parent>
 
     <artifactId>post</artifactId>
+    <dependencies>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>common-model</artifactId>
+        </dependency>
+    </dependencies>
 
 </project>
