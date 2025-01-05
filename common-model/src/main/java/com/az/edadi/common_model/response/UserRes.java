@@ -13,6 +13,6 @@ public class UserRes {
     private UUID id;
     private String username;
     private String fullName;
-    private String email;
     private String profilePicUrl;
+
 }

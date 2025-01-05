@@ -1,4 +1,4 @@
-package com.az.edadi.common_service.exception;
+package com.az.edadi.common_service.exception.handler;
 
 import com.az.edadi.common_service.service.Translator;
 import org.springframework.http.HttpStatus;

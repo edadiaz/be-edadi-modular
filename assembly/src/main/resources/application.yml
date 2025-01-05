@@ -24,3 +24,9 @@ aws:
     region: ${S3_REGION}
     bucket: ${S3_BUCKET}
     url: ${S3_URL}
+
+jwt:
+  title: Bearer
+  secretKey: ${JWT_SECRET}
+  accessTokenSessionTime: 999999999999
+  refreshTokenSessionTime: 99999999999
