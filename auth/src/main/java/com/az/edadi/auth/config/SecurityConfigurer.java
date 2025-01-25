@@ -1,5 +1,6 @@
 package com.az.edadi.auth.config;
 
+import com.az.edadi.auth.security.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -10,10 +11,14 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.annotation.web.configurers.HeadersConfigurer;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
 @Configuration
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfigurer {
+
+    private final JwtAuthenticationFilter jwtVerifierFilter;
 
     private final String[] POST_WHITE_LIST = {
             "/api/v1/user/sign-up",
@@ -40,10 +45,10 @@ public class SecurityConfigurer {
                         .requestMatchers(HttpMethod.GET, GET_WHITE_LIST).permitAll()
                         .requestMatchers(HttpMethod.POST, POST_WHITE_LIST).permitAll()
                         .requestMatchers(ALL_ALLOWED).permitAll()
-                        .anyRequest().authenticated()
-                )
+                        .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
+                .addFilterBefore(jwtVerifierFilter, UsernamePasswordAuthenticationFilter.class)
                 .build();
     }
 
