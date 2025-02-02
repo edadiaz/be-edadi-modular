@@ -1,5 +1,5 @@
 server:
-  port: 5001
+  port: ${SERVER_PORT}
 spring:
   datasource:
     url: ${TEST_POSTGRES_URL}
