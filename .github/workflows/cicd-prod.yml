@@ -40,9 +40,9 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: |
             docker pull ulvusuleymanov1/edadi-prod:latest
-            docker stop edadi-preprod || true
-            docker rm edadi-preprod || true
-            docker run -d --name edadi-preprod -p 5003:5003 \
+            docker stop edadi-prod || true
+            docker rm edadi-prod || true
+            docker run -d --name edadi-prod -p 5003:5003 \
               -e TEST_POSTGRES_URL=${{ secrets.TEST_POSTGRES_URL }} \
               -e TEST_POSTGRES_USERNAME=${{ secrets.TEST_POSTGRES_USERNAME }} \
               -e TEST_POSTGRES_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} \
