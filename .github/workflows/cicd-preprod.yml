@@ -3,7 +3,7 @@ name: Deploy to Docker on Ubuntu Server
 on:
   push:
     branches:
-      - develop
+      - preprod
 jobs:
   deploy:
     runs-on: ubuntu-latest
