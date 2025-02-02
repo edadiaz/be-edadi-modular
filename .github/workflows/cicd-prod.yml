@@ -1,0 +1,54 @@
+name: Deploy to Docker on Ubuntu Server
+
+on:
+  push:
+    branches:
+      - prod
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v3
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Log in to Docker Hub
+        uses: docker/login-action@v2
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+
+      - name: Build with Maven
+        run: mvn clean package -pl app -am
+
+      - name: Build and push Docker image
+        run: |
+          docker build -t ulvusuleymanov1/edadi-prod:latest .
+          docker push ulvusuleymanov1/edadi-prod:latest
+
+      - name: SSH and deploy on Ubuntu server
+        uses: appleboy/ssh-action@v0.1.9
+        with:
+          host: ${{ secrets.SERVER_HOST }}
+          username: ${{ secrets.SERVER_USER }}
+          key: ${{ secrets.SSH_KEY }}
+          script: |
+            docker pull ulvusuleymanov1/edadi-prod:latest
+            docker stop edadi-preprod || true
+            docker rm edadi-preprod || true
+            docker run -d --name edadi-preprod -p 5003:5003 \
+              -e TEST_POSTGRES_URL=${{ secrets.TEST_POSTGRES_URL }} \
+              -e TEST_POSTGRES_USERNAME=${{ secrets.TEST_POSTGRES_USERNAME }} \
+              -e TEST_POSTGRES_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} \
+              -e S3_ACCESS=${{ secrets.S3_ACCESS }} \
+              -e S3_SECRET=${{ secrets.S3_SECRET }} \
+              -e S3_BUCKET=${{ secrets.S3_BUCKET }} \
+              -e S3_URL=${{ secrets.S3_URL }} \
+              -e S3_REGION=${{ secrets.S3_REGION }} \
+              ulvusuleymanov1/edadi-prod:latest
