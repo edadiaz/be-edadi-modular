@@ -50,5 +50,6 @@ jobs:
               -e S3_SECRET=${{ secrets.S3_SECRET }} \
               -e S3_BUCKET=${{ secrets.S3_BUCKET }} \
               -e S3_URL=${{ secrets.S3_URL }} \
+              -e SERVER_PORT=5002 \
               -e S3_REGION=${{ secrets.S3_REGION }} \
               ulvusuleymanov1/edadi-preprod:latest
