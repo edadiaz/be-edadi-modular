@@ -42,7 +42,7 @@ jobs:
             docker pull ulvusuleymanov1/edadi-develop:latest
             docker stop edadi-develop || true
             docker rm edadi-develop || true
-            docker run -d --name edadi-develop -p 5001:5001 \
+            docker run -d --name edadi-develop -p 5000:5000 \
               -e TEST_POSTGRES_URL=${{ secrets.TEST_POSTGRES_URL }} \
               -e TEST_POSTGRES_USERNAME=${{ secrets.TEST_POSTGRES_USERNAME }} \
               -e TEST_POSTGRES_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} \

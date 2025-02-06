@@ -42,7 +42,7 @@ jobs:
             docker pull ulvusuleymanov1/edadi-preprod:latest
             docker stop edadi-preprod || true
             docker rm edadi-preprod || true
-            docker run -d --name edadi-preprod -p 5002:5002 \
+            docker run -d --name edadi-preprod -p 5001:5001 \
               -e TEST_POSTGRES_URL=${{ secrets.TEST_POSTGRES_URL }} \
               -e TEST_POSTGRES_USERNAME=${{ secrets.TEST_POSTGRES_USERNAME }} \
               -e TEST_POSTGRES_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} \
