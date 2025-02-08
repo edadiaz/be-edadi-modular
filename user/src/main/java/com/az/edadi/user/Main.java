@@ -12,7 +12,7 @@ public class Main {
         this.userRepository = userRepository;
     }
 
-    @GetMapping
+    @GetMapping("api/v1/test")
     public String test() {
         return userRepository.findAll().toString();
     }
