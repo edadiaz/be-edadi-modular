@@ -43,9 +43,9 @@ jobs:
             docker stop edadi-develop || true
             docker rm edadi-develop || true
             docker run -d --name edadi-develop -p 5000:5000 \
-              -e TEST_POSTGRES_URL=${{ secrets.TEST_POSTGRES_URL }} \
-              -e TEST_POSTGRES_USERNAME=${{ secrets.TEST_POSTGRES_USERNAME }} \
-              -e TEST_POSTGRES_PASSWORD=${{ secrets.TEST_POSTGRES_PASSWORD }} \
+              -e TEST_POSTGRES_URL=${{ secrets.POSTGRES_URL }} \
+              -e TEST_POSTGRES_USERNAME=${{ secrets.POSTGRES_USERNAME }} \
+              -e TEST_POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
               -e S3_ACCESS=${{ secrets.S3_ACCESS }} \
               -e S3_SECRET=${{ secrets.S3_SECRET }} \
               -e S3_BUCKET=${{ secrets.S3_BUCKET }} \
