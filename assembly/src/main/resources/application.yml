@@ -1,32 +1,8 @@
-server:
-  port: ${SERVER_PORT}
 spring:
-  datasource:
-    url: ${POSTGRES_URL}
-    username: ${POSTGRES_USERNAME}
-    password: ${POSTGRES_PASSWORD}
-    driver-class-name: org.postgresql.Driver
-  jpa:
-    database-platform: org.hibernate.dialect.PostgreSQLDialect
-    hibernate:
-      ddl-auto: none
-    show-sql: true
-    properties:
-      hibernate:
-        format_sql: true
-  liquibase:
-    change-log: classpath:/db-changelog/changelog-master.xml
-    enabled: true
-aws:
-  s3:
-    access: ${S3_ACCESS}
-    secret: ${S3_SECRET}
-    region: ${S3_REGION}
-    bucket: ${S3_BUCKET}
-    url: ${S3_URL}
-
-jwt:
-  title: Bearer
-  secretKey: ${JWT_SECRET}
-  accessTokenSessionTime: 999999999999
-  refreshTokenSessionTime: 99999999999
+  application:
+    name: application
+  config:
+    import: "configserver:"
+  cloud:
+    config:
+      uri: ${CONFIG_SERVER_URL}

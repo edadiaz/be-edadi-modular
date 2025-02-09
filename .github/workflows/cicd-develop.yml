@@ -42,14 +42,4 @@ jobs:
             docker pull ulvusuleymanov1/edadi-develop:latest
             docker stop edadi-develop || true
             docker rm edadi-develop || true
-            docker run -d --name edadi-develop -p 5000:5000 \
-              -e POSTGRES_URL=${{ secrets.POSTGRES_URL }} \
-              -e POSTGRES_USERNAME=${{ secrets.POSTGRES_USERNAME }} \
-              -e POSTGRES_PASSWORD=${{ secrets.POSTGRES_PASSWORD }} \
-              -e S3_ACCESS=${{ secrets.S3_ACCESS }} \
-              -e S3_SECRET=${{ secrets.S3_SECRET }} \
-              -e S3_BUCKET=${{ secrets.S3_BUCKET }} \
-              -e S3_URL=${{ secrets.S3_URL }} \
-              -e SERVER_PORT=5000 \
-              -e S3_REGION=${{ secrets.S3_REGION }} \
-              ulvusuleymanov1/edadi-develop:latest
+            docker run -d --name edadi-develop -p 5000:5000 ulvusuleymanov1/edadi-develop:latest

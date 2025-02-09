@@ -36,6 +36,8 @@
         <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
+        <spring-cloud.version>2024.0.0</spring-cloud.version>
+
         <eda-post-version>1.0-SNAPSHOT</eda-post-version>
         <eda-user-version>1.0-SNAPSHOT</eda-user-version>
         <eda-dal-version>1.0-SNAPSHOT</eda-dal-version>
@@ -101,6 +103,14 @@
                 <version>${eda-file-storage-version}</version>
             </dependency>
 
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <scope>import</scope>
+                <type>pom</type>
+            </dependency>
+
         </dependencies>
     </dependencyManagement>
 
@@ -149,6 +159,11 @@
             <artifactId>lombok</artifactId>
             <version>1.18.36</version>
             <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-config</artifactId>
         </dependency>
 
     </dependencies>
