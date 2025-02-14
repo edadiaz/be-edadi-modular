@@ -8,4 +8,5 @@
     <include file="v1/university-v1-cumulative.xml" relativeToChangelogFile="true" />
 
 
+
 </databaseChangeLog>
