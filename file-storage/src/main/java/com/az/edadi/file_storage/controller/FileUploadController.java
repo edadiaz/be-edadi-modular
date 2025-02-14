@@ -1,6 +1,6 @@
 package com.az.edadi.file_storage.controller;
 
-import com.az.edadi.file_storage.model.res.UploadedImageRes;
+import com.az.edadi.file_storage.model.response.UploadedImageRes;
 import com.az.edadi.file_storage.service.FileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
