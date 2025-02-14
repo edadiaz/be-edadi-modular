@@ -6,3 +6,5 @@ spring:
   cloud:
     config:
       uri: ${CONFIG_SERVER_URL}
+  profiles:
+    active: prod

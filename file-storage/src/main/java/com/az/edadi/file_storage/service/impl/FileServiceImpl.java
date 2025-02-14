@@ -3,7 +3,7 @@ package com.az.edadi.file_storage.service.impl;
 import com.az.edadi.dal.entity.file_storage.EdaFile;
 import com.az.edadi.dal.repository.FileRepository;
 import com.az.edadi.file_storage.adapter.FileAdapter;
-import com.az.edadi.file_storage.model.res.UploadedImageRes;
+import com.az.edadi.file_storage.model.response.UploadedImageRes;
 import com.az.edadi.file_storage.service.FileService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -14,7 +14,6 @@ import org.springframework.web.multipart.MultipartFile;
 import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.PutObjectRequest;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
