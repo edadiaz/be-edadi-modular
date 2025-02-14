@@ -6,7 +6,7 @@ import com.az.edadi.university.model.response.UniversityRes;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
+@Mapper(componentModel = "spring")
 public interface UniversityMapper {
     UniversityMapper INSTANCE = Mappers.getMapper(UniversityMapper.class);
     UniversityRes toResponse(University university);

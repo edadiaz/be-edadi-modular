@@ -25,7 +25,7 @@ public class UniversityController {
     }
 
     @GetMapping
-    public ResponseEntity<List<UniversityRes>> findAll() {
+    public ResponseEntity<List<University>> findAll() {
         return ResponseEntity.ok(universityService.findAll());
     }
 
@@ -37,6 +37,7 @@ public class UniversityController {
 
     @PostMapping("/create")
     public ResponseEntity<UniversityRes> createUniversity(@RequestBody UniversityReq universityReq){
+        System.out.println(universityReq);
         UniversityRes universityRes = universityService.createUniversity(universityReq);
         return new ResponseEntity<>(universityRes,HttpStatus.CREATED);
     }

@@ -24,6 +24,7 @@ public class UniversityServiceImpl implements UniversityService {
     public UniversityServiceImpl(UniversityRepository universityRepository, MessageSource messageSource) {
         this.universityRepository = universityRepository;
         this.messageSource = messageSource;
+
     }
 
     private final UniversityRepository universityRepository;
@@ -63,11 +64,11 @@ public class UniversityServiceImpl implements UniversityService {
 
 
     @Override
-    public List<UniversityRes> findAll() {
-        return universityRepository.findAll()
-                .stream()
-                .map(UniversityMapper.INSTANCE::toResponse)
-                .collect(Collectors.toList());
+    public List<University> findAll() {
+        return universityRepository.findAll();
+//                .stream()
+//                .map(UniversityMapper.INSTANCE::toResponse)
+//                .collect(Collectors.toList());
     }
 
     private String getMessage(String key){

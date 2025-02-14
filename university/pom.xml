@@ -26,7 +26,7 @@
         <dependency>
             <groupId>org.mapstruct</groupId>
             <artifactId>mapstruct</artifactId>
-            <version>1.5.0.Final</version>
+            <version>1.5.3.Final</version>
         </dependency>
     </dependencies>
 
@@ -43,7 +43,7 @@
                     <annotationProcessorPath>
                         <groupId>org.mapstruct</groupId>
                         <artifactId>mapstruct-processor</artifactId>
-                        <version>1.5.0.Final</version>
+                        <version>1.5.3.Final</version>
                     </annotationProcessorPath>
                 </annotationProcessorPaths>
             </configuration>
