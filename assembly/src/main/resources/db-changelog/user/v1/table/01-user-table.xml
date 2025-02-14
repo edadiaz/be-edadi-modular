@@ -13,7 +13,7 @@
             <column name="username" type="varchar(50)">
                 <constraints nullable="false" unique="true"/>
             </column>
-            <column name="name" type="varchar(50)">
+            <column name="name" type="varchar(50)" >
                 <constraints nullable="false"/>
             </column>
             <column name="email" type="varchar(100)">
@@ -22,12 +22,13 @@
             <column name="password" type="varchar(256)">
                 <constraints nullable="false"/>
             </column>
-            <column name="date_modified" type="timestamp" defaultValueDate="CURRENT_TIMESTAMP">
-                <constraints nullable="false"/>
-            </column>
-            <column name="date_created" type="timestamp" defaultValueDate="CURRENT_TIMESTAMP">
-                <constraints nullable="false"/>
-            </column>
+            <column name="gender" type="edadi.gender"/>
+            <column name="birthday" type="DATE"/>
+            <column name="academic_degree" type="varchar(20)"/>
+            <column name="university_id" type="uuid"/>
+            <column name="speciality_id" type="uuid"/>
+            <column name="date_modified" type="timestamp" defaultValueDate="CURRENT_TIMESTAMP"/>
+            <column name="date_created" type="timestamp" defaultValueDate="CURRENT_TIMESTAMP"/>
         </createTable>
     </changeSet>
 

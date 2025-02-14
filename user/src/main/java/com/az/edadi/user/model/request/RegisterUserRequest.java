@@ -1,4 +1,4 @@
-package com.az.edadi.user.model;
+package com.az.edadi.user.model.request;
 
 import com.az.edadi.user.validation.NotDuplicateEmail;
 import com.az.edadi.user.validation.NotDuplicateUsername;
