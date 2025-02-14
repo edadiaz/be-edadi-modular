@@ -1,6 +1,6 @@
 package com.az.edadi.file_storage.service;
 
-import com.az.edadi.file_storage.model.res.UploadedImageRes;
+import com.az.edadi.file_storage.model.response.UploadedImageRes;
 import org.springframework.web.multipart.MultipartFile;
 
 public interface FileService {
