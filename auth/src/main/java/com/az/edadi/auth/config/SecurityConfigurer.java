@@ -34,7 +34,9 @@ public class SecurityConfigurer {
     };
 
     private final String[] ALL_ALLOWED = {
-            "/h2-console/**",
+            "/h2-console/**"
+
+
     };
 
     @Bean
