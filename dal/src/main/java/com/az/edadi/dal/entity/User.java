@@ -1,14 +1,22 @@
 package com.az.edadi.dal.entity;
 
+import com.az.edadi.dal.convertor.AcademicDegreeConverter;
 import com.az.edadi.dal.entity.post.Post;
+import com.az.edadi.dal.types.AcademicDegree;
+import com.az.edadi.dal.types.Gender;
 import jakarta.persistence.*;
+import lombok.Getter;
+import lombok.Setter;
 
+import java.time.LocalDate;
 import java.util.List;
 import java.util.Objects;
-
+import java.util.UUID;
+@Getter
+@Setter
 @Entity
 @Table(name = "\"user\"")
-public class User extends BaseEntity{
+public class User extends BaseEntity {
     @Column(name = "username")
     private String username;
     @Column(name = "email")
@@ -17,6 +25,17 @@ public class User extends BaseEntity{
     private String name;
     @Column(name = "password")
     private String password;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "gender", nullable = false)
+    private Gender gender;
+
+    private LocalDate birthday;
+
+
+    private AcademicDegree academic_degree;
+    private UUID university_id;
+    private UUID speciality_id;
     @OneToMany(mappedBy = "user", cascade = CascadeType.REFRESH)
     private List<Post> postList;
 
@@ -30,13 +49,6 @@ public class User extends BaseEntity{
         this.postList = postList;
     }
 
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
-    }
 
     @Override
     public boolean equals(Object o) {
@@ -51,35 +63,4 @@ public class User extends BaseEntity{
         return Objects.hash(super.hashCode(), getUsername(), getEmail(), getName(), getPostList());
     }
 
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Post> getPostList() {
-        return postList;
-    }
-
-    public void setPostList(List<Post> postList) {
-        this.postList = postList;
-    }
 }

@@ -5,17 +5,17 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <changeSet id="2025-02-14-create-gender-type" author="ulvu">
+    <changeSet id="2025-02-15-create-academic-degree-type" author="ulvusuleymanovv@gmail.com">
         <preConditions onFail="MARK_RAN">
             <sqlCheck expectedResult="f">
-                select exists(select 1 from pg_catalog.pg_type where typname = 'gender');
+                select exists(select 1 from pg_catalog.pg_type where typname = 'academic_degree');
             </sqlCheck>
         </preConditions>
         <sql>
-            CREATE TYPE gender AS ENUM ('MALE', 'FEMALE','NONE','OTHER');
+            CREATE TYPE academic_degree AS ENUM ('STUDENT', 'APPLICANT', 'BACHELOR', 'MASTER', 'NONE', 'OTHER');
         </sql>
         <rollback>
-            <sql>DROP TYPE IF EXISTS gender;</sql>
+            <sql>DROP TYPE IF EXISTS academic_degree;</sql>
         </rollback>
     </changeSet>
 

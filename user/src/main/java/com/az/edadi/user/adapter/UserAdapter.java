@@ -1,6 +1,8 @@
 package com.az.edadi.user.adapter;
 
 import com.az.edadi.dal.entity.User;
+import com.az.edadi.dal.types.AcademicDegree;
+import com.az.edadi.dal.types.Gender;
 import com.az.edadi.user.model.request.RegisterUserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -16,5 +18,6 @@ public class UserAdapter {
         user.setEmail(request.getEmail().toLowerCase());
         user.setUsername(request.getUsername().toLowerCase());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-    }
+        user.setGender(Gender.NONE);
+     }
 }

@@ -5,8 +5,7 @@
         xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
         http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
 
-    <include file="01-gender-type.xml" relativeToChangelogFile="true" />
-    <include file="02-academic-degree-type.xml" relativeToChangelogFile="true" />
+    <include file="v1/v1-auth-cumulative.xml" relativeToChangelogFile="true" />
 
 
 </databaseChangeLog>

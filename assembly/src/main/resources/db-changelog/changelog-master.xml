@@ -10,5 +10,6 @@
     <include file="university/01-university-cumulative.xml" relativeToChangelogFile="true" />
     <include file="post/01-post-cumulative.xml" relativeToChangelogFile="true" />
     <include file="file-storage/01-file-storage-cumulative.xml" relativeToChangelogFile="true" />
+    <include file="auth/01-auth-cumulative.xml" relativeToChangelogFile="true" />
 
 </databaseChangeLog>

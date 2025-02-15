@@ -22,9 +22,9 @@
             <column name="password" type="varchar(256)">
                 <constraints nullable="false"/>
             </column>
-            <column name="gender" type="edadi.gender"/>
+            <column name="gender" type="gender"/>
             <column name="birthday" type="DATE"/>
-            <column name="academic_degree" type="varchar(20)"/>
+            <column name="academic_degree" type="academic_degree"/>
             <column name="university_id" type="uuid"/>
             <column name="speciality_id" type="uuid"/>
             <column name="date_modified" type="timestamp" defaultValueDate="CURRENT_TIMESTAMP"/>
