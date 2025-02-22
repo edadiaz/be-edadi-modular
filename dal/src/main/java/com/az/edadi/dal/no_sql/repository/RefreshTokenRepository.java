@@ -25,7 +25,7 @@ public class RefreshTokenRepository {
     private static final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
 
-    public void saveUser(RefreshToken refreshToken) {
+    public void saveToken(RefreshToken refreshToken) {
         Map<String, AttributeValue> item = new HashMap<>();
         item.put("userId", AttributeValue.builder().s(refreshToken.getUserId()).build()); // Primary Key
         item.put("tokenId", AttributeValue.builder().s(refreshToken.getTokenId()).build());

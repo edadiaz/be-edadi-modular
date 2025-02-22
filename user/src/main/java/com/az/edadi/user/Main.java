@@ -24,7 +24,7 @@ public class Main {
         token.setTokenId(uuid);
         token.setUserId("ulvusuleymanovv");
         token.setStartDate(LocalDate.now());
-        refreshTokenRepository.saveUser(token);
+        refreshTokenRepository.saveToken(token);
         return refreshTokenRepository.findByTokenId(uuid).toString() + (System.currentTimeMillis()-start) + " ms";
     }
 }

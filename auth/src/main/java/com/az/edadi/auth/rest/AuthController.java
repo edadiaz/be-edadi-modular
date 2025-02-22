@@ -3,6 +3,7 @@ package com.az.edadi.auth.rest;
 import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
 import com.az.edadi.auth.model.response.LoginResponseModel;
 import com.az.edadi.auth.service.LoginService;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,8 +19,8 @@ public class AuthController {
     private final LoginService loginService;
 
     @PostMapping("login-with-password")
-    ResponseEntity<LoginResponseModel> loginWithPassword(@RequestBody LoginWithPasswordRequest request) {
-        return ResponseEntity.ok(loginService.loginWithPassword(request));
+    ResponseEntity<LoginResponseModel> loginWithPassword(@RequestBody LoginWithPasswordRequest request, HttpServletResponse response) {
+        return ResponseEntity.ok(loginService.loginWithPassword(request,response));
 
     }
 }
