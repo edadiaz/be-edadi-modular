@@ -10,7 +10,7 @@ import java.util.UUID;
 
 @Service
 public interface UniversityService {
-    List<University> findAll();
+    List<UniversityRes> findAll();
     UniversityRes getUniversityById(UUID id);
     UniversityRes createUniversity(UniversityReq universityReq);
     UniversityRes update(UUID id,UniversityReq universityReq);

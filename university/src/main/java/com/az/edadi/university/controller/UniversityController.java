@@ -5,6 +5,7 @@ import com.az.edadi.university.model.request.UniversityReq;
 import com.az.edadi.university.model.response.UniversityRes;
 import com.az.edadi.university.service.UniversityService;
 import com.az.edadi.university.service.impl.UniversityServiceImpl;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -25,7 +26,7 @@ public class UniversityController {
     }
 
     @GetMapping
-    public ResponseEntity<List<University>> findAll() {
+    public ResponseEntity<List<UniversityRes>> findAll() {
         return ResponseEntity.ok(universityService.findAll());
     }
 
@@ -36,14 +37,14 @@ public class UniversityController {
     }
 
     @PostMapping("/create")
-    public ResponseEntity<UniversityRes> createUniversity(@RequestBody UniversityReq universityReq){
+    public ResponseEntity<UniversityRes> createUniversity(@Valid @RequestBody UniversityReq universityReq){
         System.out.println(universityReq);
         UniversityRes universityRes = universityService.createUniversity(universityReq);
         return new ResponseEntity<>(universityRes,HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UniversityRes> updateUniversity(@PathVariable UUID id, @RequestBody UniversityReq universityReq){
+    public ResponseEntity<UniversityRes> updateUniversity(@Valid @PathVariable UUID id, @RequestBody UniversityReq universityReq){
         UniversityRes universityRes = universityService.update(id,universityReq);
         return new ResponseEntity<>(universityRes,HttpStatus.OK);
 

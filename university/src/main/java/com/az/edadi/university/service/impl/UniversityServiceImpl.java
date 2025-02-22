@@ -31,16 +31,16 @@ public class UniversityServiceImpl implements UniversityService {
     private final MessageSource messageSource;
     @Override
     public UniversityRes createUniversity(UniversityReq universityReq) {
-        University university = UniversityMapper.INSTANCE.toEntity(universityReq);
+        University university = UniversityMapper.toEntity(universityReq);
         universityRepository.save(university);
-        return UniversityMapper.INSTANCE.toResponse(university);
+        return UniversityMapper.toResponse(university);
     }
 
     @Override
     public UniversityRes getUniversityById(UUID id) {
         University university = universityRepository.findById(id)
                 .orElseThrow(() -> new UniversityNotFoundException(getMessage("university.not.found")));
-        return UniversityMapper.INSTANCE.toResponse(university);
+        return UniversityMapper.toResponse(university);
     }
 
     @Transactional
@@ -50,7 +50,7 @@ public class UniversityServiceImpl implements UniversityService {
                 findById(id)
                 .orElseThrow(()-> new UniversityNotFoundException(getMessage("university.not.found")));
         BeanUtils.copyProperties(university,universityReq, NullFinder.getNullFieldNames(universityReq));
-        return UniversityMapper.INSTANCE.toResponse(universityRepository.save(university));
+        return UniversityMapper.toResponse(universityRepository.save(university));
     }
 
     @Override
@@ -64,11 +64,11 @@ public class UniversityServiceImpl implements UniversityService {
 
 
     @Override
-    public List<University> findAll() {
-        return universityRepository.findAll();
-//                .stream()
-//                .map(UniversityMapper.INSTANCE::toResponse)
-//                .collect(Collectors.toList());
+    public List<UniversityRes> findAll() {
+        return universityRepository.findAll()
+                .stream()
+                .map(UniversityMapper::toResponse)
+                .collect(Collectors.toList());
     }
 
     private String getMessage(String key){

@@ -2,8 +2,9 @@ package com.az.edadi.dal.entity.university;
 
 import com.az.edadi.dal.constants.UniversityType;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
 
-import java.time.LocalDate;
 import java.util.UUID;
 
 @Entity
@@ -126,7 +127,7 @@ public class University {
         this.countOfStudent = countOfStudent;
     }
 
-    public void setType(String  type) {
+    public void setType(String type) {
         this.type = type;
     }
 

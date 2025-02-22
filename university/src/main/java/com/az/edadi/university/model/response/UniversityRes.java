@@ -9,9 +9,9 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 @Data
+@Builder
 @AllArgsConstructor
 @NoArgsConstructor
-@JsonSerialize
 public class UniversityRes {
     private String abbrAz;
     private String abbrEn;
