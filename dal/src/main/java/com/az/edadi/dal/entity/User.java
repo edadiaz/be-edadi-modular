@@ -1,6 +1,5 @@
 package com.az.edadi.dal.entity;
 
-import com.az.edadi.dal.convertor.AcademicDegreeConverter;
 import com.az.edadi.dal.entity.post.Post;
 import com.az.edadi.dal.types.AcademicDegree;
 import com.az.edadi.dal.types.Gender;
@@ -25,15 +24,11 @@ public class User extends BaseEntity {
     private String name;
     @Column(name = "password")
     private String password;
-
-    @Enumerated(EnumType.STRING)
-    @Column(name = "gender", nullable = false)
-    private Gender gender;
-
+    @Column(name = "gender")
+    private String gender;
     private LocalDate birthday;
+    private String academicDegree;
 
-
-    private AcademicDegree academic_degree;
     private UUID university_id;
     private UUID speciality_id;
     @OneToMany(mappedBy = "user", cascade = CascadeType.REFRESH)

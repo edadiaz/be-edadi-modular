@@ -2,6 +2,9 @@ package com.az.edadi.auth.service.impl;
 
 import com.az.edadi.auth.property.JwtProperties;
 import com.az.edadi.auth.service.JwtService;
+import com.az.edadi.auth.service.UserBlackList;
+import com.az.edadi.dal.no_sql.repository.RefreshTokenRepository;
+import com.az.edadi.dal.no_sql.table.RefreshToken;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
@@ -24,7 +28,7 @@ import java.util.stream.Collectors;
 public class JwtServiceImpl implements JwtService {
 
     private final JwtProperties jwtProperties;
-
+    private final RefreshTokenRepository refreshTokenRepository;
     private final String USER_ID = "userId";
     private final String PERMISSIONS = "permissions";
 
@@ -42,13 +46,14 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public String generateRefreshToken(String username, UUID userId) {
+    public String generateRefreshToken(UUID userId) {
+        String tokenId = UUID.randomUUID().toString();
+        refreshTokenRepository.saveToken(new RefreshToken(tokenId, userId.toString(), LocalDate.now()));
         return Jwts.builder()
                 .signWith(getKey())
-                .setSubject(username)
+                .setSubject(tokenId)
                 .setIssuer("Edadi")
                 .setIssuedAt(new Date())
-                .claim(USER_ID, userId)
                 .setExpiration(getExpirationDate(TokenType.REFRESH))
                 .compact();
     }
@@ -68,12 +73,13 @@ public class JwtServiceImpl implements JwtService {
     }
 
     void setToContext(Claims claims) {
-
+        if (UserBlackList.isBlackListed(getUserIdFromClaims(claims)))
+            throw new RuntimeException("Token is blacklisted");
         List<String> permissions = (List<String>) claims.get(PERMISSIONS);
         List<SimpleGrantedAuthority> authorities = permissions.stream()
                 .map(SimpleGrantedAuthority::new)
                 .collect(Collectors.toList());
-        String userId = claims.get(USER_ID, String.class);
+        String userId = getUserIdFromClaims(claims).toString();
         Authentication authentication = new UsernamePasswordAuthenticationToken(
                 claims.getSubject(),
                 userId,
@@ -87,6 +93,10 @@ public class JwtServiceImpl implements JwtService {
             case ACCESS -> new Date(System.currentTimeMillis() + jwtProperties.getAccessTokenSessionTime());
             case REFRESH -> new Date(System.currentTimeMillis() + jwtProperties.getRefreshTokenSessionTime());
         };
+    }
+
+    UUID getUserIdFromClaims(Claims claims) {
+        return UUID.fromString(claims.get(USER_ID, String.class));
     }
 
     SecretKey getKey() {

@@ -10,7 +10,5 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class LoginResponseModel {
     private String accessToken;
-    private String refreshToken;
     private Long expiresIn;
-    private UserRes user;
 }

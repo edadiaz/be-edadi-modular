@@ -18,6 +18,6 @@ public class UserAdapter {
         user.setEmail(request.getEmail().toLowerCase());
         user.setUsername(request.getUsername().toLowerCase());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
-        user.setGender(Gender.NONE);
+        user.setAcademicDegree(AcademicDegree.NONE.toString());
      }
 }
