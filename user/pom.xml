@@ -20,6 +20,10 @@
             <groupId>com.az.edadi</groupId>
             <artifactId>common-model</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>common-service</artifactId>
+        </dependency>
     </dependencies>
 
 

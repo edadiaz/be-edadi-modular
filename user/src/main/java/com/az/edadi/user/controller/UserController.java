@@ -1,8 +1,10 @@
 package com.az.edadi.user.controller;
 
+import com.az.edadi.common_service.util.AuthUtils;
 import com.az.edadi.user.model.request.RegisterUserRequest;
 import com.az.edadi.user.model.request.UpdateUserEducationInfo;
 import com.az.edadi.user.model.request.UpdateUserPersonalInfoRequest;
+import com.az.edadi.user.model.response.CurrentUserRes;
 import com.az.edadi.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -38,5 +40,10 @@ public class UserController {
      log.info("Updating user personal info with userId: {}", "id");
         userService.updatePersonalInfo(request);
         return ResponseEntity.ok(HttpStatus.CREATED);
+    }
+    @GetMapping("me")
+    ResponseEntity<CurrentUserRes> getMe(){
+        log.info("User {} fetch own data", AuthUtils.getCurrentUserId());
+        return ResponseEntity.ok(userService.getCurrentUser());
     }
 }
