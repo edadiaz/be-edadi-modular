@@ -6,6 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.List;
+import java.util.Optional;
+import java.util.UUID;
 import java.util.stream.Collectors;
 @UtilityClass
 public class AuthUtils {
@@ -19,5 +21,10 @@ public class AuthUtils {
     String getUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return (String) authentication.getCredentials();
+    }
+
+    public static UUID getCurrentUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return UUID.fromString(Optional.ofNullable(authentication).map(Authentication::getPrincipal).orElseThrow().toString());
     }
 }
