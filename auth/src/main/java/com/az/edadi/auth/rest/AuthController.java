@@ -1,5 +1,6 @@
 package com.az.edadi.auth.rest;
 
+import com.az.edadi.auth.model.request.LoginWithGoogleRequest;
 import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
 import com.az.edadi.auth.model.response.LoginResponseModel;
 import com.az.edadi.auth.service.LoginService;
@@ -21,6 +22,10 @@ public class AuthController {
     @PostMapping("login-with-password")
     ResponseEntity<LoginResponseModel> loginWithPassword(@RequestBody LoginWithPasswordRequest request, HttpServletResponse response) {
         return ResponseEntity.ok(loginService.loginWithPassword(request,response));
+    }
 
+    @PostMapping("login-with-google")
+    ResponseEntity<LoginResponseModel> loginWithGoogle(@RequestBody LoginWithGoogleRequest request, HttpServletResponse response) {
+        return ResponseEntity.ok(loginService.loginWithGoogle(request,response));
     }
 }

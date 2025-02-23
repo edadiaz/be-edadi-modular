@@ -1,9 +1,10 @@
 package com.az.edadi.auth.service.impl;
 
-import com.az.edadi.auth.adapter.AuthAdapter;
 import com.az.edadi.auth.exception.InvalidPasswordException;
+import com.az.edadi.auth.model.request.LoginWithGoogleRequest;
 import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
 import com.az.edadi.auth.model.response.LoginResponseModel;
+import com.az.edadi.auth.model.response.OAuth2CustomUser;
 import com.az.edadi.auth.property.JwtProperties;
 import com.az.edadi.auth.service.JwtService;
 import com.az.edadi.auth.service.LoginService;
@@ -13,11 +14,13 @@ import com.az.edadi.dal.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.web.client.RestTemplate;
 
-import java.io.IOException;
 import java.time.Duration;
+import java.util.Collections;
 import java.util.List;
 
 @Service
@@ -28,14 +31,32 @@ public class LoginServiceImpl implements LoginService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final JwtProperties jwtProperties;
-    private final AuthAdapter authAdapter;
 
     @Override
     public LoginResponseModel loginWithPassword(LoginWithPasswordRequest request, HttpServletResponse response) {
         User user = userRepository.findByUsernameOrEmail(request.getUsernameOrEmail(), request.getUsernameOrEmail())
                 .orElseThrow(() -> new UserNotFoundException("user-not-found-with-username-or-email"));
         validatePassword(request.getPassword(), user.getPassword());
-        return createLoginResponseModel(user,response);
+        return createLoginResponseModel(user, response);
+    }
+
+    @Override
+    public LoginResponseModel loginWithGoogle(LoginWithGoogleRequest request, HttpServletResponse response) {
+            OAuth2CustomUser oAuth2CustomUser = verifyToken(request.token());
+        User user = userRepository.findByEmail(oAuth2CustomUser.getEmail()).orElseThrow();
+        return createLoginResponseModel(user, response);
+    }
+
+    OAuth2CustomUser verifyToken(String token) {
+
+        RestTemplate restTemplate = new RestTemplate();
+        String uri = "https://oauth2.googleapis.com/tokeninfo?id_token=" + token;
+        HttpHeaders headers = new HttpHeaders();
+        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
+        headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
+        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
+        ResponseEntity<OAuth2CustomUser> result = restTemplate.exchange(uri, HttpMethod.GET, entity, OAuth2CustomUser.class);
+        return null;
     }
 
     void validatePassword(String input, String actualPassword) {
@@ -53,6 +74,6 @@ public class LoginServiceImpl implements LoginService {
         cookie.setMaxAge((int) Duration.ofDays(30).getSeconds());
 //        cookie.setDomain("edadi.az");
         response.addCookie(cookie);
-        return new LoginResponseModel(accessToken,jwtProperties.getRefreshTokenSessionTime());
+        return new LoginResponseModel(accessToken, jwtProperties.getRefreshTokenSessionTime());
     }
 }
