@@ -5,6 +5,7 @@ import com.az.edadi.auth.model.request.LoginWithGoogleRequest;
 import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
 import com.az.edadi.auth.model.response.LoginResponseModel;
 import com.az.edadi.auth.model.response.OAuth2CustomUser;
+import com.az.edadi.auth.property.GoogleClientProperties;
 import com.az.edadi.auth.property.JwtProperties;
 import com.az.edadi.auth.service.JwtService;
 import com.az.edadi.auth.service.LoginService;
@@ -31,6 +32,7 @@ public class LoginServiceImpl implements LoginService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final JwtProperties jwtProperties;
+    private final GoogleClientProperties googleClientProperties;
 
     @Override
     public LoginResponseModel loginWithPassword(LoginWithPasswordRequest request, HttpServletResponse response) {
@@ -43,12 +45,11 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public LoginResponseModel loginWithGoogle(LoginWithGoogleRequest request, HttpServletResponse response) {
             OAuth2CustomUser oAuth2CustomUser = verifyToken(request.token());
-        User user = userRepository.findByEmail(oAuth2CustomUser.getEmail()).orElseThrow();
-        return createLoginResponseModel(user, response);
+//        User user = userRepository.findByEmail(oAuth2CustomUser.getEmail()).orElseThrow();
+        return null;
     }
 
     OAuth2CustomUser verifyToken(String token) {
-
         RestTemplate restTemplate = new RestTemplate();
         String uri = "https://oauth2.googleapis.com/tokeninfo?id_token=" + token;
         HttpHeaders headers = new HttpHeaders();
