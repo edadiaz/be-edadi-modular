@@ -25,6 +25,7 @@ public class SecurityConfigurer {
     private final String[] POST_WHITE_LIST = {
             "/api/v1/user/sign-up",
             "/api/v1/auth/login-with-password",
+            "/api/v1/auth/login-with-google",
             "/api/v1/file-storage/**",
             "/api/v1/university/**"
     };
