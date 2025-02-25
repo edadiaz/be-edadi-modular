@@ -2,8 +2,10 @@ package com.az.edadi.auth.rest;
 
 import com.az.edadi.auth.model.request.LoginWithGoogleRequest;
 import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
-import com.az.edadi.auth.model.response.LoginResponseModel;
+import com.az.edadi.auth.model.request.RefreshTokenRequest;
+import com.az.edadi.auth.model.response.LoginResponse;
 import com.az.edadi.auth.service.LoginService;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,12 +22,20 @@ public class AuthController {
     private final LoginService loginService;
 
     @PostMapping("login-with-password")
-    ResponseEntity<LoginResponseModel> loginWithPassword(@RequestBody LoginWithPasswordRequest request, HttpServletResponse response) {
-        return ResponseEntity.ok(loginService.loginWithPassword(request,response));
+    ResponseEntity<LoginResponse> loginWithPassword(@RequestBody LoginWithPasswordRequest request,
+                                                    HttpServletResponse response) {
+        return ResponseEntity.ok(loginService.loginWithPassword(request, response));
     }
 
     @PostMapping("login-with-google")
-    ResponseEntity<LoginResponseModel> loginWithGoogle(@RequestBody LoginWithGoogleRequest request, HttpServletResponse response) {
-        return ResponseEntity.ok(loginService.loginWithGoogle(request,response));
+    ResponseEntity<LoginResponse> loginWithGoogle(@RequestBody LoginWithGoogleRequest request,
+                                                  HttpServletResponse response) {
+        return ResponseEntity.ok(loginService.loginWithGoogle(request, response));
+    }
+
+    @PostMapping("refresh-token")
+    ResponseEntity<LoginResponse> refreshToken(@RequestBody RefreshTokenRequest loginRequest,
+                                               HttpServletRequest servletRequest) {
+        return ResponseEntity.ok(loginService.refreshToken(loginRequest, servletRequest));
     }
 }

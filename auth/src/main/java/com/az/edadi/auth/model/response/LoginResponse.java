@@ -1,6 +1,5 @@
 package com.az.edadi.auth.model.response;
 
-import com.az.edadi.common_model.response.UserRes;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -8,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginResponseModel {
+public class LoginResponse {
     private String accessToken;
     private Long expiresIn;
 }

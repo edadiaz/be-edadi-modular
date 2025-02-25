@@ -43,15 +43,23 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
-    public String generateRefreshToken(UUID userId) {
+    public String generateRefreshToken() {
         return Jwts.builder()
                 .signWith(getKey())
-                .setSubject(userId.toString())
+                .setSubject(UUID.randomUUID().toString())
                 .setIssuer("Edadi")
                 .setIssuedAt(new Date())
-                .claim(USER_ID, userId)
                 .setExpiration(getExpirationDate(TokenType.REFRESH))
                 .compact();
+    }
+
+    @Override
+    public String getRefreshTokenId(String token) {
+        return Jwts.parserBuilder()
+                .setSigningKey(getKey())
+                .build()
+                .parseClaimsJws(token)
+                .getBody().getSubject();
     }
 
     @Override

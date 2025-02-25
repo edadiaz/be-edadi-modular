@@ -1,0 +1,8 @@
+databaseChangeLog:
+  - changeSet:
+      id: insert-universities-of-Azerbaijan
+      author: ulvusuleymanovv@gmail.com
+      changes:
+        - sqlFile:
+            path: sql/azerbaijan-universities.sql
+            relativeToChangelogFile: true
