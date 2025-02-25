@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: table/v1-user-table-cumulative.yaml
+      relativeToChangelogFile: true

@@ -1,0 +1,7 @@
+databaseChangeLog:
+  - changeSet:
+      id: 2025-02-14-add-edadi-schema
+      author: ulvusuleymanovv@gmail.com
+      changes:
+        - sql:
+            sql: CREATE SCHEMA IF NOT EXISTS edadi;

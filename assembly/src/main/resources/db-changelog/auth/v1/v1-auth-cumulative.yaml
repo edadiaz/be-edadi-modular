@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: table/v1-auth-table-cumulative.yaml
+      relativeToChangelogFile: true

@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: table/v1-table-file-storage.yaml
+      relativeToChangelogFile: true

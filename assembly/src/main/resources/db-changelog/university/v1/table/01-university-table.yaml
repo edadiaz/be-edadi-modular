@@ -1,0 +1,69 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01-create-university-table
+      author: emil
+      changes:
+        - createTable:
+            tableName: university
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: name_az
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: name_en
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: abbr_az
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: abbr_en
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: photo_url
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: founded_year
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: web_site_url
+                  type: varchar(255)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: count_of_student
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: type
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: description
+                  type: text
+                  constraints:
+                    nullable: false
+              - column:
+                  name: location
+                  type: varchar(255)
+                  constraints:
+                    nullable: false

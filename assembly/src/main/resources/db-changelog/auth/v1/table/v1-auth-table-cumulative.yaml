@@ -1,0 +1,4 @@
+databaseChangeLog:
+  - include:
+      file: 01-create-user-permission-table.yaml
+      relativeToChangelogFile: true

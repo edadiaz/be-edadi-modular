@@ -1,0 +1,57 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01-create-file-table
+      author: ulvusuleymanovv@gmail.com
+      changes:
+        - createTable:
+            tableName: eda_file
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: path
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: file_type
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: file_name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: size
+                  type: integer
+                  constraints:
+                    nullable: false
+              - column:
+                  name: version
+                  type: bigint
+                  defaultValue: 0
+                  constraints:
+                    nullable: false
+              - column:
+                  name: is_used
+                  type: boolean
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_modified
+                  type: timestamp
+                  defaultValueDate: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
+              - column:
+                  name: date_created
+                  type: timestamp
+                  defaultValueDate: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false

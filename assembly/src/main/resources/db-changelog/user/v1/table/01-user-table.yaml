@@ -1,0 +1,58 @@
+databaseChangeLog:
+  - changeSet:
+      id: 01-create-user-table
+      author: ulvusuleymanovv@gmail.com
+      changes:
+        - createTable:
+            tableName: user
+            columns:
+              - column:
+                  name: id
+                  type: uuid
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: username
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+                    unique: true
+              - column:
+                  name: name
+                  type: varchar(50)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: email
+                  type: varchar(100)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: password
+                  type: varchar(256)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: gender
+                  type: varchar(10)
+              - column:
+                  name: birthday
+                  type: DATE
+              - column:
+                  name: academic_degree
+                  type: varchar(36)
+              - column:
+                  name: university_id
+                  type: uuid
+              - column:
+                  name: speciality_id
+                  type: uuid
+              - column:
+                  name: date_modified
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+              - column:
+                  name: date_created
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP

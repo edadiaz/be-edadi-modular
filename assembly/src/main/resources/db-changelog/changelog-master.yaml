@@ -1,0 +1,16 @@
+databaseChangeLog:
+  - include:
+      file: schema/create-schemas.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: user/user-cumulative.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: university/university-cumulative.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: file-storage/file-storage-cumulative.yaml
+      relativeToChangelogFile: true
+  - include:
+      file: auth/auth-cumulative.yaml
+      relativeToChangelogFile: true
