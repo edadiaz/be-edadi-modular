@@ -3,7 +3,8 @@ package com.az.edadi.auth.rest;
 import com.az.edadi.auth.model.request.LoginWithGoogleRequest;
 import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
 import com.az.edadi.auth.model.request.RefreshTokenRequest;
-import com.az.edadi.auth.model.response.LoginResponse;
+import com.az.edadi.auth.model.response.LoginWithPasswordResponse;
+import com.az.edadi.auth.model.response.LoginWithGoogleResponse;
 import com.az.edadi.auth.service.LoginService;
 import com.az.edadi.auth.service.RegisterService;
 import com.az.edadi.user.model.request.RegisterUserRequest;
@@ -36,20 +37,20 @@ public class AuthController {
 
 
     @PostMapping("login-with-password")
-    ResponseEntity<LoginResponse> loginWithPassword(@RequestBody LoginWithPasswordRequest request,
-                                                    HttpServletResponse response) {
+    ResponseEntity<LoginWithPasswordResponse> loginWithPassword(@RequestBody LoginWithPasswordRequest request,
+                                                                HttpServletResponse response) {
         return ResponseEntity.ok(loginService.loginWithPassword(request, response));
     }
 
     @PostMapping("login-with-google")
-    ResponseEntity<LoginResponse> loginWithGoogle(@RequestBody LoginWithGoogleRequest request,
-                                                  HttpServletResponse response) {
+    ResponseEntity<LoginWithGoogleResponse> loginWithGoogle(@RequestBody LoginWithGoogleRequest request,
+                                                            HttpServletResponse response) {
         return ResponseEntity.ok(loginService.loginWithGoogle(request, response));
     }
 
     @PostMapping("refresh-token")
-    ResponseEntity<LoginResponse> refreshToken(@RequestBody RefreshTokenRequest loginRequest,
-                                               HttpServletRequest servletRequest) {
+    ResponseEntity<LoginWithPasswordResponse> refreshToken(@RequestBody RefreshTokenRequest loginRequest,
+                                                           HttpServletRequest servletRequest) {
         return ResponseEntity.ok(loginService.refreshToken(loginRequest, servletRequest));
     }
 }

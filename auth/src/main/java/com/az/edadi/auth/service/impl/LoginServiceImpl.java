@@ -6,12 +6,14 @@ import com.az.edadi.auth.exception.InvalidPasswordException;
 import com.az.edadi.auth.model.request.LoginWithGoogleRequest;
 import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
 import com.az.edadi.auth.model.request.RefreshTokenRequest;
-import com.az.edadi.auth.model.response.LoginResponse;
+import com.az.edadi.auth.model.response.LoginWithPasswordResponse;
+import com.az.edadi.auth.model.response.LoginWithGoogleResponse;
 import com.az.edadi.auth.model.response.OAuth2CustomUser;
 import com.az.edadi.auth.property.GoogleClientProperties;
 import com.az.edadi.auth.property.JwtProperties;
 import com.az.edadi.auth.service.JwtService;
 import com.az.edadi.auth.service.LoginService;
+import com.az.edadi.auth.service.OAuthService;
 import com.az.edadi.auth.util.AuthUtil;
 import com.az.edadi.common_model.exception.UserNotFoundException;
 import com.az.edadi.dal.entity.User;
@@ -43,9 +45,10 @@ public class LoginServiceImpl implements LoginService {
     private final JwtProperties jwtProperties;
     private final GoogleClientProperties googleClientProperties;
     private final RefreshTokenRepository tokenRepository;
+    private final OAuthService oAuthService;
 
     @Override
-    public LoginResponse loginWithPassword(LoginWithPasswordRequest request, HttpServletResponse response) {
+    public LoginWithPasswordResponse loginWithPassword(LoginWithPasswordRequest request, HttpServletResponse response) {
         User user = userRepository.findByUsernameOrEmail(request.getUsernameOrEmail(), request.getUsernameOrEmail())
                 .orElseThrow(() -> new UserNotFoundException("user-not-found-with-username-or-email"));
         validatePassword(request.getPassword(), user.getPassword());
@@ -53,14 +56,14 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public LoginResponse loginWithGoogle(LoginWithGoogleRequest request, HttpServletResponse response) {
-        OAuth2CustomUser oAuth2CustomUser = verifyToken(request.token());
-//        User user = userRepository.findByEmail(oAuth2CustomUser.getEmail()).orElseThrow();
-        return null;
+    public LoginWithGoogleResponse loginWithGoogle(LoginWithGoogleRequest request, HttpServletResponse response) {
+        OAuth2CustomUser oAuth2CustomUser = oAuthService.getGoogleUser(request.token());
+        var user = userRepository.findByEmail(oAuth2CustomUser.getEmail());
+        return user.map(value -> new LoginWithGoogleResponse(createLoginResponseModel(value, response))).orElseGet(() -> new LoginWithGoogleResponse(oAuth2CustomUser));
     }
 
     @Override
-    public LoginResponse refreshToken(RefreshTokenRequest tokenRequest, HttpServletRequest servletRequest) {
+    public LoginWithPasswordResponse refreshToken(RefreshTokenRequest tokenRequest, HttpServletRequest servletRequest) {
         //todo change it cookie not found exception
         String refreshToken = AuthUtil.findCookie(servletRequest, AuthConstants.REFRESH_TOKEN.getName())
                 .orElseThrow(ExpiredTokenException::new);
@@ -75,16 +78,6 @@ public class LoginServiceImpl implements LoginService {
 
     }
 
-    OAuth2CustomUser verifyToken(String token) {
-        RestTemplate restTemplate = new RestTemplate();
-        String uri = "https://oauth2.googleapis.com/tokeninfo?id_token=" + token;
-        HttpHeaders headers = new HttpHeaders();
-        headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
-        headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
-        HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
-        ResponseEntity<OAuth2CustomUser> result = restTemplate.exchange(uri, HttpMethod.GET, entity, OAuth2CustomUser.class);
-        return null;
-    }
 
     void validatePassword(String input, String actualPassword) {
         if (!passwordEncoder.matches(input, actualPassword))
@@ -92,17 +85,17 @@ public class LoginServiceImpl implements LoginService {
     }
 
 
-    LoginResponse createLoginResponseModel(User user, HttpServletResponse response) {
+    LoginWithPasswordResponse createLoginResponseModel(User user, HttpServletResponse response) {
         String accessToken = jwtService.generateAccessToken(user.getId(), user.getUsername(), List.of());
         String refreshToken = jwtService.generateRefreshToken();
         saveToken(user.getId().toString(), refreshToken);
         setTokenToResponse(response, refreshToken);
-        return new LoginResponse(accessToken, jwtProperties.getRefreshTokenSessionTime());
+        return new LoginWithPasswordResponse(accessToken, jwtProperties.getRefreshTokenSessionTime());
     }
 
-    LoginResponse createLoginResponseForRefreshToken(User user) {
+    LoginWithPasswordResponse createLoginResponseForRefreshToken(User user) {
         String accessToken = jwtService.generateAccessToken(user.getId(), user.getUsername(), List.of());
-        return new LoginResponse(accessToken, jwtProperties.getRefreshTokenSessionTime());
+        return new LoginWithPasswordResponse(accessToken, jwtProperties.getRefreshTokenSessionTime());
     }
 
     void saveToken(String token, String userId) {

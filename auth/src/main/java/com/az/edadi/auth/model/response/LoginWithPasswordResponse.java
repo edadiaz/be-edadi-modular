@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class LoginResponse {
+public class LoginWithPasswordResponse {
     private String accessToken;
     private Long expiresIn;
 }
