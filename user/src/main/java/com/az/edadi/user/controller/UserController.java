@@ -21,13 +21,6 @@ public class UserController {
 
     private final UserService userService;
 
-    @PostMapping("sign-up")
-    ResponseEntity<HttpStatus> registerUser(@RequestBody @Validated RegisterUserRequest request) {
-        log.info("Registering user with email: {}", request.getEmail());
-        userService.registerUser(request);
-        return ResponseEntity.ok(HttpStatus.CREATED);
-    }
-
     @PutMapping("{userId}/education-degree")
     ResponseEntity<HttpStatus> updateUserEducationInfo( @PathVariable String userId, @RequestBody @Validated UpdateUserEducationInfo request) {
         log.info("Updating user education info with userId: {}", "id");

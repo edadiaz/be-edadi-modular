@@ -25,9 +25,14 @@ public class User extends BaseEntity {
     @Column(name = "password")
     private String password;
     @Column(name = "gender")
-    private String gender;
+
+    @Enumerated(EnumType.STRING)
+    private Gender gender;
+
     private LocalDate birthday;
-    private String academicDegree;
+
+    @Enumerated(EnumType.STRING)
+    private AcademicDegree academicDegree;
 
     private UUID university_id;
     private UUID speciality_id;

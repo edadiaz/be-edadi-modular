@@ -19,12 +19,6 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserAdapter userAdapter;
 
-    @Override
-    public void registerUser(RegisterUserRequest request) {
-        User user = new User();
-        userAdapter.map(user, request);
-        userRepository.save(user);
-    }
 
     @Override
     public void updateEducationalDegree(UpdateUserEducationInfo request) {
