@@ -14,7 +14,7 @@ import com.az.edadi.auth.property.JwtProperties;
 import com.az.edadi.auth.service.JwtService;
 import com.az.edadi.auth.service.LoginService;
 import com.az.edadi.auth.service.OAuthService;
-import com.az.edadi.auth.util.AuthUtil;
+import com.az.edadi.auth.util.CookieUtil;
 import com.az.edadi.common_model.exception.UserNotFoundException;
 import com.az.edadi.dal.entity.User;
 import com.az.edadi.dal.no_sql.repository.RefreshTokenRepository;
@@ -24,14 +24,11 @@ import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
-import org.springframework.http.*;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import java.time.Duration;
 import java.time.LocalDate;
-import java.util.Collections;
 import java.util.List;
 import java.util.UUID;
 
@@ -65,7 +62,7 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public LoginWithPasswordResponse refreshToken(RefreshTokenRequest tokenRequest, HttpServletRequest servletRequest) {
         //todo change it cookie not found exception
-        String refreshToken = AuthUtil.findCookie(servletRequest, AuthConstants.REFRESH_TOKEN.getName())
+        String refreshToken = CookieUtil.findCookie(servletRequest, AuthConstants.REFRESH_TOKEN.getName())
                 .orElseThrow(ExpiredTokenException::new);
         var savedToken = tokenRepository.findByTokenId(jwtService.getRefreshTokenId(refreshToken));
         //todo handle exception

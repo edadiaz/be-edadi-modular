@@ -1,6 +1,6 @@
-package com.az.edadi.user.validation;
+package com.az.edadi.common_service.annotation;
 
-import com.az.edadi.user.validation.impl.DuplicateEmailValidator;
+import com.az.edadi.common_service.annotation.impl.DuplicateEmailValidator;
 import jakarta.validation.Constraint;
 import jakarta.validation.Payload;
 

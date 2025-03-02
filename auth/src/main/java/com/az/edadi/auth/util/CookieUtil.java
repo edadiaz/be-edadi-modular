@@ -8,7 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.Arrays;
 import java.util.Optional;
 
-public class AuthUtil {
+public class CookieUtil {
 
     public static Optional<String> findCookie(HttpServletRequest request, String cookieName) {
         return Optional.ofNullable(request.getCookies())
