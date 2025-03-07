@@ -1,14 +1,13 @@
 package com.az.edadi.university.service.impl;
 
 import com.az.edadi.common_service.service.NullFinder;
-import com.az.edadi.dal.entity.university.University;
+import com.az.edadi.dal.entity.institution.Institution;
 import com.az.edadi.dal.repository.UniversityRepository;
 import com.az.edadi.university.exception.UniversityNotFoundException;
 import com.az.edadi.university.mapper.UniversityMapper;
 import com.az.edadi.university.model.request.UniversityReq;
 import com.az.edadi.university.model.response.UniversityRes;
 import com.az.edadi.university.service.UniversityService;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -31,14 +30,14 @@ public class UniversityServiceImpl implements UniversityService {
     private final MessageSource messageSource;
     @Override
     public UniversityRes createUniversity(UniversityReq universityReq) {
-        University university = UniversityMapper.toEntity(universityReq);
+        Institution university = UniversityMapper.toEntity(universityReq);
         universityRepository.save(university);
         return UniversityMapper.toResponse(university);
     }
 
     @Override
     public UniversityRes getUniversityById(UUID id) {
-        University university = universityRepository.findById(id)
+        Institution university = universityRepository.findById(id)
                 .orElseThrow(() -> new UniversityNotFoundException(getMessage("university.not.found")));
         return UniversityMapper.toResponse(university);
     }
@@ -46,7 +45,7 @@ public class UniversityServiceImpl implements UniversityService {
     @Transactional
     @Override
     public UniversityRes update(UUID id, UniversityReq universityReq) {
-        University university = universityRepository.
+        Institution university = universityRepository.
                 findById(id)
                 .orElseThrow(()-> new UniversityNotFoundException(getMessage("university.not.found")));
         BeanUtils.copyProperties(university,universityReq, NullFinder.getNullFieldNames(universityReq));
@@ -55,7 +54,7 @@ public class UniversityServiceImpl implements UniversityService {
 
     @Override
     public String delete(UUID id) {
-        University university = universityRepository.
+        Institution university = universityRepository.
                 findById(id)
                 .orElseThrow(()-> new UniversityNotFoundException(getMessage("university.not.found")));
         universityRepository.deleteById(id);

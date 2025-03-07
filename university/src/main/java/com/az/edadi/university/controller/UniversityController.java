@@ -1,12 +1,9 @@
 package com.az.edadi.university.controller;
 
-import com.az.edadi.dal.entity.university.University;
 import com.az.edadi.university.model.request.UniversityReq;
 import com.az.edadi.university.model.response.UniversityRes;
 import com.az.edadi.university.service.UniversityService;
-import com.az.edadi.university.service.impl.UniversityServiceImpl;
 import jakarta.validation.Valid;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

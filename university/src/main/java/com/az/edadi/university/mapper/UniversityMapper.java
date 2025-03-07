@@ -1,13 +1,12 @@
 package com.az.edadi.university.mapper;
 
-import com.az.edadi.dal.entity.university.University;
+import com.az.edadi.dal.entity.institution.Institution;
 import com.az.edadi.university.model.request.UniversityReq;
 import com.az.edadi.university.model.response.UniversityRes;
-import org.springframework.stereotype.Component;
 
 
 public class UniversityMapper {
-    public static UniversityRes toResponse(University university) {
+    public static UniversityRes toResponse(Institution university) {
         UniversityRes universityRes = new UniversityRes();
         universityRes.setAbbrAz(university.getAbbrAz());
         universityRes.setAbbrEn(university.getAbbrEn());
@@ -25,7 +24,7 @@ public class UniversityMapper {
     }
 
 
-    public static UniversityReq toRequest(University university) {
+    public static UniversityReq toRequest(Institution university) {
         UniversityReq universityReq = new UniversityReq();
         universityReq.setAbbrAz(university.getAbbrAz());
         universityReq.setAbbrEn(university.getAbbrEn());
@@ -44,8 +43,8 @@ public class UniversityMapper {
 
     ;
 
-    public static University toEntity(UniversityRes universityRes) {
-        University university = new University();
+    public static Institution toEntity(UniversityRes universityRes) {
+        Institution university = new Institution();
         university.setNameAz(universityRes.getNameAz());
         university.setNameEn(universityRes.getNameEn());
         university.setAbbrAz(universityRes.getAbbrAz());
@@ -62,8 +61,8 @@ public class UniversityMapper {
 
     ;
 
-    public static University toEntity(UniversityReq universityReq) {
-        University university = new University();
+    public static Institution toEntity(UniversityReq universityReq) {
+        Institution university = new Institution();
         university.setNameAz(universityReq.getNameAz());
         university.setNameEn(universityReq.getNameEn());
         university.setAbbrAz(universityReq.getAbbrAz());

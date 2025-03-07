@@ -1,4 +1,4 @@
 databaseChangeLog:
   - include:
-      file: 01-university-table.yaml
+      file: 01-institution-table.yaml
       relativeToChangelogFile: true

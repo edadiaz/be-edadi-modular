@@ -6,7 +6,7 @@ databaseChangeLog:
       file: user/user-cumulative.yaml
       relativeToChangelogFile: true
   - include:
-      file: university/university-cumulative.yaml
+      file: institution/institution-cumulative.yaml
       relativeToChangelogFile: true
   - include:
       file: file-storage/file-storage-cumulative.yaml

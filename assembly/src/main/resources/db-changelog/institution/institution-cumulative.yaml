@@ -1,4 +1,4 @@
 databaseChangeLog:
   - include:
-      file: table/v1-university-table-cumulative.yaml
+      file: v1/v1-institution-cumulative.yaml
       relativeToChangelogFile: true

@@ -1,10 +1,10 @@
 databaseChangeLog:
   - changeSet:
-      id: 01-create-university-table
+      id: 01-create-institution-table
       author: emil
       changes:
         - createTable:
-            tableName: university
+            tableName: institution
             columns:
               - column:
                   name: id
@@ -12,6 +12,9 @@ databaseChangeLog:
                   constraints:
                     primaryKey: true
                     nullable: false
+              - column:
+                  name: institution_type
+                  type: varchar(40)
               - column:
                   name: name_az
                   type: varchar(256)

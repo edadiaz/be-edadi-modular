@@ -1,6 +1,5 @@
 package com.az.edadi.university.service;
 
-import com.az.edadi.dal.entity.university.University;
 import com.az.edadi.university.model.request.UniversityReq;
 import com.az.edadi.university.model.response.UniversityRes;
 import org.springframework.stereotype.Service;
