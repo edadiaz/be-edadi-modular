@@ -1,13 +1,12 @@
 package com.az.edadi.common_service.service;
 
 import freemarker.template.Configuration;
-import freemarker.template.Template;
 import jakarta.mail.internet.InternetAddress;
 import jakarta.mail.internet.MimeMessage;
 import lombok.RequiredArgsConstructor;
-import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.mail.javamail.MimeMessageHelper;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.freemarker.FreeMarkerTemplateUtils;
 
@@ -18,30 +17,20 @@ import java.util.Map;
 @RequiredArgsConstructor
 public class SecurityMailSender {
 
-
     private final JavaMailSender mailSender;
     private final Configuration configuration;
 
-    public void sendEmail(String to, String subject, String text) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom("security@edadi.az");
-        message.setTo(to);
-        message.setSubject(subject);
-        message.setText(text);
-        mailSender.send(message);
-    }
-
-    public void sendResetPasswordLink(String to, Map<String,String> mailMessage) {
+    @Async
+    public void sendResetPasswordLink(String to, Map<String, String> mailMessage) {
         MimeMessage message = mailSender.createMimeMessage();
         try {
             MimeMessageHelper mimeMessageHelper = new MimeMessageHelper(message, MimeMessageHelper.MULTIPART_MODE_MIXED_RELATED,
                     StandardCharsets.UTF_8.name());
-            Template template = configuration.getTemplate("reset-password-mail-az.html");
-            String html = FreeMarkerTemplateUtils.processTemplateIntoString(template, mailMessage);
+            String html = FreeMarkerTemplateUtils.processTemplateIntoString(configuration.getTemplate("reset-password-mail.html"), mailMessage);
             mimeMessageHelper.setTo(to);
             mimeMessageHelper.setText(html, true);
-            mimeMessageHelper.setSubject("Şifrə bərpası");
-            mimeMessageHelper.setFrom(new InternetAddress("security@edadi.az", "Edadi"));
+            mimeMessageHelper.setSubject(Translator.getTranslation("password-reset-mail"));
+            mimeMessageHelper.setFrom(new InternetAddress("security@edadi.az", "Edadi.az"));
             mailSender.send(message);
         } catch (Exception e) {
             System.out.println(e.toString());

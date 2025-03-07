@@ -1,11 +1,13 @@
 package com.az.edadi.auth.rest;
 
+import com.az.edadi.auth.model.request.ForgotPasswordRequest;
 import com.az.edadi.auth.model.request.LoginWithGoogleRequest;
 import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
 import com.az.edadi.auth.model.request.RefreshTokenRequest;
 import com.az.edadi.auth.model.response.LoginWithPasswordResponse;
 import com.az.edadi.auth.model.response.LoginWithGoogleResponse;
 import com.az.edadi.auth.service.LoginService;
+import com.az.edadi.auth.service.PasswordService;
 import com.az.edadi.auth.service.RegisterService;
 import com.az.edadi.user.model.request.RegisterUserRequest;
 import jakarta.servlet.http.HttpServletRequest;
@@ -27,14 +29,13 @@ public class AuthController {
 
     private final LoginService loginService;
     private final RegisterService registerService;
-
+    private final PasswordService passwordService;
     @PostMapping("sign-up")
     ResponseEntity<HttpStatus> registerUser(@RequestBody @Validated RegisterUserRequest request) {
         log.info("Registering user with email: {}", request.getEmail());
         registerService.registerUser(request);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
-
 
     @PostMapping("login-with-password")
     ResponseEntity<LoginWithPasswordResponse> loginWithPassword(@RequestBody LoginWithPasswordRequest request,
@@ -52,5 +53,11 @@ public class AuthController {
     ResponseEntity<LoginWithPasswordResponse> refreshToken(@RequestBody RefreshTokenRequest loginRequest,
                                                            HttpServletRequest servletRequest) {
         return ResponseEntity.ok(loginService.refreshToken(loginRequest, servletRequest));
+    }
+
+    @PostMapping("forgot-password")
+    ResponseEntity<HttpStatus> forgotPassword(@RequestBody ForgotPasswordRequest request) {
+        passwordService.sendResetPasswordEmail(request);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 }

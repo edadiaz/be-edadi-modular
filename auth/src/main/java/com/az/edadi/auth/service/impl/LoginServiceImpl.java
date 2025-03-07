@@ -46,6 +46,7 @@ public class LoginServiceImpl implements LoginService {
 
     @Override
     public LoginWithPasswordResponse loginWithPassword(LoginWithPasswordRequest request, HttpServletResponse response) {
+        request.setUsernameOrEmail(request.getUsernameOrEmail().toLowerCase());
         User user = userRepository.findByUsernameOrEmail(request.getUsernameOrEmail(), request.getUsernameOrEmail())
                 .orElseThrow(() -> new UserNotFoundException("user-not-found-with-username-or-email"));
         validatePassword(request.getPassword(), user.getPassword());
@@ -85,7 +86,7 @@ public class LoginServiceImpl implements LoginService {
     LoginWithPasswordResponse createLoginResponseModel(User user, HttpServletResponse response) {
         String accessToken = jwtService.generateAccessToken(user.getId(), user.getUsername(), List.of());
         String refreshToken = jwtService.generateRefreshToken();
-        saveToken(user.getId().toString(), refreshToken);
+        saveToken(refreshToken,user.getId().toString());
         setTokenToResponse(response, refreshToken);
         return new LoginWithPasswordResponse(accessToken, jwtProperties.getRefreshTokenSessionTime());
     }
