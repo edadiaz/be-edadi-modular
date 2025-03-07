@@ -40,7 +40,6 @@ public class LoginServiceImpl implements LoginService {
     private final PasswordEncoder passwordEncoder;
     private final JwtService jwtService;
     private final JwtProperties jwtProperties;
-    private final GoogleClientProperties googleClientProperties;
     private final RefreshTokenRepository tokenRepository;
     private final OAuthService oAuthService;
 

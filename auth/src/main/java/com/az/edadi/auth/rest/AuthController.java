@@ -1,9 +1,6 @@
 package com.az.edadi.auth.rest;
 
-import com.az.edadi.auth.model.request.ForgotPasswordRequest;
-import com.az.edadi.auth.model.request.LoginWithGoogleRequest;
-import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
-import com.az.edadi.auth.model.request.RefreshTokenRequest;
+import com.az.edadi.auth.model.request.*;
 import com.az.edadi.auth.model.response.LoginWithPasswordResponse;
 import com.az.edadi.auth.model.response.LoginWithGoogleResponse;
 import com.az.edadi.auth.service.LoginService;
@@ -58,6 +55,12 @@ public class AuthController {
     @PostMapping("forgot-password")
     ResponseEntity<HttpStatus> forgotPassword(@RequestBody ForgotPasswordRequest request) {
         passwordService.sendResetPasswordEmail(request);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping("reset-password-with-token")
+    ResponseEntity<HttpStatus> resetPassword(@RequestBody ResetPasswordWithTokenRequest request) {
+        passwordService.resetPasswordWithToken(request);
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 }

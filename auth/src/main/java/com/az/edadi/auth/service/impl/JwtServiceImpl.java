@@ -63,6 +63,19 @@ public class JwtServiceImpl implements JwtService {
     }
 
     @Override
+    public String getUserIdFromToken(String token) {
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(getKey())
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody().getSubject();
+        } catch (Exception e) {
+            throw new RuntimeException("Invalid token");
+        }
+    }
+
+    @Override
     public void verifyAccessToken(String token) {
         try {
             Claims claims = Jwts.parserBuilder()

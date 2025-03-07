@@ -1,6 +1,7 @@
 package com.az.edadi.auth.service.impl;
 
 import com.az.edadi.auth.model.request.ForgotPasswordRequest;
+import com.az.edadi.auth.model.request.ResetPasswordWithTokenRequest;
 import com.az.edadi.auth.service.JwtService;
 import com.az.edadi.auth.service.PasswordService;
 import com.az.edadi.common_service.service.SecurityMailSender;
@@ -10,9 +11,11 @@ import com.az.edadi.dal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
@@ -24,7 +27,7 @@ public class PasswordServiceImpl implements PasswordService {
     private final SecurityMailSender securityMailSender;
     private final UserRepository userRepository;
     private final JwtService jwtService;
-
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public void sendResetPasswordEmail(ForgotPasswordRequest forgotPasswordRequest) {
@@ -32,6 +35,14 @@ public class PasswordServiceImpl implements PasswordService {
                 forgotPasswordRequest.usernameOrEmail(), forgotPasswordRequest.usernameOrEmail())
                 .orElseThrow();
         securityMailSender.sendResetPasswordLink(user.getEmail(), getMailInfoMap(user));
+    }
+
+    @Override
+    public void resetPasswordWithToken(ResetPasswordWithTokenRequest request) {
+        var userId= jwtService.getUserIdFromToken(request.token());
+        var user = userRepository.findById(UUID.fromString(userId)).orElseThrow();
+        user.setPassword(passwordEncoder.encode(request.newPassword()));
+        userRepository.save(user);
     }
 
     HashMap<String, String> getMailInfoMap(User user) {
