@@ -27,4 +27,9 @@ public class AuthUtils {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return UUID.fromString(Optional.ofNullable(authentication).map(Authentication::getPrincipal).orElseThrow().toString());
     }
+
+    public static void checkCurrentUser(UUID userId) {
+        if (!getCurrentUserId().equals(userId))
+            throw new RuntimeException();
+    }
 }

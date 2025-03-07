@@ -34,8 +34,9 @@ public class User extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private AcademicDegree academicDegree;
 
-    private UUID university_id;
-    private UUID speciality_id;
+    private UUID universityId;
+    private UUID specialityId;
+
     @OneToMany(mappedBy = "user", cascade = CascadeType.REFRESH)
     private List<Post> postList;
 

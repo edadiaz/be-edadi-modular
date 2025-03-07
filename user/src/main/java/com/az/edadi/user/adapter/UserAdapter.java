@@ -15,7 +15,7 @@ public class UserAdapter {
         currentUserRes.setEmail(user.getEmail());
         currentUserRes.setId(user.getId());
         currentUserRes.setUsername(user.getUsername());
-        currentUserRes.setUniversityId(user.getUniversity_id());
+        currentUserRes.setUniversityId(user.getUniversityId());
         return currentUserRes;
     }
 }

@@ -5,11 +5,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.UUID;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 public class UpdateUserEducationInfo {
     private AcademicDegree degree;
-    private String universityId;
-    private String specialityId;
+    private UUID universityId;
+    private UUID specialityId;
 }

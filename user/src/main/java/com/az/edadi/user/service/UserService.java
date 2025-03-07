@@ -5,8 +5,10 @@ import com.az.edadi.user.model.request.UpdateUserEducationInfo;
 import com.az.edadi.user.model.request.UpdateUserPersonalInfoRequest;
 import com.az.edadi.user.model.response.CurrentUserRes;
 
+import java.util.UUID;
+
 public interface UserService {
-    void updateEducationalDegree(UpdateUserEducationInfo request);
-    void updatePersonalInfo(UpdateUserPersonalInfoRequest request);
+    void updateEducationalDegree(UUID userId, UpdateUserEducationInfo request);
+    void updatePersonalInfo(UUID userId, UpdateUserPersonalInfoRequest request);
     CurrentUserRes getCurrentUser();
 }

@@ -13,6 +13,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.UUID;
+
 @Slf4j
 @RestController
 @RequiredArgsConstructor
@@ -21,17 +23,17 @@ public class UserController {
 
     private final UserService userService;
 
-    @PutMapping("{userId}/education-degree")
-    ResponseEntity<HttpStatus> updateUserEducationInfo( @PathVariable String userId, @RequestBody @Validated UpdateUserEducationInfo request) {
+    @PutMapping("{userId}/academic-degree")
+    ResponseEntity<HttpStatus> updateUserEducationInfo(@PathVariable UUID userId, @RequestBody @Validated UpdateUserEducationInfo request) {
         log.info("Updating user education info with userId: {}", "id");
-        userService.updateEducationalDegree(request);
+        userService.updateEducationalDegree(userId,request);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
     @PutMapping("{userId}/personal-info")
-    ResponseEntity<HttpStatus> updatePersonalInfo(@PathVariable String userId, @RequestBody @Validated UpdateUserPersonalInfoRequest request) {
+    ResponseEntity<HttpStatus> updatePersonalInfo(@PathVariable UUID userId, @RequestBody @Validated UpdateUserPersonalInfoRequest request) {
      log.info("Updating user personal info with userId: {}", "id");
-        userService.updatePersonalInfo(request);
+        userService.updatePersonalInfo(userId,request);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
     @GetMapping("me")

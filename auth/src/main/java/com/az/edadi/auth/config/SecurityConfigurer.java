@@ -33,13 +33,14 @@ public class SecurityConfigurer {
     private final String[] GET_WHITE_LIST = {
             "/api/v1/**",
             "/swagger-ui/**",
-            "/v3/api-docs/**"
+            "/v3/api-docs/**",
+            "/swagger-ui/index.html"
 
     };
 
     private final String[] ALL_ALLOWED = {
-            "/h2-console/**"
-
+            "/h2-console/**",
+            "/api/v1/docs"
 
     };
 
