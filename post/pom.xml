@@ -10,6 +10,8 @@
     </parent>
 
     <artifactId>post</artifactId>
+    <packaging>jar</packaging>
+
     <dependencies>
         <dependency>
             <groupId>com.az.edadi</groupId>

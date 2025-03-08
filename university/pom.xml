@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>university</artifactId>
+    <packaging>jar</packaging>
 
 
     <dependencies>

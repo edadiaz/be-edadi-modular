@@ -10,6 +10,7 @@
     </parent>
 
     <artifactId>dal</artifactId>
+    <packaging>jar</packaging>
 
 <dependencies>
     <dependency>
