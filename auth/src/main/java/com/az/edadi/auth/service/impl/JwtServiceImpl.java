@@ -30,10 +30,10 @@ public class JwtServiceImpl implements JwtService {
     private final String PERMISSIONS = "permissions";
 
     @Override
-    public String generateAccessToken(UUID userId, String username, List<String> permissions) {
+    public String generateAccessToken(String userId, String username, List<String> permissions) {
         return Jwts.builder()
                 .signWith(getKey())
-                .setSubject(userId.toString())
+                .setSubject(userId)
                 .setIssuer("Edadi")
                 .setIssuedAt(new Date())
                 .claim(USERNAME, userId)

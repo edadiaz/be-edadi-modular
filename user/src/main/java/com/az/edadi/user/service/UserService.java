@@ -8,7 +8,7 @@ import com.az.edadi.user.model.response.CurrentUserRes;
 import java.util.UUID;
 
 public interface UserService {
-    void updateEducationalDegree(UUID userId, UpdateUserEducationInfo request);
-    void updatePersonalInfo(UUID userId, UpdateUserPersonalInfoRequest request);
+    void updateEducationalDegree(String userId, UpdateUserEducationInfo request);
+    void updatePersonalInfo(String userId, UpdateUserPersonalInfoRequest request);
     CurrentUserRes getCurrentUser();
 }

@@ -1,6 +1,6 @@
 package com.az.edadi.common_service.annotation.impl;
 
-import com.az.edadi.dal.repository.UserRepository;
+import com.az.edadi.dal.no_sql.repository.UserRepository;
 import com.az.edadi.common_service.annotation.NotDuplicateEmail;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

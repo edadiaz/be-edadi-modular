@@ -24,14 +24,14 @@ public class UserController {
     private final UserService userService;
 
     @PutMapping("{userId}/academic-degree")
-    ResponseEntity<HttpStatus> updateUserEducationInfo(@PathVariable UUID userId, @RequestBody @Validated UpdateUserEducationInfo request) {
+    ResponseEntity<HttpStatus> updateUserEducationInfo(@PathVariable String userId, @RequestBody @Validated UpdateUserEducationInfo request) {
         log.info("Updating user education info with userId: {}", "id");
         userService.updateEducationalDegree(userId,request);
         return ResponseEntity.ok(HttpStatus.CREATED);
     }
 
     @PutMapping("{userId}/personal-info")
-    ResponseEntity<HttpStatus> updatePersonalInfo(@PathVariable UUID userId, @RequestBody @Validated UpdateUserPersonalInfoRequest request) {
+    ResponseEntity<HttpStatus> updatePersonalInfo(@PathVariable String userId, @RequestBody @Validated UpdateUserPersonalInfoRequest request) {
      log.info("Updating user personal info with userId: {}", "id");
         userService.updatePersonalInfo(userId,request);
         return ResponseEntity.ok(HttpStatus.CREATED);

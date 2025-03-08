@@ -7,7 +7,7 @@ import com.az.edadi.auth.service.PasswordService;
 import com.az.edadi.common_service.service.SecurityMailSender;
 import com.az.edadi.common_service.service.Translator;
 import com.az.edadi.dal.entity.User;
-import com.az.edadi.dal.repository.UserRepository;
+import com.az.edadi.dal.no_sql.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,7 +40,7 @@ public class PasswordServiceImpl implements PasswordService {
     @Override
     public void resetPasswordWithToken(ResetPasswordWithTokenRequest request) {
         var userId= jwtService.getUserIdFromToken(request.token());
-        var user = userRepository.findById(UUID.fromString(userId)).orElseThrow();
+        var user = userRepository.findById(userId).orElseThrow();
         user.setPassword(passwordEncoder.encode(request.newPassword()));
         userRepository.save(user);
     }

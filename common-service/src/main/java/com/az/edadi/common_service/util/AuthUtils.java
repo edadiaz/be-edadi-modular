@@ -23,13 +23,10 @@ public class AuthUtils {
         return (String) authentication.getCredentials();
     }
 
-    public static UUID getCurrentUserId() {
+    public static String getCurrentUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return UUID.fromString(Optional.ofNullable(authentication).map(Authentication::getPrincipal).orElseThrow().toString());
+        return Optional.ofNullable(authentication).map(Authentication::getPrincipal).orElseThrow().toString();
     }
 
-    public static void checkCurrentUser(UUID userId) {
-        if (!getCurrentUserId().equals(userId))
-            throw new RuntimeException();
-    }
+
 }

@@ -10,11 +10,11 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class CurrentUserRes {
-    private UUID id;
+    private String id;
     private String username;
     private String name;
     private String email;
-    private UUID universityId;
-    private UUID specialityId;
+    private String universityId;
+    private String specialityId;
     private String profileImageUrl;
 }

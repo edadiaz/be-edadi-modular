@@ -12,6 +12,6 @@ import java.util.UUID;
 @NoArgsConstructor
 public class UpdateUserEducationInfo {
     private AcademicDegree degree;
-    private UUID universityId;
-    private UUID specialityId;
+    private String universityId;
+    private String specialityId;
 }

@@ -9,7 +9,6 @@ import com.az.edadi.auth.model.request.RefreshTokenRequest;
 import com.az.edadi.auth.model.response.LoginWithPasswordResponse;
 import com.az.edadi.auth.model.response.LoginWithGoogleResponse;
 import com.az.edadi.auth.model.response.OAuth2CustomUser;
-import com.az.edadi.auth.property.GoogleClientProperties;
 import com.az.edadi.auth.property.JwtProperties;
 import com.az.edadi.auth.service.JwtService;
 import com.az.edadi.auth.service.LoginService;
@@ -19,7 +18,7 @@ import com.az.edadi.common_model.exception.UserNotFoundException;
 import com.az.edadi.dal.entity.User;
 import com.az.edadi.dal.no_sql.repository.RefreshTokenRepository;
 import com.az.edadi.dal.no_sql.table.RefreshToken;
-import com.az.edadi.dal.repository.UserRepository;
+import com.az.edadi.dal.no_sql.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -68,7 +67,7 @@ public class LoginServiceImpl implements LoginService {
         //todo handle exception
         if (!tokenRequest.getUserId().equals(savedToken.getUserId()))
             throw new RuntimeException();
-        return userRepository.findById(UUID.fromString(tokenRequest.getUserId()))
+        return userRepository.findById(tokenRequest.getUserId())
                 .map(this::createLoginResponseForRefreshToken)
                 .orElseThrow();
 
