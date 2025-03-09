@@ -22,7 +22,6 @@ public class FileAdapter {
         return new UploadedImageRes(entity.getId().toString(),
                 ROOT_URL + entity.getPath() + entity.getId(),
                 entity.getFileType(),
-                entity.getSize(),
-                entity.getDateCreated().toString());
+                entity.getSize());
     }
 }

@@ -10,7 +10,6 @@ import java.util.UUID;
 @Data
 @Document(collection = "post")
 public class Post {
-
     @Id
     private String id;
     private String text;

@@ -7,7 +7,7 @@ import com.az.edadi.auth.service.PasswordService;
 import com.az.edadi.common_service.service.SecurityMailSender;
 import com.az.edadi.common_service.service.Translator;
 import com.az.edadi.dal.entity.User;
-import com.az.edadi.dal.no_sql.repository.UserRepository;
+import com.az.edadi.dal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -15,7 +15,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor

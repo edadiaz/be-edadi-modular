@@ -28,7 +28,7 @@ public class UniversityController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UniversityRes> getUniversityById(@PathVariable UUID id){
+    public ResponseEntity<UniversityRes> getUniversityById(@PathVariable String id){
         UniversityRes universityRes = universityService.getUniversityById(id);
         return new ResponseEntity<>(universityRes, HttpStatus.OK);
     }
@@ -41,14 +41,14 @@ public class UniversityController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UniversityRes> updateUniversity(@Valid @PathVariable UUID id, @RequestBody UniversityReq universityReq){
+    public ResponseEntity<UniversityRes> updateUniversity(@Valid @PathVariable String id, @RequestBody UniversityReq universityReq){
         UniversityRes universityRes = universityService.update(id,universityReq);
         return new ResponseEntity<>(universityRes,HttpStatus.OK);
 
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deleteUniversity(@PathVariable UUID id){
+    public ResponseEntity<String> deleteUniversity(@PathVariable String id){
         String deletedMsg = universityService.delete(id);
         return new ResponseEntity<>(deletedMsg,HttpStatus.OK);
     }

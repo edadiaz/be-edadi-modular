@@ -1,4 +1,4 @@
-package com.az.edadi.dal.no_sql.repository;
+package com.az.edadi.dal.repository;
 
 import com.az.edadi.dal.entity.post.Post;
 import org.springframework.data.mongodb.repository.MongoRepository;

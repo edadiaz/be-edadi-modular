@@ -36,7 +36,7 @@ public class UniversityServiceImpl implements UniversityService {
     }
 
     @Override
-    public UniversityRes getUniversityById(UUID id) {
+    public UniversityRes getUniversityById(String id) {
         Institution university = universityRepository.findById(id)
                 .orElseThrow(() -> new UniversityNotFoundException(getMessage("university.not.found")));
         return UniversityMapper.toResponse(university);
@@ -44,7 +44,7 @@ public class UniversityServiceImpl implements UniversityService {
 
     @Transactional
     @Override
-    public UniversityRes update(UUID id, UniversityReq universityReq) {
+    public UniversityRes update(String id, UniversityReq universityReq) {
         Institution university = universityRepository.
                 findById(id)
                 .orElseThrow(()-> new UniversityNotFoundException(getMessage("university.not.found")));
@@ -53,7 +53,7 @@ public class UniversityServiceImpl implements UniversityService {
     }
 
     @Override
-    public String delete(UUID id) {
+    public String delete(String id) {
         Institution university = universityRepository.
                 findById(id)
                 .orElseThrow(()-> new UniversityNotFoundException(getMessage("university.not.found")));

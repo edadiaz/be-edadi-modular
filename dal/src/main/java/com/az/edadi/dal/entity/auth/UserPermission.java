@@ -1,19 +1,17 @@
 package com.az.edadi.dal.entity.auth;
 
-import com.az.edadi.dal.entity.BaseEntity;
 import com.az.edadi.dal.types.Permission;
-import jakarta.persistence.Entity;
-import jakarta.persistence.EnumType;
-import jakarta.persistence.Enumerated;
-import jakarta.persistence.Table;
+import jakarta.persistence.Id;
+import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.UUID;
+@Data
+@Document(collection = "user")
+  public class UserPermission {
 
-@Entity
-@Table(name = "user_permission")
-public class UserPermission extends BaseEntity {
-    private UUID userId;
+    @Id
+    private String id;
 
-    @Enumerated(EnumType.STRING)
+    private String userId;
     private Permission permission;
 }

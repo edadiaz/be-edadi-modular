@@ -20,7 +20,7 @@ import com.az.edadi.common_model.exception.UserNotFoundException;
 import com.az.edadi.dal.entity.User;
 import com.az.edadi.dal.no_sql.repository.RefreshTokenRepository;
 import com.az.edadi.dal.no_sql.table.RefreshToken;
-import com.az.edadi.dal.no_sql.repository.UserRepository;
+import com.az.edadi.dal.repository.UserRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -31,7 +31,6 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.time.LocalDate;
 import java.util.List;
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor

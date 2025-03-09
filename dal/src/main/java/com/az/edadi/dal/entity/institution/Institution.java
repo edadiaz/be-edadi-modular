@@ -3,16 +3,14 @@ package com.az.edadi.dal.entity.institution;
 import com.az.edadi.dal.types.InstitutionType;
 import jakarta.persistence.*;
 import lombok.Data;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.UUID;
 
-@Entity
 @Data
-@Table(name = "institution")
+@Document(collection = "institution")
 public class Institution {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
-    private UUID id;
+    private String id;
     private InstitutionType institutionType;
     private String abbrAz;
     private String abbrEn;
@@ -25,24 +23,5 @@ public class Institution {
     private String  type;
     private String description;
     private String location;
-
-    @Override
-    public String toString() {
-        return "University{" +
-                "id=" + id +
-                ", abbrAz='" + abbrAz + '\'' +
-                ", abbrEn='" + abbrEn + '\'' +
-                ", nameAz='" + nameAz + '\'' +
-                ", nameEn='" + nameEn + '\'' +
-                ", photoUrl='" + photoUrl + '\'' +
-                ", foundedYear=" + foundedYear +
-                ", webSiteUrl='" + webSiteUrl + '\'' +
-                ", countOfStudent=" + countOfStudent +
-                ", type=" + type +
-                ", description='" + description + '\'' +
-                ", location='" + location + '\'' +
-                '}';
-    }
-
 
 }

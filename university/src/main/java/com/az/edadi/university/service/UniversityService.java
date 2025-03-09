@@ -10,8 +10,8 @@ import java.util.UUID;
 @Service
 public interface UniversityService {
     List<UniversityRes> findAll();
-    UniversityRes getUniversityById(UUID id);
+    UniversityRes getUniversityById(String id);
     UniversityRes createUniversity(UniversityReq universityReq);
-    UniversityRes update(UUID id,UniversityReq universityReq);
-    String delete(UUID id);
+    UniversityRes update(String id,UniversityReq universityReq);
+    String delete(String id);
 }

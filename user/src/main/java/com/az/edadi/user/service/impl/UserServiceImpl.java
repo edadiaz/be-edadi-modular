@@ -2,7 +2,7 @@ package com.az.edadi.user.service.impl;
 
 import com.az.edadi.common_service.util.AuthUtils;
 import com.az.edadi.dal.entity.User;
-import com.az.edadi.dal.no_sql.repository.UserRepository;
+import com.az.edadi.dal.repository.UserRepository;
 import com.az.edadi.user.adapter.UserAdapter;
 import com.az.edadi.user.model.request.UpdateUserEducationInfo;
 import com.az.edadi.user.model.request.UpdateUserPersonalInfoRequest;
@@ -10,8 +10,6 @@ import com.az.edadi.user.model.response.CurrentUserRes;
 import com.az.edadi.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
-import java.util.UUID;
 
 @Service
 @RequiredArgsConstructor
