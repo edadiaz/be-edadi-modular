@@ -1,6 +1,11 @@
 package com.az.edadi.auth.rest;
 
 import com.az.edadi.auth.model.request.*;
+import com.az.edadi.auth.model.request.LoginWithFacebookRequest;
+import com.az.edadi.auth.model.request.LoginWithGoogleRequest;
+import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
+import com.az.edadi.auth.model.request.RefreshTokenRequest;
+import com.az.edadi.auth.model.response.LoginWithFacebookResponse;
 import com.az.edadi.auth.model.response.LoginWithPasswordResponse;
 import com.az.edadi.auth.model.response.LoginWithGoogleResponse;
 import com.az.edadi.auth.service.LoginService;
@@ -44,6 +49,12 @@ public class AuthController {
     ResponseEntity<LoginWithGoogleResponse> loginWithGoogle(@RequestBody LoginWithGoogleRequest request,
                                                             HttpServletResponse response) {
         return ResponseEntity.ok(loginService.loginWithGoogle(request, response));
+    }
+
+    @PostMapping("login-with-facebook")
+    ResponseEntity<LoginWithFacebookResponse> loginWithGoogle(@RequestBody LoginWithFacebookRequest request,
+                                                              HttpServletResponse response) {
+        return ResponseEntity.ok(loginService.loginWithFacebook(request, response));
     }
 
     @PostMapping("refresh-token")
