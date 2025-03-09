@@ -3,9 +3,11 @@ package com.az.edadi.auth.service.impl;
 import com.az.edadi.auth.constant.AuthConstants;
 import com.az.edadi.auth.exception.ExpiredTokenException;
 import com.az.edadi.auth.exception.InvalidPasswordException;
+import com.az.edadi.auth.model.request.LoginWithFacebookRequest;
 import com.az.edadi.auth.model.request.LoginWithGoogleRequest;
 import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
 import com.az.edadi.auth.model.request.RefreshTokenRequest;
+import com.az.edadi.auth.model.response.LoginWithFacebookResponse;
 import com.az.edadi.auth.model.response.LoginWithPasswordResponse;
 import com.az.edadi.auth.model.response.LoginWithGoogleResponse;
 import com.az.edadi.auth.model.response.OAuth2CustomUser;
@@ -56,6 +58,13 @@ public class LoginServiceImpl implements LoginService {
         OAuth2CustomUser oAuth2CustomUser = oAuthService.getGoogleUser(request.token());
         var user = userRepository.findByEmail(oAuth2CustomUser.getEmail());
         return user.map(value -> new LoginWithGoogleResponse(createLoginResponseModel(value, response))).orElseGet(() -> new LoginWithGoogleResponse(oAuth2CustomUser));
+    }
+
+    @Override
+    public LoginWithFacebookResponse loginWithFacebook(LoginWithFacebookRequest request, HttpServletResponse response) {
+        OAuth2CustomUser oAuth2CustomUser = oAuthService.getFacebookUser(request.token());
+        var user = userRepository.findByEmail(oAuth2CustomUser.getEmail());
+        return user.map(value -> new LoginWithFacebookResponse(createLoginResponseModel(value, response))).orElseGet(() -> new LoginWithFacebookResponse(oAuth2CustomUser));
     }
 
     @Override
