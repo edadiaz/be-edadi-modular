@@ -23,7 +23,10 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
-        response.setHeader("Access-Control-Allow-Origin", "*");
+        String origin = request.getHeader("Origin");
+        if (origin != null)
+            response.setHeader("Access-Control-Allow-Origin", origin);
+
         response.setHeader("Access-Control-Allow-Credentials", "true");
         response.setHeader("Accept-Language", "*");
         response.setHeader("Access-Control-Allow-Methods", "*");
