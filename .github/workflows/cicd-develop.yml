@@ -43,5 +43,6 @@ jobs:
             docker stop edadi-develop || true
             docker rm edadi-develop || true
             docker run -d --name edadi-develop -p 5000:5000 -p 4000:4000 \
+              -e JAVA_TOOL_OPTIONS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:4000" \
               -e CONFIG_SERVER_URL=${{ secrets.CONFIG_SERVER_URL }} \
               ulvusuleymanov1/edadi-develop:latest
