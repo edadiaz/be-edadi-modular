@@ -10,6 +10,7 @@ import com.az.edadi.auth.model.response.LoginWithPasswordResponse;
 import com.az.edadi.auth.model.response.LoginWithGoogleResponse;
 import com.az.edadi.auth.service.LoginService;
 import com.az.edadi.auth.service.PasswordService;
+import com.az.edadi.auth.service.PermissionService;
 import com.az.edadi.auth.service.RegisterService;
 import com.az.edadi.user.model.request.RegisterUserRequest;
 import jakarta.servlet.http.HttpServletRequest;
@@ -32,6 +33,7 @@ public class AuthController {
     private final LoginService loginService;
     private final RegisterService registerService;
     private final PasswordService passwordService;
+    private final PermissionService permissionService;
     @PostMapping("sign-up")
     ResponseEntity<HttpStatus> registerUser(@RequestBody @Validated RegisterUserRequest request) {
         log.info("Registering user with email: {}", request.getEmail());
@@ -74,4 +76,11 @@ public class AuthController {
         passwordService.resetPasswordWithToken(request);
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
+
+    @PostMapping("give-permission")
+    ResponseEntity<HttpStatus> resetPassword(@RequestBody GivePermissionRequest request) {
+        permissionService.givePermissionToUser(request);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    }
+
 }
