@@ -1,6 +1,6 @@
 package com.az.edadi.post.model.response;
 
-import com.az.edadi.common_model.response.UserRes;
+import com.az.edadi.model.response.UserRes;
 import com.az.edadi.post.model.PostParentType;
 import lombok.AllArgsConstructor;
 import lombok.Data;

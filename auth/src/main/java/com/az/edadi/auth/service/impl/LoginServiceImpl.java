@@ -17,7 +17,7 @@ import com.az.edadi.auth.service.JwtService;
 import com.az.edadi.auth.service.LoginService;
 import com.az.edadi.auth.service.OAuthService;
 import com.az.edadi.auth.util.CookieUtil;
-import com.az.edadi.common_model.exception.UserNotFoundException;
+import com.az.edadi.model.exception.UserNotFoundException;
 import com.az.edadi.dal.entity.auth.RefreshToken;
 import com.az.edadi.dal.entity.user.User;
 import com.az.edadi.dal.repository.UserRepository;

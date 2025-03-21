@@ -15,7 +15,7 @@
     <dependencies>
         <dependency>
             <groupId>com.az.edadi</groupId>
-            <artifactId>common-model</artifactId>
+            <artifactId>model</artifactId>
         </dependency>
     </dependencies>
 

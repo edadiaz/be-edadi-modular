@@ -1,7 +1,7 @@
 package com.az.edadi.user.model.request;
 
-import com.az.edadi.common_service.annotation.NotDuplicateEmail;
-import com.az.edadi.common_service.annotation.NotDuplicateUsername;
+import com.az.edadi.service.annotation.NotDuplicateEmail;
+import com.az.edadi.service.annotation.NotDuplicateUsername;
 import jakarta.validation.constraints.Email;
 import lombok.AllArgsConstructor;
 import lombok.Data;

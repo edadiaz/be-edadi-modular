@@ -24,8 +24,8 @@
         <module>dal</module>
         <module>university</module>
         <module>auth</module>
-        <module>common-service</module>
-        <module>common-model</module>
+        <module>service</module>
+        <module>model</module>
         <module>file-storage</module>
         <module>speciality</module>
     </modules>
@@ -45,8 +45,8 @@
         <eda-assembly-version>1.0-SNAPSHOT</eda-assembly-version>
         <eda-university-version>1.0-SNAPSHOT</eda-university-version>
         <eda-auth-version>1.0-SNAPSHOT</eda-auth-version>
-        <eda-common-service-version>1.0-SNAPSHOT</eda-common-service-version>
-        <eda-common-model-version>1.0-SNAPSHOT</eda-common-model-version>
+        <eda-service-version>1.0-SNAPSHOT</eda-service-version>
+        <eda-model-version>1.0-SNAPSHOT</eda-model-version>
         <eda-file-storage-version>1.0-SNAPSHOT</eda-file-storage-version>
         <eda-speciality-version>1.0-SNAPSHOT</eda-speciality-version>
     </properties>
@@ -91,13 +91,13 @@
             </dependency>
             <dependency>
                 <groupId>com.az.edadi</groupId>
-                <artifactId>common-service</artifactId>
-                <version>${eda-common-service-version}</version>
+                <artifactId>service</artifactId>
+                <version>${eda-service-version}</version>
             </dependency>
             <dependency>
                 <groupId>com.az.edadi</groupId>
-                <artifactId>common-model</artifactId>
-                <version>${eda-common-model-version}</version>
+                <artifactId>model</artifactId>
+                <version>${eda-model-version}</version>
             </dependency>
             <dependency>
                 <groupId>com.az.edadi</groupId>

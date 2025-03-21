@@ -1,6 +1,6 @@
 package com.az.edadi.user.controller;
 
-import com.az.edadi.common_service.util.AuthUtils;
+import com.az.edadi.service.util.AuthUtils;
 import com.az.edadi.user.model.request.RegisterUserRequest;
 import com.az.edadi.user.model.request.UpdateUserEducationInfo;
 import com.az.edadi.user.model.request.UpdateUserPersonalInfoRequest;

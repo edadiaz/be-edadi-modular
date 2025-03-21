@@ -1,0 +1,31 @@
+package com.az.edadi.service.util;
+
+import lombok.experimental.UtilityClass;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.context.SecurityContextHolder;
+
+import java.util.List;
+import java.util.Optional;
+import java.util.stream.Collectors;
+@UtilityClass
+public class AuthUtils {
+    public List<String> getPermissions() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return authentication.getAuthorities().stream()
+                .map(GrantedAuthority::getAuthority)
+                .collect(Collectors.toList());
+    }
+
+    String getUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return (String) authentication.getCredentials();
+    }
+
+    public static String getCurrentUserId() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        return Optional.ofNullable(authentication).map(Authentication::getPrincipal).orElseThrow().toString();
+    }
+
+
+}

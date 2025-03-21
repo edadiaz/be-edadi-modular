@@ -1,6 +1,6 @@
 package com.az.edadi.university.service.impl;
 
-import com.az.edadi.common_service.service.NullFinder;
+import com.az.edadi.service.service.NullFinder;
 import com.az.edadi.dal.entity.institution.Institution;
 import com.az.edadi.dal.repository.UniversityRepository;
 import com.az.edadi.university.exception.UniversityNotFoundException;

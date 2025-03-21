@@ -1,6 +1,6 @@
-package com.az.edadi.auth.exception.handler;
+package com.az.edadi.service.exception.handler;
 
-import com.az.edadi.auth.exception.InvalidPasswordException;
+import com.az.edadi.model.exception.UserNotFoundException;
 import com.az.edadi.service.service.Translator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -11,12 +11,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 @ControllerAdvice
-public class InvalidPasswordHandler {
-    @ExceptionHandler(InvalidPasswordException.class)
-    public ResponseEntity<Map<String, String>> handleValidationExceptions(InvalidPasswordException ex) {
+public class UserNotFoundExceptionHandler {
+    @ExceptionHandler(UserNotFoundException.class)
+    public ResponseEntity<Map<String, String>> handleValidationExceptions(UserNotFoundException ex) {
         Map<String, String> errors = new HashMap<>();
         errors.put("message", Translator.getTranslation(ex.getMessage()));
-        errors.put("field", "password");
         return new ResponseEntity<>(errors, HttpStatus.NOT_FOUND);
     }
 }
