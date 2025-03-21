@@ -1,12 +1,13 @@
 package com.az.edadi.auth.service.impl;
 
+import com.az.edadi.auth.constant.TokenType;
 import com.az.edadi.auth.model.request.ForgotPasswordRequest;
 import com.az.edadi.auth.model.request.ResetPasswordWithTokenRequest;
 import com.az.edadi.auth.service.JwtService;
 import com.az.edadi.auth.service.PasswordService;
 import com.az.edadi.common_service.service.SecurityMailSender;
 import com.az.edadi.common_service.service.Translator;
-import com.az.edadi.dal.entity.User;
+import com.az.edadi.dal.entity.user.User;
 import com.az.edadi.dal.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
@@ -15,6 +16,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -38,7 +40,7 @@ public class PasswordServiceImpl implements PasswordService {
 
     @Override
     public void resetPasswordWithToken(ResetPasswordWithTokenRequest request) {
-        var userId= jwtService.getUserIdFromToken(request.token());
+        var userId= jwtService.getUserId(TokenType.RESET_PASSWORD_TOKEN,request.token());
         var user = userRepository.findById(userId).orElseThrow();
         user.setPassword(passwordEncoder.encode(request.newPassword()));
         userRepository.save(user);
@@ -55,7 +57,7 @@ public class PasswordServiceImpl implements PasswordService {
     }
 
     String getRecoveryLink(User user) {
-        String token = jwtService.generateAccessToken(user.getId(),user.getUsername(),null);
+        String token = jwtService.generateToken(TokenType.RESET_PASSWORD_TOKEN,user.getId(), List.of());
         return StringUtils.join(domain, "/auth/reset-password?token=",token);
     }
 }

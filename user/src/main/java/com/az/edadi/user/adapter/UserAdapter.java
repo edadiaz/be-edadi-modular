@@ -1,6 +1,6 @@
 package com.az.edadi.user.adapter;
 
-import com.az.edadi.dal.entity.User;
+import com.az.edadi.dal.entity.user.User;
 import com.az.edadi.user.model.response.CurrentUserRes;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;

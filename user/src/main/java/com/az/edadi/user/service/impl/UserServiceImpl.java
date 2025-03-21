@@ -1,7 +1,7 @@
 package com.az.edadi.user.service.impl;
 
 import com.az.edadi.common_service.util.AuthUtils;
-import com.az.edadi.dal.entity.User;
+import com.az.edadi.dal.entity.user.User;
 import com.az.edadi.dal.repository.UserRepository;
 import com.az.edadi.user.adapter.UserAdapter;
 import com.az.edadi.user.model.request.UpdateUserEducationInfo;

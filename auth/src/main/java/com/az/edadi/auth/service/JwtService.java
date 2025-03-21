@@ -1,13 +1,21 @@
 package com.az.edadi.auth.service;
 
+import com.az.edadi.auth.constant.TokenType;
+import com.az.edadi.auth.model.TokenBody;
+
+import java.util.Date;
 import java.util.List;
-import java.util.UUID;
 
 public interface JwtService {
-    String generateAccessToken(String userId, String username, List<String> permissions);
-    String generateRefreshToken();
-    String getRefreshTokenId(String token);
-    String getUserIdFromToken(String token);
-    void verifyAccessToken(String token);
+    String generateToken(TokenType type, String userId, List<String> permissions);
+
+    TokenBody getTokenBody(TokenType tokenType, String token);
+
+    String getTokenId(TokenType tokenType, String token);
+
+    String getUserId(TokenType tokenType, String token);
+
+    Date getExpirationDate(TokenType type);
+
 
 }

@@ -1,6 +1,6 @@
 package com.az.edadi.auth.adapter;
 
-import com.az.edadi.dal.entity.User;
+import com.az.edadi.dal.entity.user.User;
 import com.az.edadi.user.model.request.RegisterUserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
