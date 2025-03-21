@@ -2,7 +2,7 @@ package com.az.edadi.dal.entity.user;
 
 import com.az.edadi.dal.types.AcademicDegree;
 import com.az.edadi.dal.types.Gender;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 

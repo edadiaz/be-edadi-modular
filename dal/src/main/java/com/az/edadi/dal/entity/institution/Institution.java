@@ -1,7 +1,7 @@
 package com.az.edadi.dal.entity.institution;
 
 import com.az.edadi.dal.types.InstitutionType;
-import jakarta.persistence.*;
+import org.springframework.data.annotation.Id;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 

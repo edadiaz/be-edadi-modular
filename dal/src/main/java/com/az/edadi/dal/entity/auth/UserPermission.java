@@ -1,7 +1,7 @@
 package com.az.edadi.dal.entity.auth;
 
 import com.az.edadi.dal.types.Permission;
-import jakarta.persistence.Id;
+import org.springframework.data.annotation.Id;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
 

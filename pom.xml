@@ -20,7 +20,6 @@
         <module>post</module>
         <module>user</module>
         <module>app</module>
-        <module>assembly</module>
         <module>dal</module>
         <module>university</module>
         <module>auth</module>
@@ -42,7 +41,6 @@
         <eda-post-version>1.0-SNAPSHOT</eda-post-version>
         <eda-user-version>1.0-SNAPSHOT</eda-user-version>
         <eda-dal-version>1.0-SNAPSHOT</eda-dal-version>
-        <eda-assembly-version>1.0-SNAPSHOT</eda-assembly-version>
         <eda-university-version>1.0-SNAPSHOT</eda-university-version>
         <eda-auth-version>1.0-SNAPSHOT</eda-auth-version>
         <eda-service-version>1.0-SNAPSHOT</eda-service-version>
@@ -70,12 +68,6 @@
                 <groupId>com.az.edadi</groupId>
                 <artifactId>dal</artifactId>
                 <version>${eda-dal-version}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.az.edadi</groupId>
-                <artifactId>assembly</artifactId>
-                <version>${eda-assembly-version}</version>
             </dependency>
 
             <dependency>
@@ -127,22 +119,6 @@
             <artifactId>spring-boot-starter-web</artifactId>
         </dependency>
 
-        <dependency>
-            <groupId>org.postgresql</groupId>
-            <artifactId>postgresql</artifactId>
-            <version>42.7.2</version>
-        </dependency>
-
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-jpa</artifactId>
-        </dependency>
-
-        <dependency>
-            <groupId>org.liquibase</groupId>
-            <artifactId>liquibase-core</artifactId>
-            <version>4.20.0</version>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>
