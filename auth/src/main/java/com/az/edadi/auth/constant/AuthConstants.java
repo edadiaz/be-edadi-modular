@@ -8,8 +8,10 @@ import lombok.Getter;
 public enum AuthConstants {
 
     REFRESH_TOKEN("refresh_token"),
-    RESPONSE_MESSAGE("message");
+    RESPONSE_MESSAGE("message"),
+    USER_ID("user_id"),
+    PERMISSIONS("permissions");
 
-    private final String name;
+    private final String  name;
 
 }

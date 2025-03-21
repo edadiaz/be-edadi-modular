@@ -16,6 +16,7 @@ import com.az.edadi.auth.property.JwtProperties;
 import com.az.edadi.auth.service.JwtService;
 import com.az.edadi.auth.service.LoginService;
 import com.az.edadi.auth.service.OAuthService;
+import com.az.edadi.auth.service.UserBlackList;
 import com.az.edadi.auth.util.CookieUtil;
 import com.az.edadi.model.exception.UserNotFoundException;
 import com.az.edadi.dal.entity.auth.RefreshToken;
@@ -74,6 +75,7 @@ public class LoginServiceImpl implements LoginService {
         String refreshToken = CookieUtil.findCookie(servletRequest, AuthConstants.REFRESH_TOKEN.getName()).orElseThrow(ExpiredTokenException::new);
         var tokenId = jwtService.getTokenId(TokenType.REFRESH_TOKEN, refreshToken);
         var savedToken = refreshTokenRepository.findByTokenId(tokenId);
+        UserBlackList.checkUserId(savedToken.getUserId());
         if (!tokenRequest.getUserId().equals(savedToken.getUserId())) throw new RuntimeException();
         return userRepository.findById(tokenRequest.getUserId()).map(this::createLoginResponseForRefreshToken).orElseThrow();
     }

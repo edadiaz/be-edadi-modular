@@ -1,19 +1,27 @@
 package com.az.edadi.auth.service;
 
+import com.az.edadi.auth.exception.UserBlacklistedException;
+
 import java.util.HashSet;
 import java.util.Set;
-import java.util.UUID;
 
 public class UserBlackList {
-    private static Set<UUID> blackList = new HashSet<>();
+    private static Set<String> blackList = new HashSet<>();
 
-    public static boolean isBlackListed(UUID userId) {
-        return blackList.contains(userId);
+    public static void checkUserId(String userId) {
+        blackList.stream()
+                .filter(userId::equals)
+                .findFirst()
+                .ifPresent(user -> {
+                    throw new UserBlacklistedException("User " + userId + " is blacklisted.");
+                });
     }
-    public static void add(UUID userId) {
+
+    public static void add(String userId) {
         blackList.add(userId);
     }
-    public static void remove(UUID userId) {
+
+    public static void remove(String userId) {
         blackList.remove(userId);
     }
 

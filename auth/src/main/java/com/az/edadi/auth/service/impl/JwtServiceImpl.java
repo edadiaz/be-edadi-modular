@@ -8,10 +8,6 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import javax.crypto.SecretKey;
@@ -19,15 +15,15 @@ import java.nio.charset.StandardCharsets;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
-import java.util.stream.Collectors;
+
+import static com.az.edadi.auth.constant.AuthConstants.PERMISSIONS;
+import static com.az.edadi.auth.constant.AuthConstants.USER_ID;
 
 @Service
 @RequiredArgsConstructor
 public class JwtServiceImpl implements JwtService {
 
     private final JwtProperties jwtProperties;
-    private final String USER_ID = "userId";
-    private final String PERMISSIONS = "permissions";
 
 
     @Override
@@ -37,8 +33,8 @@ public class JwtServiceImpl implements JwtService {
                 .setSubject(userId)
                 .setIssuer("Edadi")
                 .setIssuedAt(new Date())
-                .claim(USER_ID, userId)
-                .claim(PERMISSIONS, permissions)
+                .claim(USER_ID.getName(), userId)
+                .claim(PERMISSIONS.getName(), permissions)
                 .signWith(getKey(type))
                 .setExpiration(getExpirationDate(type))
                 .compact();
@@ -75,7 +71,7 @@ public class JwtServiceImpl implements JwtService {
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-        return claims.get(USER_ID, String.class);
+        return claims.get(USER_ID.getName(), String.class);
     }
 
 
