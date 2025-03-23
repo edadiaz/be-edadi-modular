@@ -53,7 +53,9 @@ public class SecurityConfigurer {
                         .requestMatchers(HttpMethod.GET, GET_WHITE_LIST).permitAll()
                         .requestMatchers(HttpMethod.POST, POST_WHITE_LIST).permitAll()
                         .requestMatchers(ALL_ALLOWED).permitAll()
+                        .requestMatchers(HttpMethod.OPTIONS, "/**").permitAll()
                         .anyRequest().authenticated())
+
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .headers(httpSecurityHeadersConfigurer -> httpSecurityHeadersConfigurer.frameOptions(HeadersConfigurer.FrameOptionsConfig::disable))
                 .addFilterBefore(jwtVerifierFilter, UsernamePasswordAuthenticationFilter.class)
