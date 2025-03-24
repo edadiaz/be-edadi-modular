@@ -50,13 +50,7 @@
         </dependency>
         <dependency>
             <groupId>com.az.edadi</groupId>
-            <artifactId>service</artifactId>
-            <scope>compile</scope>
-        </dependency>
-        <dependency>
-            <groupId>com.az.edadi</groupId>
-            <artifactId>model</artifactId>
-            <scope>compile</scope>
+            <artifactId>message</artifactId>
         </dependency>
     </dependencies>
     <build>

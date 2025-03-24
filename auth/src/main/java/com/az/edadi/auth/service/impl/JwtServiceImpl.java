@@ -4,6 +4,7 @@ import com.az.edadi.auth.constant.TokenType;
 import com.az.edadi.auth.model.TokenBody;
 import com.az.edadi.auth.property.JwtProperties;
 import com.az.edadi.auth.service.JwtService;
+import com.az.edadi.dal.types.Permission;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
@@ -34,7 +35,7 @@ public class JwtServiceImpl implements JwtService {
                 .setIssuer("Edadi")
                 .setIssuedAt(new Date())
                 .claim(USER_ID.getName(), userId)
-                .claim(PERMISSIONS.getName(), permissions)
+                .claim(PERMISSIONS.getName(), List.of(Permission.BLOCK_USER))
                 .signWith(getKey(type))
                 .setExpiration(getExpirationDate(type))
                 .compact();
@@ -50,7 +51,7 @@ public class JwtServiceImpl implements JwtService {
         return new TokenBody(
                 claims.getId(),
                 claims.getSubject(),
-                (List<String>) claims.get(PERMISSIONS)
+                (List<String>) claims.get(PERMISSIONS.getName())
         );
     }
 

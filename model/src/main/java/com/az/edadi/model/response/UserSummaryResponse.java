@@ -9,8 +9,8 @@ import java.util.UUID;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class UserRes {
-    private UUID id;
+public class UserSummaryResponse {
+    private String id;
     private String username;
     private String fullName;
     private String profilePicUrl;

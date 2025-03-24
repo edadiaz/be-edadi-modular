@@ -1,6 +1,6 @@
 package com.az.edadi.post.model.response;
 
-import com.az.edadi.model.response.UserRes;
+import com.az.edadi.model.response.UserSummaryResponse;
 import com.az.edadi.post.model.PostParentType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -16,5 +16,5 @@ public class PostRes {
     private String text;
     private String parentEntityId;
     private PostParentType parentEntityType;
-    private UserRes user;
+    private UserSummaryResponse user;
 }

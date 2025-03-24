@@ -1,6 +1,7 @@
-package com.az.edadi.service.exception.handler;
+package com.az.edadi.service.exception;
 
 import com.az.edadi.service.service.Translator;
+import jakarta.servlet.http.HttpServletRequest;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
@@ -16,11 +17,12 @@ import java.util.Map;
 public class ValidationExceptionHandler {
 
     @ExceptionHandler(MethodArgumentNotValidException.class)
-    public ResponseEntity<Map<String, Object>> handleValidationExceptions(MethodArgumentNotValidException ex) {
+    public ResponseEntity<Map<String, Object>> handleValidationExceptions(MethodArgumentNotValidException ex, HttpServletRequest request) {
         BindingResult bindingResult = ex.getBindingResult();
         Map<String, Object> response = new HashMap<>();
         response.put("timestamp", LocalDateTime.now().toString());
         response.put("status", String.valueOf(HttpStatus.BAD_REQUEST.value()));
+        response.put("path",  request.getRequestURI());
         var errors = bindingResult.getFieldErrors().stream().map(error ->
                 Map.of("field", error.getField(), "message", Translator.getTranslation(error.getDefaultMessage()))
         ).toList();
