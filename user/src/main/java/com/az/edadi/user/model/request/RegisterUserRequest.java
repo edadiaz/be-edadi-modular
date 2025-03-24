@@ -15,7 +15,7 @@ public class RegisterUserRequest {
 
     @NotDuplicateUsername
     @Length(min = 3,max = 20,message ="valid-username-length")
-    private String username;
+    private String userName;
 
     @Length(min = 6,max = 20,message ="valid-password-length")
     private String password;
