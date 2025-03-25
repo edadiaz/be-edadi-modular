@@ -46,6 +46,7 @@ public class SpecialityAdapter {
         return Speciality.builder()
                 .specialityCode(specialityRes.getSpecialityCode())
                 .specialityName(specialityRes.getSpecialityName())
+                .institutionId(specialityRes.getInstitutionId())
                 .specialityGroup(specialityRes.getSpecialityGroup())
                 .studyLang(specialityRes.getStudyLang())
                 .city(specialityRes.getCity())
@@ -55,25 +56,23 @@ public class SpecialityAdapter {
                 .stateFundedPassingScore(specialityRes.getStateFundedPassingScore())
                 .specialityUrl(specialityRes.getSpecialityUrl())
                 .currency(specialityRes.getCurrency())
-                .institutionId(specialityRes.getInstitutionId())
                 .build();
     }
 
     public Speciality mapToEnt(SpecialityReq specialityReq) {
         return Speciality.builder()
-                .specialityName(specialityReq.getSpecialityName())
-                .specialityGroup(specialityReq.getSpecialityGroup())
-                .selfFundedPassingScore(specialityReq.getSelfFundedPassingScore())
-                .stateFundedPassingScore(specialityReq.getStateFundedPassingScore())
-                .tuitionFee(specialityReq.getTuitionFee())
-                .currency(specialityReq.getCurrency())
-                .institutionId(specialityReq.getInstitutionId())
                 .specialityCode(specialityReq.getSpecialityCode())
+                .specialityName(specialityReq.getSpecialityName())
+                .institutionId(specialityReq.getInstitutionId())
+                .specialityGroup(specialityReq.getSpecialityGroup())
                 .studyLang(specialityReq.getStudyLang())
                 .city(specialityReq.getCity())
                 .studyType(specialityReq.getStudyType())
+                .tuitionFee(specialityReq.getTuitionFee())
+                .selfFundedPassingScore(specialityReq.getSelfFundedPassingScore())
+                .stateFundedPassingScore(specialityReq.getStateFundedPassingScore())
                 .specialityUrl(specialityReq.getSpecialityUrl())
+                .currency(specialityReq.getCurrency())
                 .build();
     }
-
 }
