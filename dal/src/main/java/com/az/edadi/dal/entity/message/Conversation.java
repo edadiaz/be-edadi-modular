@@ -13,13 +13,9 @@ import java.time.LocalDateTime;
 public class Conversation {
     @Id
     private String id;
-
     private String name;
-
     private ConversationType type;
-
     private String photoUrl;
-
     private LocalDateTime createdDate;
 
 }

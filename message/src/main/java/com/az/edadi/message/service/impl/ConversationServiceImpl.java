@@ -29,7 +29,7 @@ public class ConversationServiceImpl implements ConversationService {
     public ConversationResponse createConversation(CreateConversationRequest request) {
 
         long a = System.currentTimeMillis();
-        var conversationUsers = conversationUserRepository.findAllById(List.of(AuthUtils.getCurrentUserId(), request.getUserId()));
+        var conversationUsers = conversationUserRepository.findConversationIdForUsers(AuthUtils.getCurrentUserId(), request.getUserId());
         if (conversationUsers.size() == 2)
             return getConversation(conversationUsers.get(0).getConversationId());
         String conversationId = createConversation();
@@ -37,6 +37,7 @@ public class ConversationServiceImpl implements ConversationService {
         createConversationUser(conversationId, request.getUserId());
         return getConversation(conversationId);
     }
+
 
     @Override
     public ConversationResponse getConversation(String conversationId) {
@@ -50,6 +51,11 @@ public class ConversationServiceImpl implements ConversationService {
         conversationResponse.setConversationId(conversationId);
         conversationResponse.setUserList(userList);
         return conversationResponse;
+    }
+
+    @Override
+    public List<ConversationResponse> getMyConversation(Integer page) {
+        return null;
     }
 
     String createConversation() {

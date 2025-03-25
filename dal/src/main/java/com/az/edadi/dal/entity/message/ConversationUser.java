@@ -9,8 +9,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 public class ConversationUser {
     @Id
     private String id;
-
     private String conversationId;
-
     private String userId;
 }
