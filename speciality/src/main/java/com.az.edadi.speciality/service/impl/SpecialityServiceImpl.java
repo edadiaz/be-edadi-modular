@@ -1,6 +1,6 @@
 package com.az.edadi.speciality.service.impl;
 
-import com.az.edadi.common_service.service.NullFinder;
+import com.az.edadi.service.service.NullFinder;
 import com.az.edadi.dal.entity.speciality.Speciality;
 import com.az.edadi.dal.repository.SpecialityRepository;
 import com.az.edadi.speciality.adapter.SpecialityAdapter;
