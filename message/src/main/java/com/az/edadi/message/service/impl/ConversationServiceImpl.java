@@ -2,8 +2,10 @@ package com.az.edadi.message.service.impl;
 
 import com.az.edadi.dal.entity.message.Conversation;
 import com.az.edadi.dal.entity.message.ConversationUser;
+import com.az.edadi.dal.repository.UserRepository;
 import com.az.edadi.dal.repository.message.ConversationRepository;
 import com.az.edadi.dal.repository.message.ConversationUserRepository;
+import com.az.edadi.message.adapter.ConversationAdapter;
 import com.az.edadi.message.model.request.CreateConversationRequest;
 import com.az.edadi.message.model.response.ConversationResponse;
 import com.az.edadi.message.service.ConversationService;
@@ -12,6 +14,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -19,25 +22,48 @@ public class ConversationServiceImpl implements ConversationService {
 
     private final ConversationRepository conversationRepository;
     private final ConversationUserRepository conversationUserRepository;
+    private final UserRepository userRepository;
+    private final ConversationAdapter conversationAdapter;
 
     @Override
     public ConversationResponse createConversation(CreateConversationRequest request) {
-        Conversation conversation = new Conversation();
-        conversation.setCreatedDate(LocalDateTime.now());
-        conversation = conversationRepository.save(conversation);
-        ConversationUser conversationUser1 = new ConversationUser();
-        conversationUser1.setUserId(AuthUtils.getCurrentUserId());
-        conversationUser1.setConversationId(conversation.getId());
-        conversationUserRepository.save(conversationUser1);
-        ConversationUser conversationUser2 = new ConversationUser();
-        conversationUser2.setUserId(request.getUserId());
-        conversationUser2.setConversationId(conversation.getId());
-        conversationUserRepository.save(conversationUser1);
-        return null;
+
+        long a = System.currentTimeMillis();
+        var conversationUsers = conversationUserRepository.findAllById(List.of(AuthUtils.getCurrentUserId(), request.getUserId()));
+        if (conversationUsers.size() == 2)
+            return getConversation(conversationUsers.get(0).getConversationId());
+        String conversationId = createConversation();
+        createConversationUser(conversationId, AuthUtils.getCurrentUserId());
+        createConversationUser(conversationId, request.getUserId());
+        return getConversation(conversationId);
     }
 
     @Override
     public ConversationResponse getConversation(String conversationId) {
-        return null;
+        var conversationUsers = conversationUserRepository.findByConversationId(conversationId);
+        if (conversationUsers.size() != 2)
+            throw new RuntimeException("Invalid conversation");
+        var userList = userRepository.findByIdIn(conversationUsers.stream().map(ConversationUser::getUserId).toList())
+                .stream()
+                .map(conversationAdapter::convertToUserSummaryResponse).toList();
+        var conversationResponse = new ConversationResponse();
+        conversationResponse.setConversationId(conversationId);
+        conversationResponse.setUserList(userList);
+        return conversationResponse;
     }
+
+    String createConversation() {
+        Conversation conversation = new Conversation();
+        conversation.setCreatedDate(LocalDateTime.now());
+        return conversationRepository.save(conversation).getId();
+    }
+
+    void createConversationUser(String conversationId, String userId) {
+        ConversationUser conversationUser = new ConversationUser();
+        conversationUser.setConversationId(conversationId);
+        conversationUser.setUserId(userId);
+        conversationUserRepository.save(conversationUser);
+    }
+
+
 }

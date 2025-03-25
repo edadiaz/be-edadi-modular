@@ -13,6 +13,6 @@ public class UserSummaryResponse {
     private String id;
     private String username;
     private String fullName;
-    private String profilePicUrl;
+    private String profilePictureUrl;
 
 }
