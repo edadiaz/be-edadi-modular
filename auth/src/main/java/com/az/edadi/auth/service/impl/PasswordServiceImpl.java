@@ -5,6 +5,7 @@ import com.az.edadi.auth.model.request.ForgotPasswordRequest;
 import com.az.edadi.auth.model.request.ResetPasswordWithTokenRequest;
 import com.az.edadi.auth.service.JwtService;
 import com.az.edadi.auth.service.PasswordService;
+import com.az.edadi.model.exception.UserNotFoundException;
 import com.az.edadi.service.service.SecurityMailSender;
 import com.az.edadi.service.service.Translator;
 import com.az.edadi.dal.entity.user.User;
@@ -32,9 +33,9 @@ public class PasswordServiceImpl implements PasswordService {
 
     @Override
     public void sendResetPasswordEmail(ForgotPasswordRequest forgotPasswordRequest) {
-        var user = userRepository.findByUsernameOrEmail(
-                forgotPasswordRequest.usernameOrEmail(), forgotPasswordRequest.usernameOrEmail())
-                .orElseThrow();
+        User user = userRepository.findByUsernameOrEmail(forgotPasswordRequest.usernameOrEmail(),
+                forgotPasswordRequest.usernameOrEmail()).orElseThrow(() -> new UserNotFoundException("user-not-found-with-username-or-email"));
+
         securityMailSender.sendResetPasswordLink(user.getEmail(), getMailInfoMap(user));
     }
 
