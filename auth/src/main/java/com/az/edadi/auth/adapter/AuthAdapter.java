@@ -14,7 +14,7 @@ public class AuthAdapter {
     public void map(User user, RegisterUserRequest request) {
         user.setName(request.getFullName().toLowerCase());
         user.setEmail(request.getEmail().toLowerCase());
-        user.setUsername(request.getUserName().toLowerCase());
+        user.setUsername(request.getUsername().toLowerCase());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
     }
 
