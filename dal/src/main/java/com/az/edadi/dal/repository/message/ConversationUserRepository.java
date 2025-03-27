@@ -1,6 +1,8 @@
 package com.az.edadi.dal.repository.message;
 
+import com.az.edadi.dal.entity.message.Conversation;
 import com.az.edadi.dal.entity.message.ConversationUser;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -17,6 +19,17 @@ public interface ConversationUserRepository extends MongoRepository<Conversation
             "{ '$replaceRoot': { 'newRoot': '$documents' } }"
     })
     List<ConversationUser> findConversationIdForUsers(String currentUserId, String targetUserId);
+
+    @Aggregation(pipeline = {
+            "{ $match: { 'userId': ?0 } }",
+            "{ $addFields: {conversationId: { $toObjectId: '$conversationId' } } }",
+            "{ $lookup: { from: 'conversation', localField: 'conversationId', foreignField: '_id', as: 'conversation' } }",
+            "{ $unwind: '$conversation' }",
+            "{ $sort: { 'conversation.createdDate': -1 }}",
+            "{ $skip:  ?1}",
+            "{ $limit: ?2 }"
+            })
+    List<Conversation> findRecentConversations(String userId, int offset, int size );
 
     List<ConversationUser> findByConversationId(String conversationId);
 

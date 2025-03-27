@@ -7,12 +7,14 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.time.LocalDateTime;
 
 @Data
-@Document(collection = "conversation_user")
-public class ConversationUser {
+@Document(collection = "message")
+public class Message {
+
     @Id
     private String id;
     private String conversationId;
     private String userId;
-    private LocalDateTime updateTs;
+    private String text;
     private LocalDateTime createTs;
+
 }
