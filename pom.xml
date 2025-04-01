@@ -28,6 +28,7 @@
         <module>file-storage</module>
         <module>speciality</module>
         <module>message</module>
+        <module>common</module>
     </modules>
 
 
@@ -49,6 +50,7 @@
         <eda-file-storage-version>1.0-SNAPSHOT</eda-file-storage-version>
         <eda-speciality-version>1.0-SNAPSHOT</eda-speciality-version>
         <eda-message-version>1.0-SNAPSHOT</eda-message-version>
+        <eda-common-version>1.0-SNAPSHOT</eda-common-version>
     </properties>
 
     <dependencyManagement>
@@ -107,6 +109,11 @@
                 <groupId>com.az.edadi</groupId>
                 <artifactId>message</artifactId>
                 <version>${eda-message-version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.az.edadi</groupId>
+                <artifactId>common</artifactId>
+                <version>${eda-common-version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

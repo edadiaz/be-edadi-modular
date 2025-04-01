@@ -52,6 +52,10 @@
             <groupId>com.az.edadi</groupId>
             <artifactId>message</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

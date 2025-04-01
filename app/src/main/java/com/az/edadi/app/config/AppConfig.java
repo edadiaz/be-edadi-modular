@@ -1,6 +1,7 @@
 package com.az.edadi.app.config;
 
 import com.az.edadi.auth.config.AuthConfig;
+import com.az.edadi.common.config.CommonConfig;
 import com.az.edadi.dal.config.DalConfig;
 import com.az.edadi.file_storage.config.FileStorageConfig;
 import com.az.edadi.message.config.MessageConfig;
@@ -24,7 +25,8 @@ import org.springframework.context.annotation.Import;
         ModelConfig.class,
         FileStorageConfig.class,
         SpecialityConfig.class,
-        MessageConfig.class
+        MessageConfig.class,
+        CommonConfig.class
 })
 public class AppConfig {
 }
