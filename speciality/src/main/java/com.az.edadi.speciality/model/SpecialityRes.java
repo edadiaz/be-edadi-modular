@@ -9,14 +9,16 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class SpecialityRes {
+    private String id;
     private Long specialityCode;
     private String specialityName;
     private String institutionId;
     private String specialityGroup;
+    private String specialitySubGroup;
     private String studyLang;
     private String city;
     private String studyType;
-    private double tuitionFee;
+    private String tuitionFee;
     private String selfFundedPassingScore;
     private String stateFundedPassingScore;
     private String specialityUrl;

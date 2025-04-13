@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -38,6 +39,17 @@ public class UniversityController {
         System.out.println(universityReq);
         UniversityRes universityRes = universityService.createUniversity(universityReq);
         return new ResponseEntity<>(universityRes,HttpStatus.CREATED);
+    }
+
+    @PostMapping("/createAll")
+    public ResponseEntity<List<UniversityRes>> createAllUniversity(@RequestBody List<UniversityReq> universityReqs){
+        UniversityRes universityRes= new UniversityRes();
+        List<UniversityRes> universityRes1 = new ArrayList<>();
+        for (int i = 0; i < universityReqs.size(); i++) {
+             universityRes = universityService.createUniversity(universityReqs.get(i));
+             universityRes1.add(universityRes);
+        }
+        return new ResponseEntity<>(universityRes1,HttpStatus.CREATED);
     }
 
     @PutMapping("/{id}")

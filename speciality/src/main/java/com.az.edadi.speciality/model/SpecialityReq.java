@@ -2,7 +2,6 @@ package com.az.edadi.speciality.model;
 
 import lombok.*;
 
-import java.util.UUID;
 @Data
 @Getter
 @Setter
@@ -13,10 +12,11 @@ public class SpecialityReq {
     private String specialityName;
     private String institutionId;
     private String specialityGroup;
+    private String specialitySubGroup;
     private String studyLang;
     private String city;
     private String studyType;
-    private double tuitionFee;
+    private String tuitionFee;
     private String selfFundedPassingScore;
     private String stateFundedPassingScore;
     private String specialityUrl;

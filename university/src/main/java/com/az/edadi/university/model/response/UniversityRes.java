@@ -13,6 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class UniversityRes {
+    private String id;
     private String abbrAz;
     private String abbrEn;
     private String nameAz;
