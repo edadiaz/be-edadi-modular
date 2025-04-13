@@ -7,6 +7,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,6 +30,15 @@ public class SpecialityController {
     @PostMapping("/create")
     public ResponseEntity<SpecialityRes> create(@RequestBody SpecialityReq specialityReq){
         return ResponseEntity.ok(specialityService.create(specialityReq));
+    }
+
+    @PostMapping("/createAll")
+    public ResponseEntity<List<SpecialityRes>> create(@RequestBody List<SpecialityReq> specialityReq){
+        List<SpecialityRes> specialityRes = new ArrayList<>();
+        for (int i = 0; i < specialityReq.size(); i++) {
+            specialityRes.add( specialityService.create(specialityReq.get(i)));
+        }
+        return ResponseEntity.ok(specialityRes);
     }
 
     @PutMapping("/{id}")

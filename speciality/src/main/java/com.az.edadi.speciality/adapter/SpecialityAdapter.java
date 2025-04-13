@@ -10,10 +10,12 @@ public class SpecialityAdapter {
 
     public SpecialityRes mapToRes(Speciality speciality) {
         return new SpecialityRes(
+                speciality.getId(),
                 speciality.getSpecialityCode(),
                 speciality.getSpecialityName(),
                 speciality.getInstitutionId(),
                 speciality.getSpecialityGroup(),
+                speciality.getSpecialitySubGroup(),
                 speciality.getStudyLang(),
                 speciality.getCity(),
                 speciality.getStudyType(),
@@ -31,6 +33,7 @@ public class SpecialityAdapter {
                 speciality.getSpecialityName(),
                 speciality.getInstitutionId(),
                 speciality.getSpecialityGroup(),
+                speciality.getSpecialitySubGroup(),
                 speciality.getStudyLang(),
                 speciality.getCity(),
                 speciality.getStudyType(),
@@ -44,10 +47,12 @@ public class SpecialityAdapter {
 
     public Speciality mapToEnt(SpecialityRes specialityRes) {
         return Speciality.builder()
+                .id(specialityRes.getId())
                 .specialityCode(specialityRes.getSpecialityCode())
                 .specialityName(specialityRes.getSpecialityName())
                 .institutionId(specialityRes.getInstitutionId())
                 .specialityGroup(specialityRes.getSpecialityGroup())
+                .specialitySubGroup(specialityRes.getSpecialitySubGroup())
                 .studyLang(specialityRes.getStudyLang())
                 .city(specialityRes.getCity())
                 .studyType(specialityRes.getStudyType())
@@ -65,6 +70,7 @@ public class SpecialityAdapter {
                 .specialityName(specialityReq.getSpecialityName())
                 .institutionId(specialityReq.getInstitutionId())
                 .specialityGroup(specialityReq.getSpecialityGroup())
+                .specialitySubGroup(specialityReq.getSpecialitySubGroup())
                 .studyLang(specialityReq.getStudyLang())
                 .city(specialityReq.getCity())
                 .studyType(specialityReq.getStudyType())

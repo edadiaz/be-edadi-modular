@@ -8,6 +8,7 @@ import com.az.edadi.university.model.response.UniversityRes;
 public class UniversityMapper {
     public static UniversityRes toResponse(Institution university) {
         UniversityRes universityRes = new UniversityRes();
+        universityRes.setId(university.getId());
         universityRes.setAbbrAz(university.getAbbrAz());
         universityRes.setAbbrEn(university.getAbbrEn());
         universityRes.setNameAz(university.getNameAz());
