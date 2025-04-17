@@ -6,5 +6,7 @@ spring:
   cloud:
     config:
       uri: ${CONFIG_SERVER_URL}
+      username: develop_user   #will be changed to ${GT_USERNAME} in the future
+      password: develop_user   #will be changed to ${GT_PASSWORD} in the future
   profiles:
     active: develop
