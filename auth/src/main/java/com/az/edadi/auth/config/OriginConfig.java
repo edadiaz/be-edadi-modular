@@ -4,19 +4,20 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
 @Configuration
 public class OriginConfig {
     @Bean
     public WebMvcConfigurer corsConfigurer() {
-        return new  WebMvcConfigurer() {
+        return new WebMvcConfigurer() {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOrigins("https://develop.edadi.az",
-                                "http://localhost:4200",
-                                "http://127.0.0.1:8080"
-                        )
+                        .allowedOrigins("http://localhost:4200",
+                                "http://127.0.0.1:8080",
+                                "https://develop.edadi.az")
                         .allowedHeaders("*")
+                        .allowCredentials(true)
                         .allowedMethods("*");
             }
         };
