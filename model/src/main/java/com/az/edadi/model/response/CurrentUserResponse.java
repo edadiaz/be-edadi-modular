@@ -1,15 +1,13 @@
-package com.az.edadi.user.model.response;
+package com.az.edadi.model.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CurrentUserRes {
+public class CurrentUserResponse {
     private String id;
     private String username;
     private String name;

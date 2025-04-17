@@ -12,9 +12,9 @@ import java.util.List;
 @NoArgsConstructor
 public class ConversationResponse {
     private String conversationId;
-    private List<UserSummaryResponse> userList;
     private String lastMessage;
     private String lastMessageTime;
     private boolean isRead;
+    private List<UserSummaryResponse> userList;
 
 }

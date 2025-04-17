@@ -41,7 +41,10 @@ public class SecurityConfigurer {
 
     private final String[] ALL_ALLOWED = {
             "/h2-console/**",
-            "/api/v1/docs"
+            "/api/v1/docs",
+            "/ws/**",
+            "/topic/**",
+            "/app/**"
 
     };
 

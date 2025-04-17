@@ -9,6 +9,7 @@ import com.az.edadi.message.adapter.ConversationAdapter;
 import com.az.edadi.message.model.request.CreateConversationRequest;
 import com.az.edadi.message.model.response.ConversationResponse;
 import com.az.edadi.message.service.ConversationService;
+import com.az.edadi.model.adapter.UserAdapter;
 import com.az.edadi.service.util.AuthUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.PageRequest;
@@ -25,6 +26,7 @@ public class ConversationServiceImpl implements ConversationService {
     private final ConversationUserRepository conversationUserRepository;
     private final UserRepository userRepository;
     private final ConversationAdapter conversationAdapter;
+    private final UserAdapter userAdapter;
 
     @Override
     public ConversationResponse createConversation(CreateConversationRequest request) {
@@ -47,7 +49,7 @@ public class ConversationServiceImpl implements ConversationService {
             throw new RuntimeException("Invalid conversation");
         var userList = userRepository.findByIdIn(conversationUsers.stream().map(ConversationUser::getUserId).toList())
                 .stream()
-                .map(conversationAdapter::convertToUserSummaryResponse).toList();
+                .map(userAdapter::toUserSummaryResponse).toList();
         var conversationResponse = new ConversationResponse();
         conversationResponse.setConversationId(conversationId);
         conversationResponse.setUserList(userList);
@@ -56,8 +58,8 @@ public class ConversationServiceImpl implements ConversationService {
 
     @Override
     public List<ConversationResponse> getMyConversation(Integer page) {
-         var userId = AuthUtils.getCurrentUserId();
-        var conversationUsers = conversationUserRepository.findRecentConversations(userId, page*10, 10);
+        var userId = AuthUtils.getCurrentUserId();
+        var conversationUsers = conversationUserRepository.findRecentConversations(userId, page * 10, 10);
         return null;
     }
 

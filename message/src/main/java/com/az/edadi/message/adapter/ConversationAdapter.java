@@ -6,12 +6,5 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class ConversationAdapter {
-    public UserSummaryResponse convertToUserSummaryResponse(User userEntity) {
-       var res = new UserSummaryResponse();
-       res.setId(userEntity.getId());
-       res.setFullName(userEntity.getName());
-       res.setUsername(userEntity.getUsername());
-       res.setProfilePictureUrl("");
-       return res;
-    }
+
 }

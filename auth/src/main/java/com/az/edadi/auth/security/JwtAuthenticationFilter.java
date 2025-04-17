@@ -39,7 +39,7 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         response.setHeader("Accept-Language", "*");
         response.setHeader("Access-Control-Allow-Methods", "*");
         response.setHeader("Access-Control-Max-Age", "3600");
-        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, X-Requested-With, Accept-Language, remember-me");
+        response.setHeader("Access-Control-Allow-Headers", "Content-Type, Accept, Authorization, X-Requested-With, Accept-Language, remember-me");
         String token = request.getHeader(AUTHORIZATION);
         if (StringUtils.hasText(token)) {
             token = token.replace("Bearer ", "");

@@ -11,6 +11,12 @@
 
     <artifactId>model</artifactId>
     <packaging>jar</packaging>
+    <dependencies>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>dal</artifactId>
+        </dependency>
+    </dependencies>
 
 
 </project>

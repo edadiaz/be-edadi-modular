@@ -28,9 +28,11 @@ public interface ConversationUserRepository extends MongoRepository<Conversation
             "{ $sort: { 'conversation.createdDate': -1 }}",
             "{ $skip:  ?1}",
             "{ $limit: ?2 }"
-            })
-    List<Conversation> findRecentConversations(String userId, int offset, int size );
+    })
+    List<Conversation> findRecentConversations(String userId, int offset, int size);
 
     List<ConversationUser> findByConversationId(String conversationId);
+
+
 
 }

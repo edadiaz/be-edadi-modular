@@ -29,6 +29,14 @@
             <groupId>com.az.edadi</groupId>
             <artifactId>service</artifactId>
         </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-websocket</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>auth</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

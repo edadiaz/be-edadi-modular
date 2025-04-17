@@ -21,5 +21,6 @@ public class User  {
     private AcademicDegree academicDegree;
     private String universityId;
     private String specialityId;
+    private String profilePictureUrl;
 
 }

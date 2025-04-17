@@ -3,10 +3,10 @@ package com.az.edadi.user.service.impl;
 import com.az.edadi.service.util.AuthUtils;
 import com.az.edadi.dal.entity.user.User;
 import com.az.edadi.dal.repository.UserRepository;
-import com.az.edadi.user.adapter.UserAdapter;
+import com.az.edadi.model.adapter.UserAdapter;
 import com.az.edadi.user.model.request.UpdateUserEducationInfo;
 import com.az.edadi.user.model.request.UpdateUserPersonalInfoRequest;
-import com.az.edadi.user.model.response.CurrentUserRes;
+import com.az.edadi.model.response.CurrentUserResponse;
 import com.az.edadi.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -36,7 +36,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public CurrentUserRes getCurrentUser() {
+    public CurrentUserResponse getCurrentUser() {
         User currentUser = userRepository.findById(AuthUtils.getCurrentUserId().toString()).orElseThrow();
         return userAdapter.map(currentUser);
     }
