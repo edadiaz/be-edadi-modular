@@ -12,7 +12,10 @@ public class OriginConfig {
             @Override
             public void addCorsMappings(CorsRegistry registry) {
                 registry.addMapping("/**")
-                        .allowedOriginPatterns("*")
+                        .allowedOrigins("https://develop.edadi.az",
+                                "http://localhost:4200",
+                                "http://127.0.0.1:8080"
+                        )
                         .allowedHeaders("*")
                         .allowedMethods("*");
             }
