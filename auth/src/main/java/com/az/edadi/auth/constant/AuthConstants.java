@@ -10,8 +10,9 @@ public enum AuthConstants {
     REFRESH_TOKEN("refresh_token"),
     RESPONSE_MESSAGE("message"),
     USER_ID("user_id"),
+    PARENT_TOKEN_ID("parent_token_id"),
     PERMISSIONS("permissions");
 
-    private final String  name;
+    private final String name;
 
 }

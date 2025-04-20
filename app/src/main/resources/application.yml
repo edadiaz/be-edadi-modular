@@ -1,12 +1,12 @@
 spring:
   application:
-    name: application
+    name: Edadi
   config:
     import: "configserver:"
   cloud:
     config:
       uri: ${CONFIG_SERVER_URL}
-      username: develop_user   #will be changed to ${GT_USERNAME} in the future
-      password: develop_user   #will be changed to ${GT_PASSWORD} in the future
+      username: develop_user   #will be changed to ${DEVELOP_CONFIG_USERNAME} in the future
+      password: develop_user   #will be changed to ${DEVELOP_CONFIG_PASSWORD} in the future
   profiles:
     active: develop

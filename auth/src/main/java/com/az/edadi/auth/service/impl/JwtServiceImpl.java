@@ -4,87 +4,94 @@ import com.az.edadi.auth.constant.TokenType;
 import com.az.edadi.auth.model.TokenBody;
 import com.az.edadi.auth.property.JwtProperties;
 import com.az.edadi.auth.service.JwtService;
-import com.az.edadi.dal.types.Permission;
+import com.az.edadi.dal.repository.auth.EdadiTokenRepository;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.cache.annotation.CacheEvict;
 import org.springframework.stereotype.Service;
+import org.springframework.util.StringUtils;
 
 import javax.crypto.SecretKey;
 import java.nio.charset.StandardCharsets;
-import java.util.Date;
-import java.util.List;
-import java.util.UUID;
+import java.util.*;
+import java.util.stream.Collectors;
 
+import static com.az.edadi.auth.constant.AuthConstants.PARENT_TOKEN_ID;
 import static com.az.edadi.auth.constant.AuthConstants.PERMISSIONS;
-import static com.az.edadi.auth.constant.AuthConstants.USER_ID;
 
 @Service
 @RequiredArgsConstructor
 public class JwtServiceImpl implements JwtService {
 
-    private final JwtProperties jwtProperties;
+    @Value("${spring.application.name}")
+    private String appName;
 
+    private final JwtProperties jwtProperties;
+    private final EdadiTokenRepository tokenRepository;
 
     @Override
-    public String generateToken(TokenType type, String userId, List<String> permissions) {
-        return Jwts.builder()
-                .setId(UUID.randomUUID().toString())
-                .setSubject(userId)
-                .setIssuer("Edadi")
+    public String generateToken(TokenType tokenType, TokenBody tokenBody) {
+        var builder = Jwts.builder().setId(UUID.randomUUID().toString())
+                .setSubject(tokenBody.getUserId())
+                .setIssuer(appName)
                 .setIssuedAt(new Date())
-                .claim(USER_ID.getName(), userId)
-                .claim(PERMISSIONS.getName(), List.of(Permission.BLOCK_USER))
-                .signWith(getKey(type))
-                .setExpiration(getExpirationDate(type))
-                .compact();
+                .signWith(getKey(tokenType))
+                .setExpiration(getExpirationDate(tokenType));
+
+        if (StringUtils.hasText(tokenBody.getParentTokenId()))
+            builder.claim(PARENT_TOKEN_ID.getName(), tokenBody.getParentTokenId());
+
+        if (tokenBody.getPermissions() != null && !tokenBody.getPermissions().isEmpty()) {
+            builder.claim(PERMISSIONS.getName(), tokenBody.getPermissions());
+        }
+
+        return builder.compact();
+
     }
 
     @Override
     public TokenBody getTokenBody(TokenType tokenType, String token) {
-        Claims claims = Jwts.parserBuilder()
-                .setSigningKey(getKey(tokenType))
-                .build()
-                .parseClaimsJws(token)
-                .getBody();
-        return new TokenBody(
+        Claims claims = getClaims(tokenType, token);
+        var body = new TokenBody(
                 claims.getId(),
                 claims.getSubject(),
-                (List<String>) claims.get(PERMISSIONS.getName())
+                claims.get(PARENT_TOKEN_ID.getName(), String.class),
+                claims.getExpiration(),
+                getPermissionsFromToken(claims)
         );
+        validateToken(tokenType, body);
+        return body;
+
     }
 
-    @Override
-    public String getTokenId(TokenType tokenType, String token) {
+
+    private Claims getClaims(TokenType type, String token) {
         return Jwts.parserBuilder()
-                .setSigningKey(getKey(tokenType))
-                .build()
-                .parseClaimsJws(token)
-                .getBody()
-                .getId();
-    }
-
-    @Override
-    public String getUserId(TokenType tokenType, String token) {
-        var claims = Jwts.parserBuilder()
-                .setSigningKey(getKey(tokenType))
+                .setSigningKey(getKey(type))
                 .build()
                 .parseClaimsJws(token)
                 .getBody();
-        return claims.get(USER_ID.getName(), String.class);
     }
 
-
-
-    @Override
     public Date getExpirationDate(TokenType type) {
         //todo separate keys for access and refresh token
         return switch (type) {
             case ACCESS_TOKEN -> new Date(System.currentTimeMillis() + jwtProperties.getAccessTokenSessionTime());
             case REFRESH_TOKEN -> new Date(System.currentTimeMillis() + jwtProperties.getRefreshTokenSessionTime());
-            case RESET_PASSWORD_TOKEN -> new Date(System.currentTimeMillis() + jwtProperties.getAccessTokenSessionTime());
+            case RESET_PASSWORD_TOKEN ->
+                    new Date(System.currentTimeMillis() + jwtProperties.getAccessTokenSessionTime());
         };
+    }
+
+    @Override
+    @CacheEvict(value = "edadi_token", key = "#tokenId")
+    public void deactivateToken(String tokenId) {
+        var edadiToken = tokenRepository.findByTokenId(tokenId);
+        edadiToken.setIsActive(false);
+        tokenRepository.save(edadiToken);
     }
 
     SecretKey getKey(TokenType type) {
@@ -92,9 +99,35 @@ public class JwtServiceImpl implements JwtService {
         return switch (type) {
             case ACCESS_TOKEN -> Keys.hmacShaKeyFor(jwtProperties.getSecretKey().getBytes(StandardCharsets.UTF_8));
             case REFRESH_TOKEN -> Keys.hmacShaKeyFor(jwtProperties.getSecretKey().getBytes(StandardCharsets.UTF_8));
-            case RESET_PASSWORD_TOKEN -> Keys.hmacShaKeyFor(jwtProperties.getSecretKey().getBytes(StandardCharsets.UTF_8));
+            case RESET_PASSWORD_TOKEN ->
+                    Keys.hmacShaKeyFor(jwtProperties.getSecretKey().getBytes(StandardCharsets.UTF_8));
 
         };
+
+    }
+
+    private List<String> getPermissionsFromToken(Claims claims) {
+        var permissions = claims.get(PERMISSIONS.getName());
+        if (permissions instanceof List<?> list)
+            return list.stream()
+                    .filter(Objects::nonNull)
+                    .map(String::valueOf)
+                    .collect(Collectors.toList());
+        return Collections.emptyList();
+    }
+
+    void validateToken(TokenType type, TokenBody tokenBody) {
+        if (tokenBody.getExpirationDate().before(new Date())) {
+            throw new RuntimeException("Token expired");
+        }
+        String tokenId = switch (type) {
+            case REFRESH_TOKEN, RESET_PASSWORD_TOKEN -> tokenBody.getTokenId();
+            case ACCESS_TOKEN -> tokenBody.getParentTokenId();
+        };
+        var token = tokenRepository.findByTokenId(tokenId);
+
+        if (!token.getIsActive())
+            throw new RuntimeException("Token is removed");
 
     }
 

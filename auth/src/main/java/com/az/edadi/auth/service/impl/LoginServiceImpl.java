@@ -4,6 +4,7 @@ import com.az.edadi.auth.constant.AuthConstants;
 import com.az.edadi.auth.constant.TokenType;
 import com.az.edadi.auth.exception.ExpiredTokenException;
 import com.az.edadi.auth.exception.InvalidPasswordException;
+import com.az.edadi.auth.model.TokenBody;
 import com.az.edadi.auth.model.request.LoginWithFacebookRequest;
 import com.az.edadi.auth.model.request.LoginWithGoogleRequest;
 import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
@@ -16,13 +17,12 @@ import com.az.edadi.auth.property.JwtProperties;
 import com.az.edadi.auth.service.JwtService;
 import com.az.edadi.auth.service.LoginService;
 import com.az.edadi.auth.service.OAuthService;
-import com.az.edadi.auth.service.UserBlackList;
 import com.az.edadi.auth.util.CookieUtil;
+import com.az.edadi.dal.entity.auth.EdadiToken;
+import com.az.edadi.dal.repository.auth.EdadiTokenRepository;
 import com.az.edadi.model.exception.UserNotFoundException;
-import com.az.edadi.dal.entity.auth.RefreshToken;
 import com.az.edadi.dal.entity.user.User;
 import com.az.edadi.dal.repository.UserRepository;
-import com.az.edadi.dal.repository.auth.RefreshTokenRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -32,7 +32,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
-import java.time.LocalDate;
 import java.util.Date;
 import java.util.List;
 
@@ -46,7 +45,7 @@ public class LoginServiceImpl implements LoginService {
     private final JwtService jwtService;
     private final JwtProperties jwtProperties;
     private final OAuthService oAuthService;
-    private final RefreshTokenRepository refreshTokenRepository;
+    private final EdadiTokenRepository refreshTokenRepository;
 
     @Override
     public LoginWithPasswordResponse loginWithPassword(LoginWithPasswordRequest request, HttpServletResponse response) {
@@ -73,11 +72,14 @@ public class LoginServiceImpl implements LoginService {
     @Override
     public LoginWithPasswordResponse refreshToken(RefreshTokenRequest tokenRequest, HttpServletRequest servletRequest) {
         String refreshToken = CookieUtil.findCookie(servletRequest, AuthConstants.REFRESH_TOKEN.getName()).orElseThrow(ExpiredTokenException::new);
-        var tokenId = jwtService.getTokenId(TokenType.REFRESH_TOKEN, refreshToken);
-        var savedToken = refreshTokenRepository.findByTokenId(tokenId);
-        UserBlackList.checkUserId(savedToken.getUserId());
-        if (!tokenRequest.getUserId().equals(savedToken.getUserId())) throw new RuntimeException();
-        return userRepository.findById(tokenRequest.getUserId()).map(this::createLoginResponseForRefreshToken).orElseThrow();
+        var refreshTokenBody = jwtService.getTokenBody(TokenType.REFRESH_TOKEN, refreshToken);
+        if (!tokenRequest.getUserId().equals(refreshTokenBody.getUserId()))
+            throw new RuntimeException();
+        var tokenBody = new TokenBody(tokenRequest.getUserId(),
+                refreshTokenBody.getTokenId(), List.of());
+        return new LoginWithPasswordResponse(
+                jwtService.generateToken(TokenType.ACCESS_TOKEN, tokenBody),
+                jwtProperties.getRefreshTokenSessionTime());
     }
 
 
@@ -87,26 +89,26 @@ public class LoginServiceImpl implements LoginService {
 
 
     LoginWithPasswordResponse createLoginResponseModel(User user, HttpServletResponse response) {
-        String accessToken = jwtService.generateToken(TokenType.ACCESS_TOKEN, user.getId(), List.of());
-        String refreshToken = jwtService.generateToken(TokenType.REFRESH_TOKEN, user.getId(), List.of());
-        saveToken(refreshToken);
+        var refreshTokenBody = new TokenBody(user.getId());
+        saveToken(refreshTokenBody);
+        var accessTokenBody = new TokenBody(user.getId(), refreshTokenBody.getTokenId(), List.of());
+        String accessToken = jwtService.generateToken(TokenType.ACCESS_TOKEN, accessTokenBody);
+        String refreshToken = jwtService.generateToken(TokenType.REFRESH_TOKEN, refreshTokenBody);
         setTokenToResponse(response, refreshToken);
         return new LoginWithPasswordResponse(accessToken, jwtProperties.getRefreshTokenSessionTime());
     }
 
-    LoginWithPasswordResponse createLoginResponseForRefreshToken(User user) {
-        String accessToken = jwtService.generateToken(TokenType.ACCESS_TOKEN, user.getId(), List.of());
-        return new LoginWithPasswordResponse(accessToken, jwtService.getExpirationDate(TokenType.ACCESS_TOKEN).getTime());
-    }
 
-    void saveToken(String token) {
-        var tokenReq = new RefreshToken();
-        tokenReq.setTokenId(jwtService.getTokenId(TokenType.REFRESH_TOKEN, token));
-        tokenReq.setUserId(jwtService.getUserId(TokenType.REFRESH_TOKEN, token));
-        tokenReq.setIp("nn");
-        tokenReq.setStartDate(new Date());
-        tokenReq.setEndDate(jwtService.getExpirationDate(TokenType.REFRESH_TOKEN));
-        refreshTokenRepository.save(tokenReq);
+
+    void saveToken(TokenBody tokenBody) {
+        var tokenEnt = new EdadiToken();
+        tokenEnt.setTokenId(tokenBody.getTokenId());
+        tokenEnt.setUserId(tokenBody.getUserId());
+        tokenEnt.setIp("nn");
+        tokenEnt.setStartDate(new Date());
+        tokenEnt.setEndDate(jwtService.getExpirationDate(TokenType.REFRESH_TOKEN));
+        tokenEnt.setIsActive(true);
+        refreshTokenRepository.save(tokenEnt);
     }
 
     void setTokenToResponse(HttpServletResponse response, String token) {
