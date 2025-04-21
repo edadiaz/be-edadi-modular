@@ -6,13 +6,13 @@ import com.az.edadi.university.model.response.UniversityRes;
 
 
 public class UniversityMapper {
+
     public static UniversityRes toResponse(Institution university) {
         UniversityRes universityRes = new UniversityRes();
         universityRes.setId(university.getId());
-        universityRes.setAbbrAz(university.getAbbrAz());
-        universityRes.setAbbrEn(university.getAbbrEn());
-        universityRes.setNameAz(university.getNameAz());
-        universityRes.setNameEn(university.getNameEn());
+        //todo add localization to abbr and name
+        universityRes.setAbbr(university.getAbbrAz());
+        universityRes.setName(university.getNameAz());
         universityRes.setDescription(university.getDescription());
         universityRes.setWebSiteUrl(university.getWebSiteUrl());
         universityRes.setPhotoUrl(university.getPhotoUrl());
@@ -42,14 +42,14 @@ public class UniversityMapper {
 
     }
 
-    ;
 
+    //todo fix this
     public static Institution toEntity(UniversityRes universityRes) {
         Institution university = new Institution();
-        university.setNameAz(universityRes.getNameAz());
-        university.setNameEn(universityRes.getNameEn());
-        university.setAbbrAz(universityRes.getAbbrAz());
-        university.setAbbrEn(universityRes.getAbbrEn());
+        university.setNameAz(universityRes.getName());
+        university.setNameEn(universityRes.getName());
+        university.setAbbrAz(universityRes.getAbbr());
+        university.setAbbrEn(universityRes.getAbbr());
         university.setDescription(universityRes.getDescription());
         university.setCountOfStudent(universityRes.getCountOfStudent());
         university.setFoundedYear(universityRes.getFoundedYear());

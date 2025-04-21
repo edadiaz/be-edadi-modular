@@ -18,9 +18,7 @@ public class InterestServiceImpl implements InterestService {
     public List<InterestResponse> getAllInterests() {
         return interestRepository.findAll().stream().map(interest -> new InterestResponse(
                 interest.getId(),
-                interest.getNameAz(),
-                interest.getNameEn(),
-                interest.getNameRu())).toList();
+                interest.getNameAz())).toList();
     }
 
 

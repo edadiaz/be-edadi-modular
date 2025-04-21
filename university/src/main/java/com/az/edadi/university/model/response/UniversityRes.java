@@ -14,10 +14,8 @@ import java.util.UUID;
 @NoArgsConstructor
 public class UniversityRes {
     private String id;
-    private String abbrAz;
-    private String abbrEn;
-    private String nameAz;
-    private String nameEn;
+    private String abbr;
+    private String name;
     private String photoUrl;
     private Integer foundedYear;
     private String webSiteUrl;
