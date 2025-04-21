@@ -70,12 +70,10 @@ public class LoginServiceImpl implements LoginService {
     }
 
     @Override
-    public LoginWithPasswordResponse refreshToken(RefreshTokenRequest tokenRequest, HttpServletRequest servletRequest) {
+    public LoginWithPasswordResponse refreshToken(HttpServletRequest servletRequest) {
         String refreshToken = CookieUtil.findCookie(servletRequest, AuthConstants.REFRESH_TOKEN.getName()).orElseThrow(ExpiredTokenException::new);
         var refreshTokenBody = jwtService.getTokenBody(TokenType.REFRESH_TOKEN, refreshToken);
-        if (!tokenRequest.getUserId().equals(refreshTokenBody.getUserId()))
-            throw new RuntimeException();
-        var tokenBody = new TokenBody(tokenRequest.getUserId(),
+        var tokenBody = new TokenBody(refreshTokenBody.getUserId(),
                 refreshTokenBody.getTokenId(), List.of());
         return new LoginWithPasswordResponse(
                 jwtService.generateToken(TokenType.ACCESS_TOKEN, tokenBody),

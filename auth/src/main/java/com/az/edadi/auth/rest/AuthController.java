@@ -59,9 +59,8 @@ public class AuthController {
     }
 
     @PostMapping("refresh-token")
-    ResponseEntity<LoginWithPasswordResponse> refreshToken(@RequestBody RefreshTokenRequest loginRequest,
-                                                           HttpServletRequest servletRequest) {
-        return ResponseEntity.ok(loginService.refreshToken(loginRequest, servletRequest));
+    ResponseEntity<LoginWithPasswordResponse> refreshToken(HttpServletRequest servletRequest) {
+        return ResponseEntity.ok(loginService.refreshToken(servletRequest));
     }
 
     @PostMapping("forgot-password")
