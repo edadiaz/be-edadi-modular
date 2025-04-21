@@ -2,6 +2,7 @@ package com.az.edadi.user.controller;
 
 import com.az.edadi.service.util.AuthUtils;
 import com.az.edadi.user.model.request.UpdateUserEducationInfo;
+import com.az.edadi.user.model.request.UpdateUserInterestRequest;
 import com.az.edadi.user.model.request.UpdateUserPersonalInfoRequest;
 import com.az.edadi.model.response.CurrentUserResponse;
 import com.az.edadi.user.service.UserService;
@@ -24,14 +25,21 @@ public class UserController {
     ResponseEntity<HttpStatus> updateUserEducationInfo(@PathVariable String userId, @RequestBody @Validated UpdateUserEducationInfo request) {
         log.info("Updating user education info with userId: {}", "id");
         userService.updateEducationalDegree(userId,request);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 
     @PutMapping("{userId}/personal-info")
     ResponseEntity<HttpStatus> updatePersonalInfo(@PathVariable String userId, @RequestBody @Validated UpdateUserPersonalInfoRequest request) {
      log.info("Updating user personal info with userId: {}", "id");
         userService.updatePersonalInfo(userId,request);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    }
+
+    @PutMapping("{userId}/interest")
+    ResponseEntity<HttpStatus> updatePersonalInfo(@PathVariable String userId, @RequestBody @Validated UpdateUserInterestRequest request) {
+        log.info("Updating user personal info with userId: {}", "id");
+        userService.updateUserInterests(userId,request);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
     @GetMapping("me")
     ResponseEntity<CurrentUserResponse> getMe(){
