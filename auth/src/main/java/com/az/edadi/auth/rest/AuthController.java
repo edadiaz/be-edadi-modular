@@ -35,10 +35,9 @@ public class AuthController {
     private final PasswordService passwordService;
     private final PermissionService permissionService;
     @PostMapping("sign-up")
-    ResponseEntity<HttpStatus> registerUser(@RequestBody @Validated RegisterUserRequest request) {
+    ResponseEntity<LoginWithPasswordResponse> registerUser(@RequestBody @Validated RegisterUserRequest request,HttpServletResponse response) {
         log.info("Registering user with email: {}", request.getEmail());
-        registerService.registerUser(request);
-        return ResponseEntity.ok(HttpStatus.CREATED);
+        return ResponseEntity.ok(registerService.registerUser(request,response));
     }
 
     @PostMapping("login-with-password")
