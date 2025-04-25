@@ -8,7 +8,6 @@ import com.az.edadi.auth.model.TokenBody;
 import com.az.edadi.auth.model.request.LoginWithFacebookRequest;
 import com.az.edadi.auth.model.request.LoginWithGoogleRequest;
 import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
-import com.az.edadi.auth.model.request.RefreshTokenRequest;
 import com.az.edadi.auth.model.response.LoginWithFacebookResponse;
 import com.az.edadi.auth.model.response.LoginWithPasswordResponse;
 import com.az.edadi.auth.model.response.LoginWithGoogleResponse;
@@ -105,7 +104,7 @@ public class LoginServiceImpl implements LoginService {
         tokenEnt.setIp("nn");
         tokenEnt.setStartDate(new Date());
         tokenEnt.setEndDate(jwtService.getExpirationDate(TokenType.REFRESH_TOKEN));
-        tokenEnt.setIsActive(true);
+        tokenEnt.setActive(true);
         refreshTokenRepository.save(tokenEnt);
     }
 

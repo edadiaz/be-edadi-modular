@@ -18,7 +18,7 @@ public class EdadiToken {
     private String tokenId;
 
     private String userId;
-    private Boolean isActive;
+    private boolean isActive;
     private Date startDate;
     private Date endDate;
     private String ip;

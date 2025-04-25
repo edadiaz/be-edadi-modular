@@ -19,15 +19,15 @@ public class TokenBody {
     private List<String> permissions;
 
     //for access token
-    public TokenBody (String userId, String parentTokenId, List<String> permissions) {
-        tokenId= UUID.randomUUID().toString();
+    public TokenBody(String userId, String parentTokenId, List<String> permissions) {
+        tokenId = UUID.randomUUID().toString();
         this.userId = userId;
         this.parentTokenId = parentTokenId;
         this.permissions = permissions;
     }
     //for refresh token
-    public TokenBody (String userId) {
-        tokenId= UUID.randomUUID().toString();
+    public TokenBody(String userId) {
+        tokenId = UUID.randomUUID().toString();
         this.userId = userId;
     }
 

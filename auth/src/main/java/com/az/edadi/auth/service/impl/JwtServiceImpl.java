@@ -34,7 +34,7 @@ public class JwtServiceImpl implements JwtService {
 
     @Override
     public String generateToken(TokenType tokenType, TokenBody tokenBody) {
-        var builder = Jwts.builder().setId(UUID.randomUUID().toString())
+        var builder = Jwts.builder().setId(tokenBody.getTokenId())
                 .setSubject(tokenBody.getUserId())
                 .setIssuer(appName)
                 .setIssuedAt(new Date())
@@ -90,7 +90,7 @@ public class JwtServiceImpl implements JwtService {
     @CacheEvict(value = "edadi_token", key = "#tokenId")
     public void deactivateToken(String tokenId) {
         var edadiToken = tokenRepository.findByTokenId(tokenId);
-        edadiToken.setIsActive(false);
+        edadiToken.setActive(false);
         tokenRepository.save(edadiToken);
     }
 
@@ -126,7 +126,7 @@ public class JwtServiceImpl implements JwtService {
         };
         var token = tokenRepository.findByTokenId(tokenId);
 
-        if (!token.getIsActive())
+        if (!token.isActive())
             throw new RuntimeException("Token is removed");
 
     }
