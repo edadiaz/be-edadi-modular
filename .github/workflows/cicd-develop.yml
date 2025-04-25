@@ -46,3 +46,4 @@ jobs:
               -e JAVA_TOOL_OPTIONS="-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=0.0.0.0:4000" \
               -e CONFIG_SERVER_URL=${{ secrets.CONFIG_SERVER_URL }} \
               ulvusuleymanov1/edadi-develop:latest
+          
