@@ -7,7 +7,7 @@ import com.az.edadi.auth.service.LoginService;
 import com.az.edadi.auth.service.RegisterService;
 import com.az.edadi.dal.entity.user.User;
 import com.az.edadi.dal.repository.UserRepository;
-import com.az.edadi.user.model.request.RegisterUserRequest;
+import com.az.edadi.auth.model.request.RegisterUserRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -27,7 +27,7 @@ public class RegisterServiceImpl implements RegisterService {
         userRepository.save(user);
         return loginService.loginWithPassword(
                 new LoginWithPasswordRequest(request.getUsername(),
-                        request.getPassword(), null),
+                        request.getPassword(), request.getFingerPrint()),
                 response);
     }
 

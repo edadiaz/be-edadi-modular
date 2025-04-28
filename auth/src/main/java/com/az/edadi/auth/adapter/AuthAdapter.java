@@ -2,7 +2,7 @@ package com.az.edadi.auth.adapter;
 
 import com.az.edadi.dal.entity.user.User;
 import com.az.edadi.model.constant.EdadiImageLinks;
-import com.az.edadi.user.model.request.RegisterUserRequest;
+import com.az.edadi.auth.model.request.RegisterUserRequest;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;

@@ -8,5 +8,5 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 public class RefreshTokenRequest {
-    private String userId;
+    private String fingerPrint;
 }

@@ -8,6 +8,7 @@ import com.az.edadi.auth.model.TokenBody;
 import com.az.edadi.auth.model.request.LoginWithFacebookRequest;
 import com.az.edadi.auth.model.request.LoginWithGoogleRequest;
 import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
+import com.az.edadi.auth.model.request.RefreshTokenRequest;
 import com.az.edadi.auth.model.response.LoginWithFacebookResponse;
 import com.az.edadi.auth.model.response.LoginWithPasswordResponse;
 import com.az.edadi.auth.model.response.LoginWithGoogleResponse;
@@ -51,25 +52,25 @@ public class LoginServiceImpl implements LoginService {
         request.setUsernameOrEmail(request.getUsernameOrEmail().toLowerCase());
         User user = userRepository.findByUsernameOrEmail(request.getUsernameOrEmail(), request.getUsernameOrEmail()).orElseThrow(() -> new UserNotFoundException("user-not-found-with-username-or-email"));
         validatePassword(request.getPassword(), user.getPassword());
-        return createLoginResponseModel(user, response);
+        return createLoginResponseModel(user, response,request.getFingerprint());
     }
 
     @Override
     public LoginWithGoogleResponse loginWithGoogle(LoginWithGoogleRequest request, HttpServletResponse response) {
         OAuth2CustomUser oAuth2CustomUser = oAuthService.getGoogleUser(request.token());
         var user = userRepository.findByEmail(oAuth2CustomUser.getEmail());
-        return user.map(value -> new LoginWithGoogleResponse(createLoginResponseModel(value, response))).orElseGet(() -> new LoginWithGoogleResponse(oAuth2CustomUser));
+        return user.map(value -> new LoginWithGoogleResponse(createLoginResponseModel(value, response, null))).orElseGet(() -> new LoginWithGoogleResponse(oAuth2CustomUser));
     }
 
     @Override
     public LoginWithFacebookResponse loginWithFacebook(LoginWithFacebookRequest request, HttpServletResponse response) {
         OAuth2CustomUser oAuth2CustomUser = oAuthService.getFacebookUser(request.token());
         var user = userRepository.findByEmail(oAuth2CustomUser.getEmail());
-        return user.map(value -> new LoginWithFacebookResponse(createLoginResponseModel(value, response))).orElseGet(() -> new LoginWithFacebookResponse(oAuth2CustomUser));
+        return user.map(value -> new LoginWithFacebookResponse(createLoginResponseModel(value, response,null))).orElseGet(() -> new LoginWithFacebookResponse(oAuth2CustomUser));
     }
 
     @Override
-    public LoginWithPasswordResponse refreshToken(HttpServletRequest servletRequest) {
+    public LoginWithPasswordResponse refreshToken(RefreshTokenRequest tokenRequest,HttpServletRequest servletRequest) {
         String refreshToken = CookieUtil.findCookie(servletRequest, AuthConstants.REFRESH_TOKEN.getName()).orElseThrow(ExpiredTokenException::new);
         var refreshTokenBody = jwtService.getTokenBody(TokenType.REFRESH_TOKEN, refreshToken);
         var tokenBody = new TokenBody(refreshTokenBody.getUserId(),
@@ -85,8 +86,8 @@ public class LoginServiceImpl implements LoginService {
     }
 
 
-    LoginWithPasswordResponse createLoginResponseModel(User user, HttpServletResponse response) {
-        var refreshTokenBody = new TokenBody(user.getId());
+    LoginWithPasswordResponse createLoginResponseModel(User user, HttpServletResponse response, String fingerPrint) {
+        var refreshTokenBody = new TokenBody(user.getId(),fingerPrint);
         saveToken(refreshTokenBody);
         var accessTokenBody = new TokenBody(user.getId(), refreshTokenBody.getTokenId(), List.of());
         String accessToken = jwtService.generateToken(TokenType.ACCESS_TOKEN, accessTokenBody);
@@ -105,6 +106,7 @@ public class LoginServiceImpl implements LoginService {
         tokenEnt.setStartDate(new Date());
         tokenEnt.setEndDate(jwtService.getExpirationDate(TokenType.REFRESH_TOKEN));
         tokenEnt.setActive(true);
+        tokenEnt.setFingerPrint(tokenBody.getFingerPrint());
         refreshTokenRepository.save(tokenEnt);
     }
 

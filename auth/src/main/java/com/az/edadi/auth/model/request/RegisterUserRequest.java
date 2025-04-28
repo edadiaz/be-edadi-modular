@@ -1,4 +1,4 @@
-package com.az.edadi.user.model.request;
+package com.az.edadi.auth.model.request;
 
 import com.az.edadi.service.annotation.NotDuplicateEmail;
 import com.az.edadi.service.annotation.NotDuplicateUsername;
@@ -27,5 +27,7 @@ public class RegisterUserRequest {
 
     @Length(min = 2,max = 50,message ="valid-full-name-length")
     private String fullName;
+
+    private String fingerPrint;
 
 }

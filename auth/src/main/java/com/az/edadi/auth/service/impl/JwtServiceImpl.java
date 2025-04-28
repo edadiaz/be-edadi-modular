@@ -60,7 +60,8 @@ public class JwtServiceImpl implements JwtService {
                 claims.getSubject(),
                 claims.get(PARENT_TOKEN_ID.getName(), String.class),
                 claims.getExpiration(),
-                getPermissionsFromToken(claims)
+                getPermissionsFromToken(claims),
+                null
         );
         validateToken(tokenType, body);
         return body;

@@ -17,6 +17,7 @@ public class TokenBody {
     private String parentTokenId;
     private Date expirationDate;
     private List<String> permissions;
+    private String fingerPrint;
 
     //for access token
     public TokenBody(String userId, String parentTokenId, List<String> permissions) {
@@ -25,11 +26,16 @@ public class TokenBody {
         this.parentTokenId = parentTokenId;
         this.permissions = permissions;
     }
+
     //for refresh token
     public TokenBody(String userId) {
         tokenId = UUID.randomUUID().toString();
         this.userId = userId;
     }
 
+    public TokenBody(String userId, String fingerPrint) {
+        this(userId);
+        this.fingerPrint = fingerPrint;
+    }
 
 }

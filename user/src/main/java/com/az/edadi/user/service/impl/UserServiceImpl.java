@@ -21,7 +21,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updateEducationalDegree(String userId, UpdateUserEducationInfo request) {
-        var user = userRepository.findById(userId.toString()).orElseThrow();
+        var user = userRepository.findById(userId).orElseThrow();
         user.setAcademicDegree(request.getDegree());
         user.setSpecialityId(request.getSpecialityId());
         user.setUniversityId(request.getUniversityId());

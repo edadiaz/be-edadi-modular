@@ -4,7 +4,6 @@ import com.az.edadi.auth.model.request.*;
 import com.az.edadi.auth.model.request.LoginWithFacebookRequest;
 import com.az.edadi.auth.model.request.LoginWithGoogleRequest;
 import com.az.edadi.auth.model.request.LoginWithPasswordRequest;
-import com.az.edadi.auth.model.request.RefreshTokenRequest;
 import com.az.edadi.auth.model.response.LoginWithFacebookResponse;
 import com.az.edadi.auth.model.response.LoginWithPasswordResponse;
 import com.az.edadi.auth.model.response.LoginWithGoogleResponse;
@@ -12,7 +11,7 @@ import com.az.edadi.auth.service.LoginService;
 import com.az.edadi.auth.service.PasswordService;
 import com.az.edadi.auth.service.PermissionService;
 import com.az.edadi.auth.service.RegisterService;
-import com.az.edadi.user.model.request.RegisterUserRequest;
+import com.az.edadi.auth.model.request.RegisterUserRequest;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
@@ -59,8 +58,8 @@ public class AuthController {
     }
 
     @PostMapping("refresh-token")
-    ResponseEntity<LoginWithPasswordResponse> refreshToken(HttpServletRequest servletRequest) {
-        return ResponseEntity.ok(loginService.refreshToken(servletRequest));
+    ResponseEntity<LoginWithPasswordResponse> refreshToken(@RequestBody RefreshTokenRequest tokenRequest,  HttpServletRequest servletRequest) {
+        return ResponseEntity.ok(loginService.refreshToken(tokenRequest,servletRequest));
     }
 
     @PostMapping("forgot-password")
