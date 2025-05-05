@@ -1,5 +1,6 @@
 package com.az.edadi.auth.service.impl;
 
+import com.az.edadi.auth.adapter.AuthAdapter;
 import com.az.edadi.auth.constant.AuthConstants;
 import com.az.edadi.auth.constant.TokenType;
 import com.az.edadi.auth.exception.ExpiredTokenException;
@@ -34,6 +35,7 @@ import org.springframework.stereotype.Service;
 import java.time.Duration;
 import java.util.Date;
 import java.util.List;
+import java.util.Optional;
 
 @Slf4j
 @Service
@@ -46,31 +48,43 @@ public class LoginServiceImpl implements LoginService {
     private final JwtProperties jwtProperties;
     private final OAuthService oAuthService;
     private final EdadiTokenRepository refreshTokenRepository;
+    private final AuthAdapter authAdapter;
 
     @Override
     public LoginWithPasswordResponse loginWithPassword(LoginWithPasswordRequest request, HttpServletResponse response) {
         request.setUsernameOrEmail(request.getUsernameOrEmail().toLowerCase());
         User user = userRepository.findByUsernameOrEmail(request.getUsernameOrEmail(), request.getUsernameOrEmail()).orElseThrow(() -> new UserNotFoundException("user-not-found-with-username-or-email"));
         validatePassword(request.getPassword(), user.getPassword());
-        return createLoginResponseModel(user, response,request.getFingerprint());
+        return createLoginResponseModel(user, response, request.getFingerprint());
     }
 
     @Override
     public LoginWithGoogleResponse loginWithGoogle(LoginWithGoogleRequest request, HttpServletResponse response) {
         OAuth2CustomUser oAuth2CustomUser = oAuthService.getGoogleUser(request.token());
         var user = userRepository.findByEmail(oAuth2CustomUser.getEmail());
-        return user.map(value -> new LoginWithGoogleResponse(createLoginResponseModel(value, response, null))).orElseGet(() -> new LoginWithGoogleResponse(oAuth2CustomUser));
+        LoginWithGoogleResponse loginResponse = new LoginWithGoogleResponse();
+        loginResponse.setRegistered(user.isPresent());
+
+        if (user.isEmpty()) {
+            var newUser = new User();
+            authAdapter.map(newUser, oAuth2CustomUser);
+            user = Optional.of(userRepository.save(newUser));
+        }
+        loginResponse.setUser(oAuth2CustomUser);
+        loginResponse.setLoginResponse(createLoginResponseModel(user.get(), response, request.fingerPrint()));
+        return loginResponse;
+
     }
 
     @Override
     public LoginWithFacebookResponse loginWithFacebook(LoginWithFacebookRequest request, HttpServletResponse response) {
         OAuth2CustomUser oAuth2CustomUser = oAuthService.getFacebookUser(request.token());
         var user = userRepository.findByEmail(oAuth2CustomUser.getEmail());
-        return user.map(value -> new LoginWithFacebookResponse(createLoginResponseModel(value, response,null))).orElseGet(() -> new LoginWithFacebookResponse(oAuth2CustomUser));
+        return user.map(value -> new LoginWithFacebookResponse(createLoginResponseModel(value, response, null))).orElseGet(() -> new LoginWithFacebookResponse(oAuth2CustomUser));
     }
 
     @Override
-    public LoginWithPasswordResponse refreshToken(RefreshTokenRequest tokenRequest,HttpServletRequest servletRequest) {
+    public LoginWithPasswordResponse refreshToken(RefreshTokenRequest tokenRequest, HttpServletRequest servletRequest) {
         String refreshToken = CookieUtil.findCookie(servletRequest, AuthConstants.REFRESH_TOKEN.getName()).orElseThrow(ExpiredTokenException::new);
         var refreshTokenBody = jwtService.getTokenBody(TokenType.REFRESH_TOKEN, refreshToken);
         var tokenBody = new TokenBody(refreshTokenBody.getUserId(),
@@ -87,7 +101,7 @@ public class LoginServiceImpl implements LoginService {
 
 
     LoginWithPasswordResponse createLoginResponseModel(User user, HttpServletResponse response, String fingerPrint) {
-        var refreshTokenBody = new TokenBody(user.getId(),fingerPrint);
+        var refreshTokenBody = new TokenBody(user.getId(), fingerPrint);
         saveToken(refreshTokenBody);
         var accessTokenBody = new TokenBody(user.getId(), refreshTokenBody.getTokenId(), List.of());
         String accessToken = jwtService.generateToken(TokenType.ACCESS_TOKEN, accessTokenBody);
@@ -95,7 +109,6 @@ public class LoginServiceImpl implements LoginService {
         setTokenToResponse(response, refreshToken);
         return new LoginWithPasswordResponse(accessToken, jwtProperties.getRefreshTokenSessionTime());
     }
-
 
 
     void saveToken(TokenBody tokenBody) {
@@ -116,7 +129,7 @@ public class LoginServiceImpl implements LoginService {
         cookie.setSecure(false);
         cookie.setPath("/");
         cookie.setMaxAge((int) Duration.ofDays(30).getSeconds());
-//        cookie.setDomain("edadi.az");
+        cookie.setDomain("edadi.az");
         response.addCookie(cookie);
     }
 

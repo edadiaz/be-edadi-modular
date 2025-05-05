@@ -12,8 +12,9 @@ public class OAuthServiceImpl implements OAuthService {
     @Override
     public OAuth2CustomUser getGoogleUser(String token) {
         RestTemplate restTemplate = new RestTemplate();
-        String uri = "https://oauth2.googleapis.com/tokeninfo?id_token=" + token;
+        String uri = "https://www.googleapis.com/oauth2/v2/userinfo";
         HttpHeaders headers = new HttpHeaders();
+        headers.add("Authorization", "Bearer "+token);
         headers.setAccept(Collections.singletonList(MediaType.APPLICATION_JSON));
         headers.add("user-agent", "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/54.0.2840.99 Safari/537.36");
         HttpEntity<String> entity = new HttpEntity<>("parameters", headers);
