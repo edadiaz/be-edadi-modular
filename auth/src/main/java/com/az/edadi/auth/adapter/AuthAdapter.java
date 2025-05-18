@@ -8,6 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import java.util.UUID;
+
 @Component
 @RequiredArgsConstructor
 public class AuthAdapter {
@@ -25,6 +27,12 @@ public class AuthAdapter {
         user.setName(request.getName());
         user.setEmail(request.getEmail().toLowerCase());
         user.setProfilePictureUrl(request.getPicture());
+        user.setPassword(passwordEncoder.encode(UUID.randomUUID().toString().substring(0, 10)));
+        var emailString = request.getEmail()
+                .split("@")[0]
+                .replaceAll("[^a-zA-Z0-9]", "");
+        var randomUsername = String.join(emailString,"_", UUID.randomUUID().toString().substring(0, 3));
+        user.setUsername(randomUsername);
     }
 
 }
