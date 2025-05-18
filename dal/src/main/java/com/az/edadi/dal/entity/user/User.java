@@ -2,6 +2,7 @@ package com.az.edadi.dal.entity.user;
 
 import com.az.edadi.dal.types.AcademicDegree;
 import com.az.edadi.dal.types.Gender;
+import com.az.edadi.dal.types.Provider;
 import org.springframework.data.annotation.Id;
 import lombok.Data;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -22,5 +23,6 @@ public class User  {
     private String universityId;
     private String specialityId;
     private String profilePictureUrl;
+    private Provider provider;
 
 }

@@ -2,6 +2,7 @@ package com.az.edadi.auth.adapter;
 
 import com.az.edadi.auth.model.response.OAuth2CustomUser;
 import com.az.edadi.dal.entity.user.User;
+import com.az.edadi.dal.types.Provider;
 import com.az.edadi.model.constant.EdadiImageLinks;
 import com.az.edadi.auth.model.request.RegisterUserRequest;
 import lombok.RequiredArgsConstructor;
@@ -21,9 +22,10 @@ public class AuthAdapter {
         user.setUsername(request.getUsername().toLowerCase());
         user.setPassword(passwordEncoder.encode(request.getPassword()));
         user.setProfilePictureUrl(EdadiImageLinks.USER_DEFAULT_PROFILE_PICTURE);
+        user.setProvider(Provider.NATIVE);
     }
 
-    public void map(User user, OAuth2CustomUser request) {
+    public void map(User user, OAuth2CustomUser request, Provider provider) {
         user.setName(request.getName());
         user.setEmail(request.getEmail().toLowerCase());
         user.setProfilePictureUrl(request.getPicture());
@@ -31,8 +33,9 @@ public class AuthAdapter {
         var emailString = request.getEmail()
                 .split("@")[0]
                 .replaceAll("[^a-zA-Z0-9]", "");
-        var randomUsername = String.join(emailString,"_", UUID.randomUUID().toString().substring(0, 3));
+        var randomUsername = String.join(emailString, UUID.randomUUID().toString().substring(0, 4));
         user.setUsername(randomUsername);
+        user.setProvider(provider);
     }
 
 }

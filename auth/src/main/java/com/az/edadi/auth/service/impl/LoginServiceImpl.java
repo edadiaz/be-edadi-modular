@@ -21,6 +21,7 @@ import com.az.edadi.auth.service.OAuthService;
 import com.az.edadi.auth.util.CookieUtil;
 import com.az.edadi.dal.entity.auth.EdadiToken;
 import com.az.edadi.dal.repository.auth.EdadiTokenRepository;
+import com.az.edadi.dal.types.Provider;
 import com.az.edadi.model.exception.UserNotFoundException;
 import com.az.edadi.dal.entity.user.User;
 import com.az.edadi.dal.repository.UserRepository;
@@ -67,7 +68,7 @@ public class LoginServiceImpl implements LoginService {
 
         if (user.isEmpty()) {
             var newUser = new User();
-            authAdapter.map(newUser, oAuth2CustomUser);
+            authAdapter.map(newUser, oAuth2CustomUser, Provider.GOOGLE);
             user = Optional.of(userRepository.save(newUser));
         }
         loginResponse.setUser(oAuth2CustomUser);
