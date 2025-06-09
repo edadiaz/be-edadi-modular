@@ -6,6 +6,7 @@ import com.az.edadi.dal.config.DalConfig;
 import com.az.edadi.file_storage.config.FileStorageConfig;
 import com.az.edadi.message.config.MessageConfig;
 import com.az.edadi.model.config.ModelConfig;
+import com.az.edadi.notification.config.NotificationConfig;
 import com.az.edadi.post.config.PostConfig;
 import com.az.edadi.roommate.config.RoommateConfig;
 import com.az.edadi.service.config.ServiceConfig;
@@ -28,7 +29,8 @@ import org.springframework.context.annotation.Import;
         SpecialityConfig.class,
         MessageConfig.class,
         CommonConfig.class,
-        RoommateConfig.class
+        RoommateConfig.class,
+        NotificationConfig.class
 })
 public class AppConfig {
 }

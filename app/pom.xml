@@ -60,6 +60,10 @@
             <groupId>com.az.edadi</groupId>
             <artifactId>roommate</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>notification</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

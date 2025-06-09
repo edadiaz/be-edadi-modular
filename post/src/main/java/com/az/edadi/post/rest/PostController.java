@@ -1,6 +1,6 @@
 package com.az.edadi.post.rest;
 
-import com.az.edadi.post.model.request.PostReq;
+import com.az.edadi.post.model.request.PostRequest;
 import com.az.edadi.post.model.response.PostRes;
 import com.az.edadi.post.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +18,8 @@ public class PostController {
 
     private final PostService postService;
     @PostMapping
-    ResponseEntity<PostRes> addPost(@RequestBody PostReq postReq) {
-        log.info("Post request received: {}", postReq);
-        return ResponseEntity.ok(postService.addPost(postReq));
+    ResponseEntity<PostRes> addPost(@RequestBody PostRequest postRequest) {
+        log.info("Post request received: {}", postRequest);
+        return ResponseEntity.ok(postService.addPost(postRequest));
     }
 }
