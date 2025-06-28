@@ -12,7 +12,6 @@ import com.az.edadi.message.service.ConversationService;
 import com.az.edadi.model.adapter.UserAdapter;
 import com.az.edadi.service.util.AuthUtils;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -60,7 +59,7 @@ public class ConversationServiceImpl implements ConversationService {
     public List<ConversationResponse> getMyConversation(Integer page) {
         var userId = AuthUtils.getCurrentUserId();
         var conversationUsers = conversationUserRepository.findRecentConversations(userId, page * 10, 10);
-        return null;
+        return conversationUsers.stream().map(s->getConversation(s.getConversationId())).toList();
     }
 
     String createConversation() {

@@ -1,8 +1,6 @@
 package com.az.edadi.dal.repository.message;
 
-import com.az.edadi.dal.entity.message.Conversation;
 import com.az.edadi.dal.entity.message.ConversationUser;
-import org.springframework.data.domain.Pageable;
 import org.springframework.data.mongodb.repository.Aggregation;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Repository;
@@ -29,7 +27,7 @@ public interface ConversationUserRepository extends MongoRepository<Conversation
             "{ $skip:  ?1}",
             "{ $limit: ?2 }"
     })
-    List<Conversation> findRecentConversations(String userId, int offset, int size);
+    List<ConversationUser> findRecentConversations(String userId, int offset, int size);
 
     List<ConversationUser> findByConversationId(String conversationId);
 
