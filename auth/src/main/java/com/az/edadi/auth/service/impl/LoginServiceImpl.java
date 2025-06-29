@@ -24,7 +24,7 @@ import com.az.edadi.dal.repository.auth.EdadiTokenRepository;
 import com.az.edadi.dal.types.Provider;
 import com.az.edadi.model.exception.UserNotFoundException;
 import com.az.edadi.dal.entity.user.User;
-import com.az.edadi.dal.repository.UserRepository;
+import com.az.edadi.dal.repository.user.UserRepository;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;

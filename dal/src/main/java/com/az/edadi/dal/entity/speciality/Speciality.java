@@ -8,8 +8,6 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import java.util.UUID;
 
 @Data
-@Getter
-@Setter
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor

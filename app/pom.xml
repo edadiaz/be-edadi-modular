@@ -64,6 +64,10 @@
             <groupId>com.az.edadi</groupId>
             <artifactId>notification</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>graphql</artifactId>
+        </dependency>
     </dependencies>
     <build>
         <plugins>

@@ -6,13 +6,12 @@ import com.az.edadi.auth.model.request.ForgotPasswordRequest;
 import com.az.edadi.auth.model.request.ResetPasswordWithTokenRequest;
 import com.az.edadi.auth.service.JwtService;
 import com.az.edadi.auth.service.PasswordService;
-import com.az.edadi.dal.entity.auth.EdadiToken;
 import com.az.edadi.dal.repository.auth.EdadiTokenRepository;
 import com.az.edadi.model.exception.UserNotFoundException;
 import com.az.edadi.service.service.SecurityMailSender;
 import com.az.edadi.service.service.Translator;
 import com.az.edadi.dal.entity.user.User;
-import com.az.edadi.dal.repository.UserRepository;
+import com.az.edadi.dal.repository.user.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,7 +19,6 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.HashMap;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor

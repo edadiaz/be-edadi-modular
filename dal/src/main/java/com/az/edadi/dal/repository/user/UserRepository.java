@@ -1,4 +1,4 @@
-package com.az.edadi.dal.repository;
+package com.az.edadi.dal.repository.user;
 
 import com.az.edadi.dal.entity.user.User;
 import org.springframework.data.mongodb.repository.MongoRepository;
