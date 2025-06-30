@@ -31,6 +31,7 @@
         <module>common</module>
         <module>roommate</module>
         <module>notification</module>
+        <module>graphql</module>
     </modules>
 
 
@@ -55,6 +56,7 @@
         <eda-common-version>1.0-SNAPSHOT</eda-common-version>
         <eda-roommate-version>1.0-SNAPSHOT</eda-roommate-version>
         <eda-notification-version>1.0-SNAPSHOT</eda-notification-version>
+        <eda-graphql-version>1.0-SNAPSHOT</eda-graphql-version>
     </properties>
 
     <dependencyManagement>
@@ -128,6 +130,12 @@
                 <groupId>com.az.edadi</groupId>
                 <artifactId>notification</artifactId>
                 <version>${eda-notification-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>com.az.edadi</groupId>
+                <artifactId>graphql</artifactId>
+                <version>${eda-graphql-version}</version>
             </dependency>
             <dependency>
                 <groupId>org.springframework.cloud</groupId>

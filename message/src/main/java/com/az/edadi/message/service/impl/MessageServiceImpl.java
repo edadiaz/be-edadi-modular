@@ -1,8 +1,7 @@
 package com.az.edadi.message.service.impl;
 
 import com.az.edadi.dal.entity.message.ConversationUser;
-import com.az.edadi.dal.entity.message.Message;
-import com.az.edadi.dal.repository.UserRepository;
+import com.az.edadi.dal.repository.user.UserRepository;
 import com.az.edadi.dal.repository.message.ConversationUserRepository;
 import com.az.edadi.dal.repository.message.MessageRepository;
 import com.az.edadi.message.adapter.MessageAdapter;

@@ -1,7 +1,7 @@
 package com.az.edadi.service.annotation.impl;
 
 
-import com.az.edadi.dal.repository.UserRepository;
+import com.az.edadi.dal.repository.user.UserRepository;
 import com.az.edadi.service.annotation.NotDuplicateUsername;
 import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;

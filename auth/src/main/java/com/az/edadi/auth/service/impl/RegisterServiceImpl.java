@@ -6,7 +6,7 @@ import com.az.edadi.auth.model.response.LoginWithPasswordResponse;
 import com.az.edadi.auth.service.LoginService;
 import com.az.edadi.auth.service.RegisterService;
 import com.az.edadi.dal.entity.user.User;
-import com.az.edadi.dal.repository.UserRepository;
+import com.az.edadi.dal.repository.user.UserRepository;
 import com.az.edadi.auth.model.request.RegisterUserRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;

@@ -15,6 +15,7 @@ public class ConversationResponse {
     private String lastMessage;
     private String lastMessageTime;
     private boolean isRead;
+    private Integer unreadCount;
     private List<UserSummaryResponse> userList;
 
 }

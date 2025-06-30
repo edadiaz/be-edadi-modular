@@ -17,15 +17,17 @@ public class AuthUtils {
                 .collect(Collectors.toList());
     }
 
-    String getUserId() {
-        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        return (String) authentication.getCredentials();
-    }
-
     public static String getCurrentUserId() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         return Optional.ofNullable(authentication).map(Authentication::getPrincipal).orElseThrow().toString();
     }
 
+    public static void isCurrentUser(String id) {
+        String currentUserId = getCurrentUserId();
+        if (!currentUserId.equals(id)) {
+            throw new IllegalArgumentException("You are not authorized to perform this action");
+        }
+
+    }
 
 }
