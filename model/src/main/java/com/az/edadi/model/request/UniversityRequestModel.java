@@ -1,7 +1,6 @@
-package com.az.edadi.university.model.request;
+package com.az.edadi.model.request;
 
 
-import com.az.edadi.dal.constants.UniversityType;
 import jakarta.validation.constraints.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +12,7 @@ import lombok.NoArgsConstructor;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UniversityReq {
+public class UniversityRequestModel {
     @NotBlank(message = "Field cannot be null")
     @Size(max = 10,min = 2 ,message = "Symbol count must be minimum 2 maximum 10" )
     private String abbrAz;

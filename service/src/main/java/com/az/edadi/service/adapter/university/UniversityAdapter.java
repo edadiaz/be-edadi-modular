@@ -1,14 +1,14 @@
-package com.az.edadi.university.mapper;
+package com.az.edadi.service.adapter.university;
 
 import com.az.edadi.dal.entity.institution.Institution;
-import com.az.edadi.university.model.request.UniversityReq;
-import com.az.edadi.university.model.response.UniversityRes;
+import com.az.edadi.model.request.UniversityRequestModel;
+import com.az.edadi.model.response.university.UniversityPageResponse;
+import org.springframework.stereotype.Service;
 
-
-public class UniversityMapper {
-
-    public static UniversityRes toResponse(Institution university) {
-        UniversityRes universityRes = new UniversityRes();
+@Service
+public class UniversityAdapter {
+    public UniversityPageResponse toResponse(Institution university) {
+        UniversityPageResponse universityRes = new UniversityPageResponse();
         universityRes.setId(university.getId());
         //todo add localization to abbr and name
         universityRes.setAbbr(university.getAbbrAz());
@@ -25,8 +25,8 @@ public class UniversityMapper {
     }
 
 
-    public static UniversityReq toRequest(Institution university) {
-        UniversityReq universityReq = new UniversityReq();
+    public static UniversityRequestModel toRequest(Institution university) {
+        UniversityRequestModel universityReq = new UniversityRequestModel();
         universityReq.setAbbrAz(university.getAbbrAz());
         universityReq.setAbbrEn(university.getAbbrEn());
         universityReq.setNameAz(university.getNameAz());
@@ -44,7 +44,7 @@ public class UniversityMapper {
 
 
     //todo fix this
-    public static Institution toEntity(UniversityRes universityRes) {
+    public static Institution toEntity(UniversityPageResponse universityRes) {
         Institution university = new Institution();
         university.setNameAz(universityRes.getName());
         university.setNameEn(universityRes.getName());
@@ -62,7 +62,7 @@ public class UniversityMapper {
 
     ;
 
-    public static Institution toEntity(UniversityReq universityReq) {
+    public  Institution toEntity(UniversityRequestModel universityReq) {
         Institution university = new Institution();
         university.setNameAz(universityReq.getNameAz());
         university.setNameEn(universityReq.getNameEn());
@@ -77,6 +77,4 @@ public class UniversityMapper {
         university.setPhotoUrl(universityReq.getPhotoUrl());
         return university;
     }
-
-    ;
 }

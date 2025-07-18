@@ -1,5 +1,6 @@
 package com.az.edadi.message.service.impl;
 
+import com.az.edadi.service.adapter.user.UserAdapter;
 import com.az.edadi.dal.entity.message.Conversation;
 import com.az.edadi.dal.entity.message.ConversationUser;
 import com.az.edadi.dal.repository.user.UserRepository;
@@ -9,7 +10,6 @@ import com.az.edadi.message.adapter.ConversationAdapter;
 import com.az.edadi.message.model.request.CreateConversationRequest;
 import com.az.edadi.message.model.response.ConversationResponse;
 import com.az.edadi.message.service.ConversationService;
-import com.az.edadi.model.adapter.UserAdapter;
 import com.az.edadi.service.util.AuthUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -48,7 +48,7 @@ public class ConversationServiceImpl implements ConversationService {
             throw new RuntimeException("Invalid conversation");
         var userList = userRepository.findByIdIn(conversationUsers.stream().map(ConversationUser::getUserId).toList())
                 .stream()
-                .map(userAdapter::toUserSummaryResponse).toList();
+                .map(userAdapter::mapToUserSummary).toList();
         var conversationResponse = new ConversationResponse();
         conversationResponse.setConversationId(conversationId);
         conversationResponse.setUserList(userList);

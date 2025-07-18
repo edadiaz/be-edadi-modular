@@ -23,6 +23,10 @@
             <groupId>com.az.edadi</groupId>
             <artifactId>service</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
 
     </dependencies>
 

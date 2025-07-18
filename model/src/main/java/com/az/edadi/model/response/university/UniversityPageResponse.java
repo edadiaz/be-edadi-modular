@@ -1,18 +1,15 @@
-package com.az.edadi.university.model.response;
+package com.az.edadi.model.response.university;
 
-import com.az.edadi.dal.constants.UniversityType;
-import com.fasterxml.jackson.databind.annotation.JsonSerialize;
+import com.az.edadi.model.constant.PageTab;
 import lombok.*;
-import lombok.experimental.FieldDefaults;
 
-import java.time.LocalDate;
-import java.util.UUID;
+import java.util.List;
 
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UniversityRes {
+public class UniversityPageResponse {
     private String id;
     private String abbr;
     private String name;
@@ -20,8 +17,9 @@ public class UniversityRes {
     private Integer foundedYear;
     private String webSiteUrl;
     private Integer countOfStudent;
-    private String  type;
+    private String type;
     private String description;
     private String location;
+    private List<PageTab> tabList;
 
 }

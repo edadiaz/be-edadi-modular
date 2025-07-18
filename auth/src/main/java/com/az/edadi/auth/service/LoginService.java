@@ -15,4 +15,5 @@ public interface LoginService {
     LoginWithGoogleResponse loginWithGoogle(LoginWithGoogleRequest request, HttpServletResponse response);
     LoginWithFacebookResponse loginWithFacebook(LoginWithFacebookRequest request, HttpServletResponse response);
     LoginWithPasswordResponse refreshToken(RefreshTokenRequest tokenRequest,HttpServletRequest servletRequest);
+    void logOut(RefreshTokenRequest tokenRequest,HttpServletRequest servletRequest);
 }

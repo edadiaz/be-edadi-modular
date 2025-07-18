@@ -1,5 +1,6 @@
 package com.az.edadi.message.service.impl;
 
+import com.az.edadi.service.adapter.user.UserAdapter;
 import com.az.edadi.dal.entity.message.ConversationUser;
 import com.az.edadi.dal.repository.user.UserRepository;
 import com.az.edadi.dal.repository.message.ConversationUserRepository;
@@ -8,7 +9,6 @@ import com.az.edadi.message.adapter.MessageAdapter;
 import com.az.edadi.message.model.request.UserChatMessage;
 import com.az.edadi.message.model.response.MessageResponse;
 import com.az.edadi.message.service.MessageService;
-import com.az.edadi.model.adapter.UserAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.messaging.simp.SimpMessagingTemplate;
 import org.springframework.stereotype.Service;
@@ -37,7 +37,7 @@ public class MessageServiceImpl implements MessageService {
         messageEnt= messageRepository.save(messageEnt);
         var userEnt = userRepository.findById(user.getName()).orElseThrow(() -> new RuntimeException("User not found"));
         var messageRes = messageAdapter.toMessageResponse(messageEnt,
-                userAdapter.toUserSummaryResponse(userEnt));
+                userAdapter.mapToUserSummary(userEnt));
         notifyUsers(userConversations, messageRes);
     }
 

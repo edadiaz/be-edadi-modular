@@ -1,4 +1,4 @@
-package com.az.edadi.model.response;
+package com.az.edadi.model.response.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

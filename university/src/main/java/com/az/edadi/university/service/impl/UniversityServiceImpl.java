@@ -1,13 +1,14 @@
 package com.az.edadi.university.service.impl;
 
+import com.az.edadi.model.request.UniversityRequestModel;
+import com.az.edadi.service.adapter.university.UniversityAdapter;
 import com.az.edadi.service.service.NullFinder;
 import com.az.edadi.dal.entity.institution.Institution;
 import com.az.edadi.dal.repository.UniversityRepository;
 import com.az.edadi.university.exception.UniversityNotFoundException;
-import com.az.edadi.university.mapper.UniversityMapper;
-import com.az.edadi.university.model.request.UniversityReq;
-import com.az.edadi.university.model.response.UniversityRes;
+import com.az.edadi.model.response.university.UniversityPageResponse;
 import com.az.edadi.university.service.UniversityService;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
 import org.springframework.context.MessageSource;
 import org.springframework.stereotype.Service;
@@ -15,41 +16,38 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Locale;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 @Service
+@RequiredArgsConstructor
 public class UniversityServiceImpl implements UniversityService {
-    public UniversityServiceImpl(UniversityRepository universityRepository, MessageSource messageSource) {
-        this.universityRepository = universityRepository;
-        this.messageSource = messageSource;
 
-    }
+    private final UniversityAdapter universityAdapter;
 
     private final UniversityRepository universityRepository;
     private final MessageSource messageSource;
     @Override
-    public UniversityRes createUniversity(UniversityReq universityReq) {
-        Institution university = UniversityMapper.toEntity(universityReq);
+    public UniversityPageResponse createUniversity(UniversityRequestModel universityReq) {
+        Institution university = universityAdapter.toEntity(universityReq);
         universityRepository.save(university);
-        return UniversityMapper.toResponse(university);
+        return universityAdapter.toResponse(university);
     }
 
     @Override
-    public UniversityRes getUniversityById(String id) {
+    public UniversityPageResponse getUniversityById(String id) {
         Institution university = universityRepository.findById(id)
                 .orElseThrow(() -> new UniversityNotFoundException(getMessage("university.not.found")));
-        return UniversityMapper.toResponse(university);
+        return universityAdapter.toResponse(university);
     }
 
     @Transactional
     @Override
-    public UniversityRes update(String id, UniversityReq universityReq) {
+    public UniversityPageResponse update(String id, UniversityRequestModel universityReq) {
         Institution university = universityRepository.
                 findById(id)
                 .orElseThrow(()-> new UniversityNotFoundException(getMessage("university.not.found")));
         BeanUtils.copyProperties(university,universityReq, NullFinder.getNullFieldNames(universityReq));
-        return UniversityMapper.toResponse(universityRepository.save(university));
+        return universityAdapter.toResponse(universityRepository.save(university));
     }
 
     @Override
@@ -63,10 +61,10 @@ public class UniversityServiceImpl implements UniversityService {
 
 
     @Override
-    public List<UniversityRes> findAll() {
+    public List<UniversityPageResponse> findAll() {
         return universityRepository.findAll()
                 .stream()
-                .map(UniversityMapper::toResponse)
+                .map(universityAdapter::toResponse)
                 .collect(Collectors.toList());
     }
 

@@ -8,6 +8,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
 @UtilityClass
 public class AuthUtils {
     public List<String> getPermissions() {
@@ -22,12 +23,17 @@ public class AuthUtils {
         return Optional.ofNullable(authentication).map(Authentication::getPrincipal).orElseThrow().toString();
     }
 
-    public static void isCurrentUser(String id) {
+    public static void isCurrentUserOrThrowException(String id) {
         String currentUserId = getCurrentUserId();
         if (!currentUserId.equals(id)) {
             throw new IllegalArgumentException("You are not authorized to perform this action");
         }
 
+    }
+
+    public static boolean isCurrentUser(String id) {
+        String currentUserId = getCurrentUserId();
+        return currentUserId.equals(id);
     }
 
 }

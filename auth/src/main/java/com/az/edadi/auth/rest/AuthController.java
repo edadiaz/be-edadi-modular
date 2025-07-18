@@ -80,4 +80,10 @@ public class AuthController {
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
 
+    @PostMapping("log-out")
+    ResponseEntity<HttpStatus> logOut(@RequestBody RefreshTokenRequest tokenRequest,  HttpServletRequest servletRequest) {
+        loginService.logOut(tokenRequest,servletRequest);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    }
+
 }

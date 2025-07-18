@@ -1,16 +1,17 @@
 package com.az.edadi.user.service.impl;
 
+import com.az.edadi.service.adapter.user.UserAdapter;
 import com.az.edadi.dal.entity.user.UserInterest;
-import com.az.edadi.dal.repository.user.InterestRepository;
 import com.az.edadi.dal.repository.user.UserInterestRepository;
+import com.az.edadi.model.response.user.UserPageResponse;
 import com.az.edadi.service.util.AuthUtils;
 import com.az.edadi.dal.entity.user.User;
 import com.az.edadi.dal.repository.user.UserRepository;
-import com.az.edadi.model.adapter.UserAdapter;
 import com.az.edadi.user.model.request.UpdateUserEducationInfo;
 import com.az.edadi.user.model.request.UpdateUserInterestRequest;
 import com.az.edadi.user.model.request.UpdateUserPersonalInfoRequest;
 import com.az.edadi.model.response.CurrentUserResponse;
+import com.az.edadi.user.model.request.UpdateUserProfileImageRequest;
 import com.az.edadi.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -22,9 +23,8 @@ import java.util.stream.Collectors;
 public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
-    private final UserAdapter userAdapter;
     private final UserInterestRepository userInterestRepository;
-    private final InterestRepository interestRepository;
+    private final UserAdapter userAdapter;
 
     @Override
     public void updateEducationalDegree(String userId, UpdateUserEducationInfo request) {
@@ -64,8 +64,22 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public CurrentUserResponse getCurrentUser() {
-        User currentUser = userRepository.findById(AuthUtils.getCurrentUserId().toString()).orElseThrow();
-        return userAdapter.map(currentUser);
+        User currentUser = userRepository.findById(AuthUtils.getCurrentUserId()).orElseThrow();
+        return userAdapter.mapToCurrentUserResponse(currentUser);
+    }
+
+    @Override
+    public UserPageResponse findUserById(String userId) {
+        var user = userRepository.findById(userId).orElseThrow();
+        return userAdapter.mapToUserPageResponse(user);
+    }
+
+    @Override
+    public void updateProfileImage(UpdateUserProfileImageRequest newImageRequest) {
+        var user  = userRepository.findById(AuthUtils.getCurrentUserId()).orElseThrow();
+        user.setProfilePictureUrl(newImageRequest.getNewUrl());
+        userRepository.save(user);
+
     }
 
 

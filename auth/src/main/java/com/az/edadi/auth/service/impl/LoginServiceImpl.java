@@ -95,6 +95,12 @@ public class LoginServiceImpl implements LoginService {
                 jwtProperties.getRefreshTokenSessionTime());
     }
 
+    @Override
+    public void logOut(RefreshTokenRequest tokenRequest, HttpServletRequest servletRequest) {
+        String refreshToken = CookieUtil.findCookie(servletRequest, AuthConstants.REFRESH_TOKEN.getName()).orElseThrow(ExpiredTokenException::new);
+
+    }
+
 
     void validatePassword(String input, String actualPassword) {
         if (!passwordEncoder.matches(input, actualPassword)) throw new InvalidPasswordException();

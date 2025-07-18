@@ -21,6 +21,14 @@
             <groupId>com.az.edadi</groupId>
             <artifactId>dal</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>model</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>service</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

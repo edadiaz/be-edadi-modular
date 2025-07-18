@@ -1,6 +1,6 @@
 package com.az.edadi.message.model.response;
 
-import com.az.edadi.model.response.UserSummaryResponse;
+import com.az.edadi.model.response.user.UserSummaryResponse;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

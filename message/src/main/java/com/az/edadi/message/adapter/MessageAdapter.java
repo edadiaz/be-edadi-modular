@@ -3,7 +3,7 @@ package com.az.edadi.message.adapter;
 import com.az.edadi.dal.entity.message.Message;
 import com.az.edadi.message.model.request.UserChatMessage;
 import com.az.edadi.message.model.response.MessageResponse;
-import com.az.edadi.model.response.UserSummaryResponse;
+import com.az.edadi.model.response.user.UserSummaryResponse;
 import org.springframework.stereotype.Component;
 
 import java.time.LocalDateTime;

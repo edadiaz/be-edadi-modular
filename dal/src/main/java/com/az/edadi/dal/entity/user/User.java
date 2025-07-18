@@ -20,6 +20,7 @@ public class User  {
     private String password;
     private Gender gender;
     private LocalDate birthday;
+    private LocalDate creationDate;
     private AcademicDegree academicDegree;
     private String universityId;
     private String specialityId;
