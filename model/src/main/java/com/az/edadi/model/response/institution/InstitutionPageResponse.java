@@ -1,4 +1,4 @@
-package com.az.edadi.model.response.university;
+package com.az.edadi.model.response.institution;
 
 import com.az.edadi.model.constant.PageTab;
 import lombok.*;
@@ -9,7 +9,7 @@ import java.util.List;
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class UniversityPageResponse {
+public class InstitutionPageResponse {
     private String id;
     private String abbr;
     private String name;

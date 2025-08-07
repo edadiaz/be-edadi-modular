@@ -2,13 +2,15 @@ package com.az.edadi.service.adapter.university;
 
 import com.az.edadi.dal.entity.institution.Institution;
 import com.az.edadi.model.request.UniversityRequestModel;
-import com.az.edadi.model.response.university.UniversityPageResponse;
+import com.az.edadi.model.response.institution.InstitutionPageResponse;
+import com.az.edadi.model.response.institution.InstitutionSummaryResponse;
+import com.az.edadi.service.service.Translator;
 import org.springframework.stereotype.Service;
 
 @Service
 public class UniversityAdapter {
-    public UniversityPageResponse toResponse(Institution university) {
-        UniversityPageResponse universityRes = new UniversityPageResponse();
+    public InstitutionPageResponse toResponse(Institution university) {
+        InstitutionPageResponse universityRes = new InstitutionPageResponse();
         universityRes.setId(university.getId());
         //todo add localization to abbr and name
         universityRes.setAbbr(university.getAbbrAz());
@@ -44,7 +46,7 @@ public class UniversityAdapter {
 
 
     //todo fix this
-    public static Institution toEntity(UniversityPageResponse universityRes) {
+    public static Institution toEntity(InstitutionPageResponse universityRes) {
         Institution university = new Institution();
         university.setNameAz(universityRes.getName());
         university.setNameEn(universityRes.getName());
@@ -76,5 +78,32 @@ public class UniversityAdapter {
         university.setWebSiteUrl(universityReq.getWebSiteUrl());
         university.setPhotoUrl(universityReq.getPhotoUrl());
         return university;
+    }
+
+    InstitutionSummaryResponse toSummaryResponse(Institution institution) {
+        InstitutionSummaryResponse response = new InstitutionSummaryResponse();
+        response.setAbbr(getAbbr(institution));
+        response.setAbbr(getName(institution));
+        response.setId(institution.getId());
+        response.setPhotoUrl(institution.getPhotoUrl());
+        return response;
+    }
+
+    private String getAbbr(Institution institution) {
+        var currentLang = Translator.getCurrentLanguage();
+      return  switch (currentLang){
+            case "en" -> institution.getAbbrEn();
+            case "az" -> institution.getAbbrAz();
+          default ->  institution.getAbbrEn();
+        };
+    }
+
+    private String getName(Institution institution) {
+        var currentLang = Translator.getCurrentLanguage();
+        return  switch (currentLang){
+            case "en" -> institution.getNameEn();
+            case "az" -> institution.getNameAz();
+            default ->  institution.getAbbrEn();
+        };
     }
 }

@@ -1,5 +1,8 @@
 package com.az.edadi.user.controller;
 
+import com.az.edadi.model.request.user.BlockUserRequest;
+import com.az.edadi.model.request.user.FollowUserRequest;
+import com.az.edadi.model.request.user.ReportUserRequest;
 import com.az.edadi.model.response.user.UserPageResponse;
 import com.az.edadi.service.util.AuthUtils;
 import com.az.edadi.user.model.request.UpdateUserEducationInfo;
@@ -61,5 +64,31 @@ public class UserController {
         return ResponseEntity.ok(userService.getCurrentUser());
     }
 
+    @PostMapping("block")
+    ResponseEntity<HttpStatus> blockUser( @RequestBody BlockUserRequest request) {
+        log.info("User {} blocked user {} ", AuthUtils.getCurrentUserId(), AuthUtils.getCurrentUserId());
+        userService.blockUser(request);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    }
+    @PostMapping("report")
+    ResponseEntity<HttpStatus> blockUser( @RequestBody ReportUserRequest request) {
+        log.info("User {} report user: {}", AuthUtils.getCurrentUserId(), request.userId());
+        userService.reportUser(request);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping("follow")
+    ResponseEntity<HttpStatus> followUser( @RequestBody FollowUserRequest request) {
+        log.info("User {} report user: {}", AuthUtils.getCurrentUserId(), request.userId());
+        userService.followUser(request);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    }
+
+    @PostMapping("unfollow")
+    ResponseEntity<HttpStatus> unfollowUser( @RequestBody FollowUserRequest request) {
+        log.info("User {} report user: {}", AuthUtils.getCurrentUserId(), request.userId());
+        userService.unfollowUser(request);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    }
 
 }

@@ -1,10 +1,11 @@
 package com.az.edadi.university.controller;
 
  import com.az.edadi.model.request.UniversityRequestModel;
- import com.az.edadi.model.response.university.UniversityPageResponse;
+ import com.az.edadi.model.response.institution.InstitutionPageResponse;
 import com.az.edadi.university.service.UniversityService;
 import jakarta.validation.Valid;
-import org.springframework.http.HttpStatus;
+ import jdk.jfr.Timespan;
+ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -21,29 +22,29 @@ public class UniversityController {
     public UniversityController(UniversityService universityService) {
         this.universityService = universityService;
     }
-
+@Timespan
     @GetMapping
-    public ResponseEntity<List<UniversityPageResponse>> findAll() {
+    public ResponseEntity<List<InstitutionPageResponse>> findAll() {
         return ResponseEntity.ok(universityService.findAll());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<UniversityPageResponse> getUniversityById(@PathVariable String id){
-        UniversityPageResponse universityRes = universityService.getUniversityById(id);
+    public ResponseEntity<InstitutionPageResponse> getUniversityById(@PathVariable String id){
+        InstitutionPageResponse universityRes = universityService.getUniversityById(id);
         return new ResponseEntity<>(universityRes, HttpStatus.OK);
     }
 
     @PostMapping("/create")
-    public ResponseEntity<UniversityPageResponse> createUniversity(@Valid @RequestBody UniversityRequestModel universityReq){
+    public ResponseEntity<InstitutionPageResponse> createUniversity(@Valid @RequestBody UniversityRequestModel universityReq){
         System.out.println(universityReq);
-        UniversityPageResponse universityRes = universityService.createUniversity(universityReq);
+        InstitutionPageResponse universityRes = universityService.createUniversity(universityReq);
         return new ResponseEntity<>(universityRes,HttpStatus.CREATED);
     }
 
     @PostMapping("/createAll")
-    public ResponseEntity<List<UniversityPageResponse>> createAllUniversity(@RequestBody List<UniversityRequestModel> universityReqs){
-        UniversityPageResponse universityRes= new UniversityPageResponse();
-        List<UniversityPageResponse> universityRes1 = new ArrayList<>();
+    public ResponseEntity<List<InstitutionPageResponse>> createAllUniversity(@RequestBody List<UniversityRequestModel> universityReqs){
+        InstitutionPageResponse universityRes= new InstitutionPageResponse();
+        List<InstitutionPageResponse> universityRes1 = new ArrayList<>();
         for (int i = 0; i < universityReqs.size(); i++) {
              universityRes = universityService.createUniversity(universityReqs.get(i));
              universityRes1.add(universityRes);
@@ -52,8 +53,8 @@ public class UniversityController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<UniversityPageResponse> updateUniversity(@Valid @PathVariable String id, @RequestBody UniversityRequestModel universityReq){
-        UniversityPageResponse universityRes = universityService.update(id,universityReq);
+    public ResponseEntity<InstitutionPageResponse> updateUniversity(@Valid @PathVariable String id, @RequestBody UniversityRequestModel universityReq){
+        InstitutionPageResponse universityRes = universityService.update(id,universityReq);
         return new ResponseEntity<>(universityRes,HttpStatus.OK);
 
     }

@@ -1,5 +1,8 @@
 package com.az.edadi.user.service.impl;
 
+import com.az.edadi.model.request.user.BlockUserRequest;
+import com.az.edadi.model.request.user.FollowUserRequest;
+import com.az.edadi.model.request.user.ReportUserRequest;
 import com.az.edadi.service.adapter.user.UserAdapter;
 import com.az.edadi.dal.entity.user.UserInterest;
 import com.az.edadi.dal.repository.user.UserInterestRepository;
@@ -79,6 +82,26 @@ public class UserServiceImpl implements UserService {
         var user  = userRepository.findById(AuthUtils.getCurrentUserId()).orElseThrow();
         user.setProfilePictureUrl(newImageRequest.getNewUrl());
         userRepository.save(user);
+
+    }
+
+    @Override
+    public void blockUser(BlockUserRequest request) {
+
+    }
+
+    @Override
+    public void reportUser(ReportUserRequest request) {
+
+    }
+
+    @Override
+    public void followUser(FollowUserRequest request) {
+
+    }
+
+    @Override
+    public void unfollowUser(FollowUserRequest request) {
 
     }
 

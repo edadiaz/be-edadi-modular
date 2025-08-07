@@ -1,12 +1,12 @@
 package com.az.edadi.university.service.impl;
 
 import com.az.edadi.model.request.UniversityRequestModel;
+import com.az.edadi.model.response.institution.InstitutionPageResponse;
 import com.az.edadi.service.adapter.university.UniversityAdapter;
 import com.az.edadi.service.service.NullFinder;
 import com.az.edadi.dal.entity.institution.Institution;
 import com.az.edadi.dal.repository.UniversityRepository;
 import com.az.edadi.university.exception.UniversityNotFoundException;
-import com.az.edadi.model.response.university.UniversityPageResponse;
 import com.az.edadi.university.service.UniversityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -27,14 +27,14 @@ public class UniversityServiceImpl implements UniversityService {
     private final UniversityRepository universityRepository;
     private final MessageSource messageSource;
     @Override
-    public UniversityPageResponse createUniversity(UniversityRequestModel universityReq) {
+    public InstitutionPageResponse createUniversity(UniversityRequestModel universityReq) {
         Institution university = universityAdapter.toEntity(universityReq);
         universityRepository.save(university);
         return universityAdapter.toResponse(university);
     }
 
     @Override
-    public UniversityPageResponse getUniversityById(String id) {
+    public InstitutionPageResponse getUniversityById(String id) {
         Institution university = universityRepository.findById(id)
                 .orElseThrow(() -> new UniversityNotFoundException(getMessage("university.not.found")));
         return universityAdapter.toResponse(university);
@@ -42,7 +42,7 @@ public class UniversityServiceImpl implements UniversityService {
 
     @Transactional
     @Override
-    public UniversityPageResponse update(String id, UniversityRequestModel universityReq) {
+    public InstitutionPageResponse update(String id, UniversityRequestModel universityReq) {
         Institution university = universityRepository.
                 findById(id)
                 .orElseThrow(()-> new UniversityNotFoundException(getMessage("university.not.found")));
@@ -61,7 +61,7 @@ public class UniversityServiceImpl implements UniversityService {
 
 
     @Override
-    public List<UniversityPageResponse> findAll() {
+    public List<InstitutionPageResponse> findAll() {
         return universityRepository.findAll()
                 .stream()
                 .map(universityAdapter::toResponse)

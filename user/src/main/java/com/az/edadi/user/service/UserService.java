@@ -1,5 +1,8 @@
 package com.az.edadi.user.service;
 
+import com.az.edadi.model.request.user.BlockUserRequest;
+import com.az.edadi.model.request.user.FollowUserRequest;
+import com.az.edadi.model.request.user.ReportUserRequest;
 import com.az.edadi.model.response.user.UserPageResponse;
 import com.az.edadi.user.model.request.UpdateUserEducationInfo;
 import com.az.edadi.user.model.request.UpdateUserInterestRequest;
@@ -14,5 +17,9 @@ public interface UserService {
     CurrentUserResponse getCurrentUser();
     UserPageResponse findUserById(String id);
     void updateProfileImage(UpdateUserProfileImageRequest newImageRequest);
+    void blockUser(BlockUserRequest request);
+    void reportUser(ReportUserRequest request);
+    void followUser(FollowUserRequest request);
+    void unfollowUser(FollowUserRequest request);
 
 }
