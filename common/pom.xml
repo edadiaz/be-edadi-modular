@@ -10,20 +10,15 @@
     </parent>
 
     <artifactId>common</artifactId>
+    <packaging>jar</packaging>
 
-    <properties>
-        <maven.compiler.source>17</maven.compiler.source>
-        <maven.compiler.target>17</maven.compiler.target>
-        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    </properties>
+
     <dependencies>
         <dependency>
-            <groupId>org.apache.logging</groupId>
-            <artifactId>logging-parent</artifactId>
-            <version>11.3.0</version>
+            <groupId>software.amazon.awssdk</groupId>
+            <artifactId>dynamodb</artifactId>
+            <version>2.30.25</version>
         </dependency>
-
-
     </dependencies>
 
 </project>
