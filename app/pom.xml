@@ -34,7 +34,7 @@
         </dependency>
         <dependency>
             <groupId>com.az.edadi</groupId>
-            <artifactId>service</artifactId>
+            <artifactId>common-service</artifactId>
         </dependency>
         <dependency>
             <groupId>com.az.edadi</groupId>

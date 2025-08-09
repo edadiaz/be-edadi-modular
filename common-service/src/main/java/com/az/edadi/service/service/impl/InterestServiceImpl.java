@@ -1,8 +1,8 @@
-package com.az.edadi.common.service.impl;
+package com.az.edadi.service.service.impl;
 
-import com.az.edadi.common.model.InterestResponse;
-import com.az.edadi.common.service.InterestService;
 import com.az.edadi.dal.repository.user.InterestRepository;
+import com.az.edadi.model.response.interest.InterestResponse;
+import com.az.edadi.service.service.InterestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

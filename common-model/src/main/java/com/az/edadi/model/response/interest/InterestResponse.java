@@ -1,4 +1,4 @@
-package com.az.edadi.common.model;
+package com.az.edadi.model.response.interest;
 
 public record InterestResponse(String id, String name) {
 }

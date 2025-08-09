@@ -18,17 +18,12 @@
     </properties>
     <dependencies>
         <dependency>
-            <groupId>com.az.edadi</groupId>
-            <artifactId>common-dal</artifactId>
+            <groupId>org.apache.logging</groupId>
+            <artifactId>logging-parent</artifactId>
+            <version>11.3.0</version>
         </dependency>
-        <dependency>
-            <groupId>com.az.edadi</groupId>
-            <artifactId>common-model</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.az.edadi</groupId>
-            <artifactId>service</artifactId>
-        </dependency>
+
+
     </dependencies>
 
 </project>

@@ -23,7 +23,7 @@
         <module>common-dal</module>
         <module>university</module>
         <module>auth</module>
-        <module>service</module>
+        <module>common-service</module>
         <module>common-model</module>
         <module>file-storage</module>
         <module>speciality</module>
@@ -93,7 +93,7 @@
             </dependency>
             <dependency>
                 <groupId>com.az.edadi</groupId>
-                <artifactId>service</artifactId>
+                <artifactId>common-service</artifactId>
                 <version>${eda-service-version}</version>
             </dependency>
             <dependency>

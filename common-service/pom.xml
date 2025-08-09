@@ -9,7 +9,7 @@
         <version>1.0-SNAPSHOT</version>
     </parent>
 
-    <artifactId>service</artifactId>
+    <artifactId>common-service</artifactId>
     <packaging>jar</packaging>
 
     <dependencies>

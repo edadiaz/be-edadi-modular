@@ -1,7 +1,7 @@
-package com.az.edadi.common.rest;
+package com.az.edadi.service.rest;
 
-import com.az.edadi.common.model.InterestResponse;
-import com.az.edadi.common.service.InterestService;
+import com.az.edadi.model.response.interest.InterestResponse;
+import com.az.edadi.service.service.InterestService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
