@@ -20,11 +20,11 @@
         <module>post</module>
         <module>user</module>
         <module>app</module>
-        <module>dal</module>
+        <module>common-dal</module>
         <module>university</module>
         <module>auth</module>
         <module>service</module>
-        <module>model</module>
+        <module>common-model</module>
         <module>file-storage</module>
         <module>speciality</module>
         <module>message</module>
@@ -76,7 +76,7 @@
 
             <dependency>
                 <groupId>com.az.edadi</groupId>
-                <artifactId>dal</artifactId>
+                <artifactId>common-dal</artifactId>
                 <version>${eda-dal-version}</version>
             </dependency>
 
@@ -98,7 +98,7 @@
             </dependency>
             <dependency>
                 <groupId>com.az.edadi</groupId>
-                <artifactId>model</artifactId>
+                <artifactId>common-model</artifactId>
                 <version>${eda-model-version}</version>
             </dependency>
             <dependency>
@@ -187,6 +187,10 @@
         <dependency>
             <groupId>org.springframework.boot</groupId>
             <artifactId>spring-boot-starter-webflux</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.data</groupId>
+            <artifactId>spring-data-mongodb</artifactId>
         </dependency>
 
     </dependencies>

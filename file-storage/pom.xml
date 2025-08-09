@@ -30,7 +30,7 @@
         </dependency>
         <dependency>
             <groupId>com.az.edadi</groupId>
-            <artifactId>dal</artifactId>
+            <artifactId>common-dal</artifactId>
         </dependency>
     </dependencies>
 

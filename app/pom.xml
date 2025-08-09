@@ -22,7 +22,7 @@
         </dependency>
         <dependency>
             <groupId>com.az.edadi</groupId>
-            <artifactId>dal</artifactId>
+            <artifactId>common-dal</artifactId>
         </dependency>
         <dependency>
             <groupId>com.az.edadi</groupId>
@@ -38,7 +38,7 @@
         </dependency>
         <dependency>
             <groupId>com.az.edadi</groupId>
-            <artifactId>model</artifactId>
+            <artifactId>common-model</artifactId>
         </dependency>
         <dependency>
             <groupId>com.az.edadi</groupId>
