@@ -33,9 +33,7 @@ public class SecurityConfigurer {
     };
     private final String[] GET_WHITE_LIST = {
             "/api/v1/common/**",
-            "/api/v1/**",
             "/api/v1/notification/**",
-
             "/swagger-ui/**",
             "/v3/api-docs/**",
             "/swagger-ui/index.html"

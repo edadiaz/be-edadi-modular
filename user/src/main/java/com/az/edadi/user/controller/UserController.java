@@ -27,9 +27,9 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("{userIdOrUsername}")
-    ResponseEntity<UserPageResponse> findUserById(@PathVariable String userId){
+    ResponseEntity<UserPageResponse> findUserById(@PathVariable String userIdOrUsername){
         log.info("User {} fetch own data", AuthUtils.getCurrentUserId());
-        return ResponseEntity.ok(userService.findUserById(userId));
+        return ResponseEntity.ok(userService.findUserById(userIdOrUsername));
     }
 
     @PatchMapping("{userId}/profile-picture")
