@@ -1,8 +1,6 @@
 package com.az.edadi.post.rest;
 
-import com.az.edadi.post.model.request.PostRequest;
 import com.az.edadi.post.model.request.ReactionRequestModel;
-import com.az.edadi.post.model.response.PostRes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;

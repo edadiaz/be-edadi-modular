@@ -2,9 +2,6 @@ package com.az.edadi.auth.util;
 
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
-import org.springframework.security.core.Authentication;
-import org.springframework.security.core.context.SecurityContextHolder;
-
 import java.util.Arrays;
 import java.util.Optional;
 

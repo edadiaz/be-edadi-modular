@@ -2,7 +2,6 @@ package com.az.edadi.auth.exception.handler;
 
 import com.az.edadi.auth.constant.AuthConstants;
 import com.az.edadi.auth.exception.ExpiredTokenException;
-import com.az.edadi.auth.exception.InvalidPasswordException;
 import com.az.edadi.service.service.Translator;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
