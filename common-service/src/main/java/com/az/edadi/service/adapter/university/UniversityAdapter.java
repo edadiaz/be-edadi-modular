@@ -9,6 +9,16 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class UniversityAdapter {
+
+    public InstitutionSummaryResponse mapToSummary(Institution institution){
+        var summaryResponse = new InstitutionSummaryResponse();
+        summaryResponse.setId(institution.getId());
+        summaryResponse.setPhotoUrl(institution.getPhotoUrl());
+        summaryResponse.setAbbr(getAbbr(institution));
+        summaryResponse.setName(getName(institution));
+        return summaryResponse;
+    }
+
     public InstitutionPageResponse toResponse(Institution university) {
         InstitutionPageResponse universityRes = new InstitutionPageResponse();
         universityRes.setId(university.getId());

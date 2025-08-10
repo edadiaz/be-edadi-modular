@@ -1,4 +1,4 @@
-package com.az.edadi.speciality.model;
+package com.az.edadi.model.response.speciality;
 
 import lombok.*;
 
@@ -7,7 +7,8 @@ import lombok.*;
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SpecialityReq {
+public class SpecialityPageResponse {
+    private String id;
     private Long specialityCode;
     private String specialityName;
     private String institutionId;

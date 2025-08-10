@@ -27,5 +27,6 @@ public class User  {
     private String profilePictureUrl;
     private Provider provider;
     private SpecialityGroup group;
-
+    private Integer followerCount;
+    private Integer followingCount;
 }

@@ -73,7 +73,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserPageResponse findUserById(String userId) {
-        var user = userRepository.findById(userId).orElseThrow();
+        var user = userRepository.findByIdOrUsername(userId,userId).orElseThrow();
         return userAdapter.mapToUserPageResponse(user);
     }
 

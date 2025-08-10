@@ -1,11 +1,11 @@
 package com.az.edadi.university.service.impl;
 
+import com.az.edadi.dal.repository.institution.InstitutionRepository;
 import com.az.edadi.model.request.UniversityRequestModel;
 import com.az.edadi.model.response.institution.InstitutionPageResponse;
 import com.az.edadi.service.adapter.university.UniversityAdapter;
 import com.az.edadi.service.service.NullFinder;
 import com.az.edadi.dal.entity.institution.Institution;
-import com.az.edadi.dal.repository.UniversityRepository;
 import com.az.edadi.university.exception.UniversityNotFoundException;
 import com.az.edadi.university.service.UniversityService;
 import lombok.RequiredArgsConstructor;
@@ -24,7 +24,7 @@ public class UniversityServiceImpl implements UniversityService {
 
     private final UniversityAdapter universityAdapter;
 
-    private final UniversityRepository universityRepository;
+    private final InstitutionRepository universityRepository;
     private final MessageSource messageSource;
     @Override
     public InstitutionPageResponse createUniversity(UniversityRequestModel universityReq) {

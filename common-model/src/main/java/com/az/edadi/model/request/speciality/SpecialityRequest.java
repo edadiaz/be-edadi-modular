@@ -1,15 +1,13 @@
-package com.az.edadi.speciality.model;
+package com.az.edadi.model.request.speciality;
 
 import lombok.*;
 
-import java.util.UUID;
 @Data
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public class SpecialityRes {
-    private String id;
+public class SpecialityRequest {
     private Long specialityCode;
     private String specialityName;
     private String institutionId;

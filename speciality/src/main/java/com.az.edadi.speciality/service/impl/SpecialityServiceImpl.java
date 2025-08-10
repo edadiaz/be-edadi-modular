@@ -1,11 +1,11 @@
 package com.az.edadi.speciality.service.impl;
 
+import com.az.edadi.model.response.speciality.SpecialityPageResponse;
 import com.az.edadi.service.service.NullFinder;
 import com.az.edadi.dal.entity.speciality.Speciality;
 import com.az.edadi.dal.repository.SpecialityRepository;
-import com.az.edadi.speciality.adapter.SpecialityAdapter;
-import com.az.edadi.speciality.model.SpecialityReq;
-import com.az.edadi.speciality.model.SpecialityRes;
+import com.az.edadi.service.adapter.speciality.SpecialityAdapter;
+import com.az.edadi.model.request.speciality.SpecialityRequest;
 import com.az.edadi.speciality.service.SpecialityService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.BeanUtils;
@@ -21,20 +21,20 @@ public class SpecialityServiceImpl implements SpecialityService {
     private final SpecialityAdapter specialityAdapter;
     private final SpecialityRepository specialityRepository;
     @Override
-    public SpecialityRes create(SpecialityReq specialityReq) {
+    public SpecialityPageResponse create(SpecialityRequest specialityReq) {
         Speciality speciality = specialityAdapter.mapToEnt(specialityReq);
         specialityRepository.save(speciality);
         return specialityAdapter.mapToRes(speciality);
     }
 
     @Override
-    public SpecialityRes getSpecialityById(UUID id) {
+    public SpecialityPageResponse getSpecialityById(UUID id) {
         Speciality speciality = specialityRepository.findById(id).orElseThrow();
         return specialityAdapter.mapToRes(speciality);
     }
 
     @Override
-    public SpecialityRes update(UUID id, SpecialityReq specialityReq) {
+    public SpecialityPageResponse update(UUID id, SpecialityRequest specialityReq) {
         Speciality speciality = specialityRepository.findById(id).orElseThrow();
         BeanUtils.copyProperties(speciality,specialityReq,NullFinder.getNullFieldNames(specialityReq));
         return specialityAdapter.mapToRes(speciality);
@@ -48,14 +48,14 @@ public class SpecialityServiceImpl implements SpecialityService {
     }
 
     @Override
-    public List<SpecialityRes> findAll() {
+    public List<SpecialityPageResponse> findAll() {
         return specialityRepository.findAll()
                 .stream()
                 .map(specialityAdapter::mapToRes).collect(Collectors.toList());
     }
 
     @Override
-    public List<SpecialityRes> findByInstitutionId(String id) {
+    public List<SpecialityPageResponse> findByInstitutionId(String id) {
         return specialityRepository.findByInstitutionId(id)
                 .stream()
                 .map(specialityAdapter::mapToRes)

@@ -2,9 +2,9 @@ package com.az.edadi.file_storage.service.impl;
 
 import com.az.edadi.dal.entity.file_storage.EdaFile;
 import com.az.edadi.dal.repository.FileRepository;
-import com.az.edadi.file_storage.adapter.FileAdapter;
-import com.az.edadi.file_storage.model.response.UploadedImageRes;
 import com.az.edadi.file_storage.service.FileService;
+import com.az.edadi.model.response.file.UploadedImageRes;
+import com.az.edadi.service.adapter.file.FileAdapter;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import net.coobird.thumbnailator.Thumbnails;

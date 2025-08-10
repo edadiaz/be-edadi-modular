@@ -1,7 +1,7 @@
-package com.az.edadi.file_storage.adapter;
+package com.az.edadi.service.adapter.file;
 
 import com.az.edadi.dal.entity.file_storage.EdaFile;
-import com.az.edadi.file_storage.model.response.UploadedImageRes;
+import com.az.edadi.model.response.file.UploadedImageRes;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.web.multipart.MultipartFile;

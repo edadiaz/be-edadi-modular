@@ -26,7 +26,7 @@ public class UserController {
 
     private final UserService userService;
 
-    @GetMapping("{userId}")
+    @GetMapping("{userIdOrUsername}")
     ResponseEntity<UserPageResponse> findUserById(@PathVariable String userId){
         log.info("User {} fetch own data", AuthUtils.getCurrentUserId());
         return ResponseEntity.ok(userService.findUserById(userId));

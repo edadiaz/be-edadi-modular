@@ -1,7 +1,7 @@
 package com.az.edadi.file_storage.controller;
 
-import com.az.edadi.file_storage.model.response.UploadedImageRes;
 import com.az.edadi.file_storage.service.FileService;
+import com.az.edadi.model.response.file.UploadedImageRes;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;
