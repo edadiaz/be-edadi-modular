@@ -3,7 +3,7 @@ package com.az.edadi.model.constant;
 public enum PageTab {
     POSTS("page_post"),
     SPECIALITIES("page_specialities"),
-    PEOPLE("page_people"),
+    STUDENTS("page_students"),
     ABOUT("page_about"),
     UNIVERSITY("page_universities");
 

@@ -1,8 +1,11 @@
 package com.az.edadi.user.service.impl;
 
+import com.az.edadi.dal.repository.user.InterestRepository;
 import com.az.edadi.model.request.user.BlockUserRequest;
 import com.az.edadi.model.request.user.FollowUserRequest;
 import com.az.edadi.model.request.user.ReportUserRequest;
+import com.az.edadi.model.response.interest.InterestResponse;
+import com.az.edadi.service.adapter.interest.InterestAdapter;
 import com.az.edadi.service.adapter.user.UserAdapter;
 import com.az.edadi.dal.entity.user.UserInterest;
 import com.az.edadi.dal.repository.user.UserInterestRepository;
@@ -19,6 +22,7 @@ import com.az.edadi.user.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
@@ -28,6 +32,8 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final UserInterestRepository userInterestRepository;
     private final UserAdapter userAdapter;
+    private final InterestAdapter interestAdapter;
+    private final InterestRepository interestRepository;
 
     @Override
     public void updateEducationalDegree(String userId, UpdateUserEducationInfo request) {
@@ -104,6 +110,17 @@ public class UserServiceImpl implements UserService {
     public void unfollowUser(FollowUserRequest request) {
 
     }
+
+    @Override
+    public List<InterestResponse> getUserInterests(String userId) {
+        var userInterestList =  userInterestRepository.findByUserId(userId);
+        var interestIdList = userInterestList.stream().map(UserInterest::getInterestId).toList();
+        return interestRepository.findAllById(interestIdList).stream()
+                .map(interestAdapter::map)
+                .collect(Collectors.toList());
+    }
+
+
 
 
 }

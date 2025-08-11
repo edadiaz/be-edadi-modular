@@ -3,6 +3,7 @@ package com.az.edadi.user.service;
 import com.az.edadi.model.request.user.BlockUserRequest;
 import com.az.edadi.model.request.user.FollowUserRequest;
 import com.az.edadi.model.request.user.ReportUserRequest;
+import com.az.edadi.model.response.interest.InterestResponse;
 import com.az.edadi.model.response.user.UserPageResponse;
 import com.az.edadi.user.model.request.UpdateUserEducationInfo;
 import com.az.edadi.user.model.request.UpdateUserInterestRequest;
@@ -10,7 +11,10 @@ import com.az.edadi.user.model.request.UpdateUserPersonalInfoRequest;
 import com.az.edadi.model.response.CurrentUserResponse;
 import com.az.edadi.user.model.request.UpdateUserProfileImageRequest;
 
+import java.util.List;
+
 public interface UserService {
+
     void updateEducationalDegree(String userId, UpdateUserEducationInfo request);
     void updatePersonalInfo(String userId, UpdateUserPersonalInfoRequest request);
     void updateUserInterests(String userId, UpdateUserInterestRequest request);
@@ -21,5 +25,5 @@ public interface UserService {
     void reportUser(ReportUserRequest request);
     void followUser(FollowUserRequest request);
     void unfollowUser(FollowUserRequest request);
-
+    List<InterestResponse> getUserInterests(String userId);
 }

@@ -3,6 +3,7 @@ package com.az.edadi.user.controller;
 import com.az.edadi.model.request.user.BlockUserRequest;
 import com.az.edadi.model.request.user.FollowUserRequest;
 import com.az.edadi.model.request.user.ReportUserRequest;
+import com.az.edadi.model.response.interest.InterestResponse;
 import com.az.edadi.model.response.user.UserPageResponse;
 import com.az.edadi.service.util.AuthUtils;
 import com.az.edadi.user.model.request.UpdateUserEducationInfo;
@@ -17,6 +18,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @Slf4j
 @RestController
@@ -38,6 +41,7 @@ public class UserController {
         userService.updateProfileImage(newUrl);
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
+
     @PutMapping("{userId}/academic-degree")
     ResponseEntity<HttpStatus> updateUserEducationInfo(@PathVariable String userId, @RequestBody @Validated UpdateUserEducationInfo request) {
         log.info("Updating user education info with userId: {}", "id");
@@ -58,6 +62,12 @@ public class UserController {
         userService.updateUserInterests(userId,request);
         return ResponseEntity.ok(HttpStatus.ACCEPTED);
     }
+
+    @GetMapping("{userId}/interest")
+    ResponseEntity<List<InterestResponse>> updatePersonalInfo(@PathVariable String userId) {
+         return ResponseEntity.ok(userService.getUserInterests(userId));
+    }
+
     @GetMapping("me")
     ResponseEntity<CurrentUserResponse> getMe(){
         log.info("User {} fetch own data", AuthUtils.getCurrentUserId());
