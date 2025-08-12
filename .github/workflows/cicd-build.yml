@@ -2,8 +2,10 @@ name: Build
 
 on:
   push:
-    branches:
-      - '**'
+    branches-ignore:
+      - develop
+      - preprod
+      - prod
 jobs:
   deploy:
     runs-on: ubuntu-latest
