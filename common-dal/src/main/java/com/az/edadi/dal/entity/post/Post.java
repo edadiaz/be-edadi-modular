@@ -16,5 +16,6 @@ public class Post extends BaseEntity {
     private String userId;
     private PostParentType parentType;
     private String parentId;
-
+    private Integer likeCount;
+    private Integer commentCount;
 }
