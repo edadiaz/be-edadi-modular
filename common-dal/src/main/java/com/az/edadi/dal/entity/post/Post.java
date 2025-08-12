@@ -1,20 +1,20 @@
 package com.az.edadi.dal.entity.post;
 
-import org.springframework.data.annotation.Id;
+import com.az.edadi.common.constant.post.PostParentType;
+import com.az.edadi.dal.entity.BaseEntity;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.time.LocalDate;
-import java.util.UUID;
 
 @Data
 @Document(collection = "post")
-public class Post {
-    @Id
-    private String id;
-    private String text;
-    private LocalDate localDate;
-    private UUID userId;
-    private String tag;
+@EqualsAndHashCode(callSuper = true)
+public class Post extends BaseEntity {
+
+    private String content;
+    private String userId;
+    private PostParentType parentType;
+    private String parentId;
 
 }

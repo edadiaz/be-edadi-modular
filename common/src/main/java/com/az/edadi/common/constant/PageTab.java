@@ -1,4 +1,4 @@
-package com.az.edadi.model.constant;
+package com.az.edadi.common.constant;
 
 public enum PageTab {
     POSTS("page_post"),

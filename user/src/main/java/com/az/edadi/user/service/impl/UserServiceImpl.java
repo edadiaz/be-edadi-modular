@@ -10,7 +10,7 @@ import com.az.edadi.service.adapter.user.UserAdapter;
 import com.az.edadi.dal.entity.user.UserInterest;
 import com.az.edadi.dal.repository.user.UserInterestRepository;
 import com.az.edadi.model.response.user.UserPageResponse;
-import com.az.edadi.service.util.AuthUtils;
+import com.az.edadi.common.util.AuthUtils;
 import com.az.edadi.dal.entity.user.User;
 import com.az.edadi.dal.repository.user.UserRepository;
 import com.az.edadi.user.model.request.UpdateUserEducationInfo;

@@ -1,20 +1,20 @@
-package com.az.edadi.post.model.response;
+package com.az.edadi.model.response.post;
 
+import com.az.edadi.common.constant.post.PostParentType;
 import com.az.edadi.model.response.user.UserSummaryResponse;
-import com.az.edadi.post.model.PostParentType;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.UUID;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class PostRes {
-    private UUID id;
-    private String text;
+public class PostResponse {
+    private String id;
+    private String content;
     private String parentEntityId;
     private PostParentType parentEntityType;
     private UserSummaryResponse user;
+    private Integer likeCount;
+    private Integer commentCount;
 }

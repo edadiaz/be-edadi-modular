@@ -1,6 +1,6 @@
 package com.az.edadi.model.response.institution;
 
-import com.az.edadi.model.constant.PageTab;
+import com.az.edadi.common.constant.PageTab;
 import lombok.*;
 
 import java.util.List;

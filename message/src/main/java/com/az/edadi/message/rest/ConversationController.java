@@ -4,7 +4,7 @@ package com.az.edadi.message.rest;
 import com.az.edadi.message.model.request.CreateConversationRequest;
 import com.az.edadi.message.model.response.ConversationResponse;
 import com.az.edadi.message.service.ConversationService;
-import com.az.edadi.service.util.AuthUtils;
+import com.az.edadi.common.util.AuthUtils;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.ResponseEntity;

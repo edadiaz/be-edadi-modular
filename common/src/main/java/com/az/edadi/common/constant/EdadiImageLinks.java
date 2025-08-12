@@ -1,4 +1,4 @@
-package com.az.edadi.model.constant;
+package com.az.edadi.common.constant;
 
 import lombok.experimental.UtilityClass;
 

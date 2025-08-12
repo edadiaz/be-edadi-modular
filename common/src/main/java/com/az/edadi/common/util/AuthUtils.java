@@ -1,4 +1,4 @@
-package com.az.edadi.service.util;
+package com.az.edadi.common.util;
 
 import lombok.experimental.UtilityClass;
 import org.springframework.security.core.Authentication;

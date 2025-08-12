@@ -16,6 +16,10 @@
             <groupId>com.az.edadi</groupId>
             <artifactId>common-dal</artifactId>
         </dependency>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
     </dependencies>
 
 

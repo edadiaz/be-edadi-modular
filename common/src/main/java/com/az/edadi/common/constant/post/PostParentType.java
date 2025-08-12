@@ -1,4 +1,4 @@
-package com.az.edadi.post.model;
+package com.az.edadi.common.constant.post;
 
 
 public enum PostParentType {

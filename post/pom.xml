@@ -17,6 +17,11 @@
             <groupId>com.az.edadi</groupId>
             <artifactId>common-model</artifactId>
         </dependency>
+
+         <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
     </dependencies>
 
 </project>

@@ -1,6 +1,6 @@
 package com.az.edadi.model.response.user;
 
-import com.az.edadi.model.constant.PageTab;
+import com.az.edadi.common.constant.PageTab;
 import com.az.edadi.model.response.institution.InstitutionSummaryResponse;
 import com.az.edadi.model.response.speciality.SpecialitySummaryResponse;
 import lombok.AllArgsConstructor;

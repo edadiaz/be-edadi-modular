@@ -5,7 +5,7 @@ import com.az.edadi.model.request.user.FollowUserRequest;
 import com.az.edadi.model.request.user.ReportUserRequest;
 import com.az.edadi.model.response.interest.InterestResponse;
 import com.az.edadi.model.response.user.UserPageResponse;
-import com.az.edadi.service.util.AuthUtils;
+import com.az.edadi.common.util.AuthUtils;
 import com.az.edadi.user.model.request.UpdateUserEducationInfo;
 import com.az.edadi.user.model.request.UpdateUserInterestRequest;
 import com.az.edadi.user.model.request.UpdateUserPersonalInfoRequest;

@@ -1,6 +1,6 @@
 package com.az.edadi.post.rest;
 
-import com.az.edadi.post.model.request.ReactionRequestModel;
+import com.az.edadi.model.request.post.ReactionRequest;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class ReactionController {
 
     @PostMapping
-    ResponseEntity<HttpStatus> sendReaction(@RequestBody ReactionRequestModel postRequest) {
+    ResponseEntity<HttpStatus> sendReaction(@RequestBody ReactionRequest postRequest) {
          return ResponseEntity.ok(HttpStatus.CREATED);
     }
 

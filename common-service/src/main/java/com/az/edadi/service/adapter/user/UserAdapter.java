@@ -2,13 +2,13 @@ package com.az.edadi.service.adapter.user;
 
 import com.az.edadi.dal.entity.user.User;
 import com.az.edadi.dal.repository.institution.InstitutionRepository;
-import com.az.edadi.model.constant.PageTab;
+import com.az.edadi.common.constant.PageTab;
 import com.az.edadi.model.response.CurrentUserResponse;
 import com.az.edadi.model.response.user.UserPageResponse;
 import com.az.edadi.model.response.user.UserSummaryResponse;
 import com.az.edadi.service.adapter.speciality.SpecialityAdapter;
 import com.az.edadi.service.adapter.university.UniversityAdapter;
-import com.az.edadi.service.util.AuthUtils;
+import com.az.edadi.common.util.AuthUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
