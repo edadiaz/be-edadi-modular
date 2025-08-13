@@ -4,8 +4,8 @@ import com.az.edadi.dal.repository.PostRepository;
 import com.az.edadi.model.request.post.PostFilterRequest;
 import com.az.edadi.model.request.post.PostRequest;
 import com.az.edadi.model.response.post.PostResponse;
-import com.az.edadi.post.adapter.PostAdapter;
 import com.az.edadi.post.service.PostService;
+import com.az.edadi.service.adapter.post.PostAdapter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

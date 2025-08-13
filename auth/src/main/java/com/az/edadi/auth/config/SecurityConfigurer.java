@@ -1,6 +1,6 @@
 package com.az.edadi.auth.config;
 
-import com.az.edadi.auth.security.JwtAuthenticationFilter;
+import com.az.edadi.auth.filter.JwtAuthenticationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
