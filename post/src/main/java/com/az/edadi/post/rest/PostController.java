@@ -6,6 +6,7 @@ import com.az.edadi.model.response.post.PostResponse;
 import com.az.edadi.post.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -31,5 +32,12 @@ public class PostController {
     ResponseEntity<PostResponse> getPost(@PathVariable String postId) {
         return ResponseEntity.ok(postService.getPost(postId));
     }
+
+    @DeleteMapping("{postId}")
+    ResponseEntity<HttpStatus> deletePost(@PathVariable String postId) {
+        postService.deletePost(postId);
+        return ResponseEntity.ok(HttpStatus.ACCEPTED);
+    }
+
 
 }

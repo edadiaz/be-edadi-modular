@@ -9,4 +9,15 @@
     <artifactId>notification</artifactId>
     <name>Notification</name>
     <url>http://maven.apache.org</url>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>common</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.az.edadi</groupId>
+            <artifactId>common-model</artifactId>
+        </dependency>
+    </dependencies>
 </project>
